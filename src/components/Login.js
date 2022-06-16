@@ -3,7 +3,8 @@ import React from 'react';
 const Login = () => {
     return (
         <>
-        <div className="row">
+        <div className='login-bg'>
+            <div className="row">
             <div className="col s12">
                 <div className="container">
                     <div id="login-page" className="row">
@@ -40,7 +41,7 @@ const Login = () => {
                             </div>
                             <div className="row">
                                 <div className="input-field col s12">
-                                    <a href="index.html" className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">Login</a>
+                                    <a href="dashboard" className="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">Login</a>
                                 </div>
                             </div>
                             <div className="row">
@@ -55,6 +56,7 @@ const Login = () => {
                 <div className="content-overlay"></div>
             </div>
             </div>
+        </div>            
         </>
     )
     
