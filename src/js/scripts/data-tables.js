@@ -1,3 +1,6 @@
+import $ from "jquery";
+import "datatables.net-dt/js/dataTables.dataTables"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
 /*
  * DataTables - Tables
  */
