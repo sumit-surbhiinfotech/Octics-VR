@@ -61,11 +61,11 @@ const Sidebar = () => {
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice List">Listing Customer</span>
                                     </NavLink>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <NavLink to="/manages-customer">
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Manages Customer</span>
                                     </NavLink>
-                                </li>
+                                </li> */}
                                 <li>
                                     <NavLink to="/customer-view">
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Customer View</span>

@@ -87,7 +87,7 @@ const Dashboard = () => {
                                  </NavLink>
                               </div>
                               <div className="col s12 m6 l6 xl2-new">
-                                 <NavLink to="/">
+                                 <NavLink to="/customer-listing">
                                     <div className="card gradient-45deg-red-pink gradient-shadow min-height-100 white-text animate fadeLeft">
                                        <div className="padding-4">
                                           <div className="row">
@@ -106,7 +106,7 @@ const Dashboard = () => {
                                  </NavLink>
                               </div>
                               <div className="col s12 m6 l6 xl2-new">
-                                 <NavLink to="/">
+                                 <NavLink to="/list-of-return-order">
                                     <div className="card gradient-45deg-amber-amber gradient-shadow min-height-100 white-text animate fadeRight">
                                        <div className="padding-4">
                                           <div className="row">
@@ -125,7 +125,7 @@ const Dashboard = () => {
                                  </NavLink>
                               </div>
                               <div className="col s12 m6 l6 xl2-new">
-                                 <NavLink to="/">
+                                 <NavLink to="/pending-order-list">
                                     <div className="card gradient-45deg-green-teal gradient-shadow min-height-100 white-text animate fadeRight">
                                        <div className="padding-4">
                                           <div className="row">
@@ -144,7 +144,7 @@ const Dashboard = () => {
                                  </NavLink>
                               </div>
                               <div className="col s12 m6 l6 xl2-new">
-                                 <NavLink to="/">
+                                 <NavLink to="/order-fulfill-and-tracking">
                                     <div className="card gradient-45deg-green-teal gradient-shadow min-height-100 white-text animate fadeRight">
                                        <div className="padding-4">
                                           <div className="row">
