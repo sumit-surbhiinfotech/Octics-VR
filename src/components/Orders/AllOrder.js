@@ -21,7 +21,7 @@ const data = [
         Customer: 'John Brown',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">View Customer</button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
     {
         key: '2',
@@ -30,7 +30,7 @@ const data = [
         Customer: 'John Brown',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">View Customer</button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
     {
         key: '3',
@@ -39,7 +39,7 @@ const data = [
         Customer: 'John Brown',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">View Customer</button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
     {
         key: '4',
@@ -48,7 +48,7 @@ const data = [
         Customer: 'raj',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">View Customer</button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
 
 ];
