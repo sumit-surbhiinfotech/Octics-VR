@@ -22,6 +22,8 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.21.3",
     "chart.js": "^3.8.0",
+    "datatables.net": "^1.12.1",
+    "datatables.net-dt": "^1.12.1",
     "i18next-js": "^0.1.4",
     "jquery": "^3.6.0",
     "jquery-i18next": "^1.2.1",

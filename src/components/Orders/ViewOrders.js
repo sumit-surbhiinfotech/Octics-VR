@@ -171,7 +171,6 @@ const ViewOrder = () => {
 
                             </div>
 
-
                         </div>
                         <div className="content-overlay"></div>
                     </div>
