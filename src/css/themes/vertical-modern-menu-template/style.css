@@ -2203,7 +2203,7 @@ footer.page-footer {
 
 select {
     width: 100%;
-    height: 3rem;
+    height: 2rem;
     padding: 5px;
 
     border: none;
@@ -6964,6 +6964,7 @@ span.badge.pill {
     position: relative;
     top: -20px;
     right: 5px;
+    font-size: 12px;
 
     margin: 0 -.8em;
     padding: 2px 5px;
@@ -6972,6 +6973,10 @@ span.badge.pill {
     border-radius: 50%;
     background-color: #ff4081;
     box-shadow: 0 0 10px 0 #ff4081;
+}
+
+.ripple1 .avatar-status {
+    line-height: 56px !important;
 }
 
 .navbar #notifications-dropdown {

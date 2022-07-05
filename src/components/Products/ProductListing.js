@@ -27,7 +27,7 @@ const ProductListing = () => {
                                 <div className="col s2 m6 l10">
                                     <div className="search-bar">
                                         <input className="form-control"></input>
-                                        <span><i class="material-icons">search_icon_</i></span>
+                                        <span><i className="material-icons">search</i></span>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@ const ProductListing = () => {
                                                     <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
                                                             href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
                                                     </div>
                                                 </div>
@@ -62,7 +62,7 @@ const ProductListing = () => {
                                                     <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
                                                             href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
                                                     </div>
                                                 </div>
@@ -77,7 +77,7 @@ const ProductListing = () => {
                                                     <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
                                                             href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
                                                     </div>
                                                 </div>
@@ -92,38 +92,7 @@ const ProductListing = () => {
                                                     <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
-                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div className="col s12 m4 l4">
-                                            <div className="card animate fadeUp">
-                                                <div className="card-content">
-                                                    <p>Headphone</p>
-                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
-                                                    <div className="display-flex flex-wrap justify-content-center">
-                                                        <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
-                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div className="col s12 m4 l4">
-                                            <div className="card animate fadeUp">
-                                                <div className="card-content">
-                                                    <p>Headphone</p>
-                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
-                                                    <div className="display-flex flex-wrap justify-content-center">
-                                                        <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
                                                             href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
                                                     </div>
                                                 </div>
@@ -139,7 +108,7 @@ const ProductListing = () => {
                                                     <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
                                                             href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
                                                     </div>
                                                 </div>
@@ -154,7 +123,7 @@ const ProductListing = () => {
                                                     <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
                                                             href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
                                                     </div>
                                                 </div>
@@ -170,7 +139,38 @@ const ProductListing = () => {
                                                     <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div className="col s12 m4 l4">
+                                            <div className="card animate fadeUp">
+                                                <div className="card-content">
+                                                    <p>Headphone</p>
+                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
+                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="display-flex flex-wrap justify-content-center">
+                                                        <h5 className="mt-3">$249.00</h5>
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div className="col s12 m4 l4">
+                                            <div className="card animate fadeUp">
+                                                <div className="card-content">
+                                                    <p>Headphone</p>
+                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
+                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="display-flex flex-wrap justify-content-center">
+                                                        <h5 className="mt-3">$249.00</h5>
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
                                                             href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
                                                     </div>
                                                 </div>
@@ -187,15 +187,15 @@ const ProductListing = () => {
                                                 </li>
                                                 <li className="active"><a href="#!">1</a>
                                                 </li>
-                                                <li className="waves-effect"><a href="#!">2</a>
+                                                <li className="ripple3"><a href="#!">2</a>
                                                 </li>
-                                                <li className="waves-effect"><a href="#!">3</a>
+                                                <li className="ripple3"><a href="#!">3</a>
                                                 </li>
-                                                <li className="waves-effect"><a href="#!">4</a>
+                                                <li className="ripple3"><a href="#!">4</a>
                                                 </li>
-                                                <li className="waves-effect"><a href="#!">5</a>
+                                                <li className="ripple3"><a href="#!">5</a>
                                                 </li>
-                                                <li className="waves-effect">
+                                                <li className="ripple3">
                                                     <a href="#!">
                                                         <i className="material-icons">chevron_right</i>
                                                     </a>
@@ -231,8 +231,8 @@ const ProductListing = () => {
                                     <li className="list-item-bullet">ake calls and control music with RemoteTalk cable</li>
                                 </ul>
                                 <h5>$249.00 <span className="prise-text-style ml-2">$559.00</span></h5>
-                                <a className="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                <a className="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
+                                <a className="ripple2 btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
+                                <a className="ripple2 btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
                             </div>
                         </div>
                     </div>
