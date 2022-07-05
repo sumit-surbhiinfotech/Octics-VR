@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -124,6 +125,19 @@ const CustomerView = () => {
                                                                 </tr>
                                                             </tbody>
                                                         </table>
+                                                    </div>
+                                                </div>
+                                                <div className=" mt-2">
+                                                    <div className="ad-btn-action">
+                                                        <div className="">
+                                                            <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-1 "><span class="material-icons">delete_forever</span></button>
+                                                            <NavLink to="/customer-listing">
+                                                                <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 ">Back To List</button>
+                                                            </NavLink>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+
                                                     </div>
                                                 </div>
                                             </div>

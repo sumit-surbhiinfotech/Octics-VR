@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Chart } from "react-google-charts";
+import { DatePicker, Space } from 'antd';
+const { RangePicker } = DatePicker;
 
 export const data = [
    ["x", "", ""],
@@ -34,11 +36,36 @@ const Dashboard = () => {
    return (
       <>
          <div id="main">
+
             <div className="row">
+
                <div className="col s12">
+
                   <div className="container">
+
                      <div className="section">
                         <div id="card-stats" className="pt-0">
+                           <div className='row'>
+                              <div className='col s12 m6 xl8'>
+
+                              </div>
+                              <div className='col s12 m6 l6 xl4'>
+                                 <div className='filter-date'>
+                                    Date Filter &nbsp;
+                                    {/* <Space direction="vertical" size={12}> */}
+                                    <RangePicker />
+                                    {/* <div className='new-date-piker'>
+                                       <div className='iner-new-date'>
+                                          <span>Form </span>&nbsp;&nbsp;  <input type="date"></input>
+                                       </div>
+                                       <div className='iner-new-date'>
+                                          &nbsp;&nbsp; <span>To</span>  &nbsp;&nbsp; <input type="date"></input>
+                                       </div>
+                                    </div> */}
+                                    {/* </Space> */}
+                                 </div>
+                              </div>
+                           </div>
                            <div className="row">
                               <div className="col s12 m6 l6 xl2-new">
                                  <NavLink to="/order-listing">
@@ -84,7 +111,7 @@ const Dashboard = () => {
                                        <div className="padding-4">
                                           <div className="row">
                                              <div className="col s7 m7">
-                                                <i className="material-icons background-round mt-5">timeline</i>
+                                                <i className="material-icons background-round mt-5">replay</i>
                                                 <p>Total Return Order</p>
                                              </div>
                                              <div className="col s5 m5 right-align">
@@ -103,7 +130,7 @@ const Dashboard = () => {
                                        <div className="padding-4">
                                           <div className="row">
                                              <div className="col s7 m7">
-                                                <i className="material-icons background-round mt-5">attach_money</i>
+                                                <i className="material-icons background-round mt-5">av_timer</i>
                                                 <p>Total Padding Order</p>
                                              </div>
                                              <div className="col s5 m5 right-align">
@@ -139,7 +166,7 @@ const Dashboard = () => {
                         </div>
                         <div id="sales-chart">
                            <div className="row">
-                              <div className="col s12 m8 l12">
+                              <div className="col s12 l12">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -161,7 +188,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12 m8 l12">
+                              <div className="col s12  l12">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -183,7 +210,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12 m8 l12">
+                              <div className="col s12  l12">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -205,7 +232,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12 m8 l12">
+                              <div className="col s12  l12">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -227,7 +254,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12 m8 l12">
+                              <div className="col s12  l12">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -249,7 +276,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12 m8 l4 mb-5">
+                              <div className="col s12  l4 mb-5">
                               </div>
                            </div>
                         </div>
