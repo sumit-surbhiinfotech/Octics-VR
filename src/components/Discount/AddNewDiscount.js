@@ -104,7 +104,7 @@ const AddNewDiscount = () => {
             <Sidebar />
             <div id="main">
                 <div className="container">
-                    <div className="add-new-discuont">
+                    <div className="add-new-discuont animate fadeUp">
                         <div className="tital mt-4">
                             <h4>Create Discount Code</h4>
                         </div>
@@ -143,7 +143,7 @@ const AddNewDiscount = () => {
                                                     <div className="discount-type">
                                                         <div className="type-discount"  >
                                                             <p className="product-percentage  active-new  " onClick={(e) => { setValueType('per') }}>Percentage</p>
-                                                            <p className="product-amount" onClick={(e) => { setValueType('amt ') }}>Fixed Amount</p>
+                                                            <p className="product-amount" onClick={(e) => { setValueType('amt') }}>Fixed Amount</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -218,7 +218,7 @@ const AddNewDiscount = () => {
                                             <div className="input-code new-input pt-2 ">
                                                 <div className="code-genreted">
                                                     <span>
-                                                        <i class="material-icons">search</i>
+                                                        <i className="material-icons">search</i>
                                                     </span>
                                                     <input type="text" placeholder="Search Products" />
                                                     <button className="ml-1 btn-generate">Browse</button>
@@ -250,7 +250,7 @@ const AddNewDiscount = () => {
                                         <div className="input-code new-input pt-2 ">
                                             <div className="code-genreted">
                                                 <span>
-                                                    <i class="material-icons">search</i>
+                                                    <i className="material-icons">search</i>
                                                 </span>
                                                 <input type="text" placeholder="Search Products" />
                                                 <button className="ml-1 btn-generate">Browse</button>
@@ -357,7 +357,7 @@ const AddNewDiscount = () => {
                                                 <div className={`input-code new-input pt-2 ${addCollProduct === "collections" ? "collections-add-open" : "collections-add-close"}`}>
                                                     <div className="code-genreted">
                                                         <span>
-                                                            <i class="material-icons">search</i>
+                                                            <i className="material-icons">search</i>
                                                         </span>
                                                         <input type="text" placeholder="Search Collections" />
                                                         <button className="ml-1 btn-generate">Browse</button>
@@ -369,7 +369,7 @@ const AddNewDiscount = () => {
                                                 <div className={`input-code new-input pt-2 ${addCollProduct === "products" ? "products-add-open-new" : "products-add-close-new"}`}>
                                                     <div className="code-genreted">
                                                         <span>
-                                                            <i class="material-icons">search</i>
+                                                            <i className="material-icons">search</i>
                                                         </span>
                                                         <input type="text" placeholder="Search Products" />
                                                         <button className="ml-1 btn-generate">Browse</button>
@@ -433,7 +433,7 @@ const AddNewDiscount = () => {
                                                     <div className={`input-code new-input pt-2 ${addSpecific === "segments" ? "amout-add-open" : "amout-add-close"} `}>
                                                         <div className="code-genreted">
                                                             <span>
-                                                                <i class="material-icons">search</i>
+                                                                <i className="material-icons">search</i>
                                                             </span>
                                                             <input type="text" placeholder="Specific Customers Segments" />
                                                             <button className="ml-1 btn-generate">Browse</button>
@@ -445,7 +445,7 @@ const AddNewDiscount = () => {
                                                     <div className={`input-code new-input pt-2 ${addSpecific === "Specificc" ? "amout-add-open" : "amout-add-close"}`}>
                                                         <div className="code-genreted">
                                                             <span>
-                                                                <i class="material-icons">search</i>
+                                                                <i className="material-icons">search</i>
                                                             </span>
                                                             <input type="text" placeholder="Specific Customers" />
                                                             <button className="ml-1 btn-generate">Browse</button>

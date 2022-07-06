@@ -113,7 +113,7 @@ const EditProduct = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <section className="add-new-product-section">
+                <section className="add-new-product-section animate fadeUp">
                     <div className="container">
                         <div className="row mt-1">
                             <div className="row">
@@ -259,10 +259,10 @@ const EditProduct = () => {
                                                         </td>
                                                         <td>
                                                             <div className="quantity-btn">
-                                                                <div class="qty-input">
-                                                                    <button class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                <div className="qty-input">
+                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
+                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -284,10 +284,10 @@ const EditProduct = () => {
                                                         </td>
                                                         <td>
                                                             <div className="quantity-btn">
-                                                                <div class="qty-input">
-                                                                    <button class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                <div className="qty-input">
+                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
+                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
                                                                 </div>
                                                             </div>
                                                         </td>

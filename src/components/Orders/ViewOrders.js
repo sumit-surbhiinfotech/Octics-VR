@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../dashboard/Header";
 import Footer from "../Footer";
 import Sidebar from "../dashboard/Sidebar";
+import { NavLink } from "react-router-dom";
 
 const ViewOrder = () => {
     return (
@@ -9,7 +10,7 @@ const ViewOrder = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <div className="row">
+                <div className="row ">
                     <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
                     <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                         <div className="container">
@@ -30,7 +31,7 @@ const ViewOrder = () => {
                     </div>
                     <div className="col s12">
                         <div className="container">
-                            <div className="section users-view">
+                            <div className="section users-view animate fadeUp">
                                 <div className="card-panel">
                                     <div className="row">
                                         <div className="col s12 m7">
@@ -95,7 +96,9 @@ const ViewOrder = () => {
 
                                                                     <tr>
                                                                         <td colSpan="4" className="right-align">
-                                                                            <button className="btn waves-effect waves-light gradient-45deg-green-teal">Fulfill items</button>
+                                                                            <NavLink to="/order-fulfill-and-tracking">
+                                                                                <button className="btn ripple2 gradient-45deg-green-teal">Fulfill items</button>
+                                                                            </NavLink>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>

@@ -4,7 +4,7 @@ const Header = () => {
 
     return (
         <>
-            <header className="page-topbar" id="header">
+            <header className="page-topbar " id="header">
                 <div className="navbar navbar-fixed">
                     <nav className="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
                         <div className="nav-wrapper">

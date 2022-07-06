@@ -225,7 +225,7 @@ const ListOfUpload3DModal = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <div className="3d-modal">
+                <div className="3d-modal ">
                     <div className="container">
                         <div className="list-return-order">
                             <div className="row">
@@ -248,7 +248,7 @@ const ListOfUpload3DModal = () => {
                                 </div>
                                 <div className="col s12">
                                     <div className="container">
-                                        <div className="section section-data-tables">
+                                        <div className="section section-data-tables animate fadeUp">
                                             <div className="row">
                                                 <div className="col s12">
                                                     <div className="card">
@@ -271,10 +271,10 @@ const ListOfUpload3DModal = () => {
                                                                         <div className="col s2 m6 l8"></div>
                                                                         <div className="col s2 m6 l3">
                                                                             <div className="new-data-search">
-                                                                                <div class="search-bar">
-                                                                                    <input class="form-control" />
+                                                                                <div className="search-bar">
+                                                                                    <input className="form-control" />
                                                                                     <span>
-                                                                                        <i class="material-icons">search</i>
+                                                                                        <i className="material-icons">search</i>
                                                                                     </span>
                                                                                 </div>
                                                                             </div>

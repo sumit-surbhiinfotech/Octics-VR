@@ -10,7 +10,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <aside className="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
+            <aside className="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square ">
                 <div className="brand-sidebar">
                     <h1 className="logo-wrapper"><a className="brand-logo darken-1" href="dashboard">
                         <img className="hide-on-med-and-down" src="images/logo/logo.png" alt="logo" />
@@ -26,7 +26,7 @@ const Sidebar = () => {
                     </li>
 
 
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "product" ? "" : "product") }}><a className="collapsible-header ripple " href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" >Products</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "product" ? "" : "product") }}><a className="collapsible-header ripple2 " href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" >Products</span></a>
                         <div className={`collapsible-body ${showCollapsible === "product" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>
@@ -53,7 +53,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "shopping" ? "" : "shopping") }}><a className="collapsible-header ripple" href="#!"><i className="material-icons">face</i><span className="menu-title" >Customer</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "shopping" ? "" : "shopping") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">face</i><span className="menu-title" >Customer</span></a>
                         <div className={`collapsible-body ${showCollapsible === "shopping" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>
@@ -75,7 +75,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "order" ? "" : "order") }}><a className="collapsible-header ripple" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">Orders</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "order" ? "" : "order") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">Orders</span></a>
                         <div className={`collapsible-body ${showCollapsible === "order" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>
@@ -102,7 +102,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "discount" ? "" : "discount") }}><a className="collapsible-header ripple" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">Discount</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "discount" ? "" : "discount") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">Discount</span></a>
                         <div className={`collapsible-body ${showCollapsible === "discount" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>
@@ -119,7 +119,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "returnorder" ? "" : "returnorder") }}><a className="collapsible-header ripple" href="#!"><i className="material-icons">replay</i><span className="menu-title" data-i18n="Invoice">Return</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "returnorder" ? "" : "returnorder") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">replay</i><span className="menu-title" data-i18n="Invoice">Return</span></a>
                         <div className={`collapsible-body ${showCollapsible === "returnorder" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>
@@ -131,7 +131,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "3dmodal" ? "" : "3dmodal") }}><a className="collapsible-header ripple" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">3D Modal</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "3dmodal" ? "" : "3dmodal") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">3D Modal</span></a>
                         <div className={`collapsible-body ${showCollapsible === "3dmodal" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>
@@ -145,7 +145,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "profile" ? "" : "profile") }}><a className="collapsible-header ripple" href="#!"><i className="material-icons">person_outline</i><span className="menu-title" data-i18n="Invoice">Profile</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "profile" ? "" : "profile") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">person_outline</i><span className="menu-title" data-i18n="Invoice">Profile</span></a>
                         <div className={`collapsible-body ${showCollapsible === "profile" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>

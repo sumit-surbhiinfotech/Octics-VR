@@ -9,8 +9,8 @@ const EditYourProfile = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <div class="container">
-                    <div className="view-your-profile mt-5">
+                <div className="container">
+                    <div className="view-your-profile mt-5 animate fadeUp">
                         <div className="row">
                             <div className="col s12 m6 l6 xl3">
 

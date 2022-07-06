@@ -113,7 +113,7 @@ const ProductView = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <section className="add-new-product-section">
+                <section className="add-new-product-section animate fadeUp">
                     <div className="container">
                         <div className="row mt-1">
                             <div className="row">
@@ -129,7 +129,7 @@ const ProductView = () => {
                                     <div className="title-product">
                                         <h5>Title</h5>
                                         <div className="add-tital">
-                                            <input type="text" placeholder="Add Product Name"></input>
+                                            <input type="text" placeholder="Add Product Name" readOnly=""></input>
                                         </div>
                                     </div>
                                     <div className="description-product">
@@ -145,6 +145,7 @@ const ProductView = () => {
                                                     [AlignLeft, AlignCenter, AlignRight],
                                                     [OrderedList, UnorderedList, Indent, Outdent],
                                                 ]}
+                                                readOnly=""
                                                 contentStyle={{ height: 320 }}
                                             // defaultContent={content}
                                             />
@@ -252,21 +253,21 @@ const ProductView = () => {
                                                         <td>Red</td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00"></input>
+                                                                <input type="text" placeholder=" $ 0.00" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="quantity-btn">
-                                                                <div class="qty-input">
-                                                                    <button class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                <div className="qty-input">
+                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
+                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU"></input>
+                                                                <input type="text" placeholder="SKU" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         {/* <td>
@@ -277,21 +278,21 @@ const ProductView = () => {
                                                         <td>Green</td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00"></input>
+                                                                <input type="text" placeholder=" $ 0.00" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="quantity-btn">
-                                                                <div class="qty-input">
-                                                                    <button class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                <div className="qty-input">
+                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
+                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU"></input>
+                                                                <input type="text" placeholder="SKU" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         {/* <td>
@@ -314,13 +315,13 @@ const ProductView = () => {
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label> SKU</label>
-                                                    <input type="text" placeholder=""></input>
+                                                    <input type="text" placeholder="" readOnly=""></input>
                                                 </div>
                                             </div>
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Quantity</label>
-                                                    <input type="text" placeholder=" 0"></input>
+                                                    <input type="text" placeholder=" 0" readOnly=""></input>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,13 +336,13 @@ const ProductView = () => {
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label> Price</label>
-                                                    <input type="text" placeholder="$ 0.00"></input>
+                                                    <input type="text" placeholder="$ 0.00" readOnly=""></input>
                                                 </div>
                                             </div>
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Compare at Price</label>
-                                                    <input type="text" placeholder="$ 0.00"></input>
+                                                    <input type="text" placeholder="$ 0.00" readOnly=""></input>
                                                 </div>
                                             </div>
                                         </div>
@@ -364,6 +365,7 @@ const ProductView = () => {
                                                         style={{
                                                             width: '100%',
                                                         }}
+                                                        readOnly=""
                                                     >
                                                         {children}
                                                     </Select>
@@ -388,6 +390,7 @@ const ProductView = () => {
                                                     style={{
                                                         width: '100%',
                                                     }}
+                                                    readOnly=""
                                                 >
                                                     {children}
                                                 </Select>

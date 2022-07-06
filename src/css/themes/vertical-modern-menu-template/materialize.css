@@ -10475,6 +10475,7 @@ input[type=range]::-ms-thumb {
     padding-left: 5px !important;
     height: 2rem;
     width: 100%;
+    margin: 0 0 0px 0 !important;
 }
 
 .pablish-btn {
@@ -10499,13 +10500,13 @@ input[type=range]::-ms-thumb {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 300px;
+    /* height: 300px;
 
 
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
 }
 
 .upload p {
@@ -10573,7 +10574,8 @@ input[type=range]::-ms-thumb {
 }
 
 .add-new-product-section .new-product-title {
-    padding: 20px;
+    /* padding: 20px; */
+    font-weight: 600;
 }
 
 .options-select-section {
@@ -10655,6 +10657,7 @@ input[type=range]::-ms-thumb {
     min-width: 0;
     height: 2.15rem;
     line-height: 1;
+    margin: 0 0 0px 0 !important;
 }
 
 .qty-input .product-qty:focus,
@@ -11617,6 +11620,7 @@ input[type="file"] {
 
 .add-remover-input .new-size-color-add-remove {
     display: flex;
+    margin-bottom: 8px;
 }
 
 .add-remover-input .new-size-color-add-remove button {
@@ -11629,4 +11633,33 @@ input[type="file"] {
 
 .all-size-color .size-list li {
     cursor: pointer;
+}
+
+.variants-open {
+    display: block;
+}
+
+.variants-close {
+    display: none;
+}
+
+.edit-Size {
+    padding-top: 20px;
+    text-align: end;
+}
+
+.edit-Size span {
+    font-size: 16px;
+    color: #0091ea;
+    font-weight: 600;
+}
+
+.add-left-product h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.add-left-product-one h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
 }

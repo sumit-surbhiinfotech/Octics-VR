@@ -190,9 +190,9 @@ const PendingOrderlist = () => {
         <>
             <Header />
             <Sidebar />
-            <div className="pendding-order">
+            <div className="pendding-order ">
                 <div id="main">
-                    <div className="row">
+                    <div className="row ">
                         <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
                         <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                             <div className="container">
@@ -212,7 +212,7 @@ const PendingOrderlist = () => {
                         </div>
                         <div className="col s12">
                             <div className="container">
-                                <div className="section section-data-tables">
+                                <div className="section section-data-tables animate fadeUp">
                                     <div className="row">
                                         <div className="col s12">
                                             <div className="card">
@@ -281,10 +281,10 @@ const PendingOrderlist = () => {
                                                                 <div className="col s2 m6 l8"></div>
                                                                 <div className="col s2 m6 l3">
                                                                     <div className="new-data-search">
-                                                                        <div class="search-bar">
-                                                                            <input class="form-control" />
+                                                                        <div className="search-bar">
+                                                                            <input className="form-control" />
                                                                             <span>
-                                                                                <i class="material-icons">search</i>
+                                                                                <i className="material-icons">search</i>
                                                                             </span>
                                                                         </div>
                                                                     </div>

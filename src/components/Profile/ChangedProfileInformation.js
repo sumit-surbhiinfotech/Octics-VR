@@ -10,7 +10,7 @@ const ChangedProfileInformation = () => {
             <Sidebar />
             <div id="main">
                 <div className="container">
-                    <div className="change-information mt-5">
+                    <div className="change-information mt-5 animate fadeUp">
                         <div className="row">
                             <h4 className="titale-h4 mb-2">Change Profile Information</h4>
                             <div className="col s12 m6 l6 xl3">
