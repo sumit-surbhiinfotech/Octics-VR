@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -8,7 +8,6 @@ import { Editor, EditorTools } from "@progress/kendo-react-editor";
 import 'antd/dist/antd.css';
 import { Badge, Button, Radio, Select } from 'antd';
 // import Sortable from 'sortablejs';
-
 import $ from "jquery";
 
 const {
@@ -47,6 +46,7 @@ const AddNewProduct = () => {
     const [dropNew, setDropNew] = useState(false);
     const [addButton, setAddButton] = useState([""]);
     const [addVariants, setAddVariants] = useState();
+    const [editOpen, setEditOpen] = useState();
     const [addNewOption, setAddNewOption] = useState([{
         name: "",
         value: []
@@ -163,18 +163,6 @@ const AddNewProduct = () => {
     });
 
 
-    let [count, setCount] = useState(0);
-
-    function incrementCount(e) {
-        e.preventDefault();
-        count = count + 1;
-        setCount(count);
-    }
-    function decrementCount(e) {
-        e.preventDefault();
-        count = count - 1;
-        setCount(count);
-    }
 
     const handleEnter = (e) => {
         e.preventDefault();
@@ -286,6 +274,7 @@ const AddNewProduct = () => {
     }
     console.log("dcvdfs", addNewOption)
 
+
     useEffect(() => {
         $(document).ready(function () {
             if (window.File && window.FileList && window.FileReader) {
@@ -301,6 +290,7 @@ const AddNewProduct = () => {
                                 "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
                                 "<br/><span class=\"remove\">Remove image</span>" +
                                 "</span>").insertAfter("#files");
+                            console.log("data", file)
                             $(".remove").click(function () {
                                 $(this).parent(".pip").remove();
                             });
@@ -308,7 +298,7 @@ const AddNewProduct = () => {
                         });
                         fileReader.readAsDataURL(f);
                     }
-                    console.log("file", files);
+                    console.log("files", files);
                 });
             } else {
                 alert("Your browser doesn't support to File API")
@@ -387,25 +377,55 @@ const AddNewProduct = () => {
                                     <div className="image-upload">
                                         <h5>Images</h5>
                                         <div className="image-new-upload">
-                                            <div
+                                            {/* <div
                                                 onDragEnter={(e) => handleEnter(e)}
                                                 onDragLeave={(e) => handleLeave(e)}
                                                 onDragOver={(e) => handleOver(e)}
                                                 onDrop={(e) => handleUpload(e)}
                                                 className={`upload${highlight ? " is-highlight" : drop ? " is-drop" : ""
                                                     }`}
-                                            >
+                                            > */}
+                                            <form className="my-form add-new-product">
+                                                <div className="field" align="left">
+                                                    <h5>Upload your Media Files</h5>
+                                                    <input type="file" id="files" name="files[]" multiple />
+                                                </div>
+                                            </form>
+
+                                            {/* </div> */}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col s12   xl6">
+                                        <div className="add-left-product-one mt-3">
+                                            <h5>Avtar 3d Image</h5>
+                                            <div className="for-avter">
                                                 <form className="my-form add-new-product">
                                                     <div className="field" align="left">
-                                                        <h5>Upload your Media Files</h5>
-                                                        <input type="file" id="files" name="files[]" multiple />
+                                                        <h5>Upload  Files</h5>
+                                                        <input type="file" id="files" name="files[]" />
+
                                                     </div>
                                                 </form>
-
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col s12   xl6">
+                                        <div className="add-left-product-one mt-3">
+                                            <h5>Avtar 3d Image</h5>
+                                            <div className="for-avter">
+                                                <form className="my-form add-new-product">
+                                                    <div className="field" align="left">
+                                                        <h5>Upload  Files</h5>
+                                                        <input type="file" id="files" name="files[]" />
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div className="add-left-product-one mt-2">
                                     <div>
@@ -415,7 +435,7 @@ const AddNewProduct = () => {
                                         <div className="row">
                                             <div className="options-select-section" >
                                                 {/* <Checkbox onChange={onChange}>Checkbox</Checkbox>; */}
-                                                <input id="vehicle1" type="checkbox" name="" value="" onClick={() => { setOpenOption(!openOption) }} />
+                                                <input id="vehicle1" type="checkbox" onClick={() => { setOpenOption(!openOption) }} />
                                                 <label htmlFor="vehicle1"> This Product Has  Options, Like Size Or Color</label>
                                             </div>
                                             <div className={`option-name  ${openOption == true ? "open-option-open" : "open-option-close"}`}>
@@ -430,13 +450,13 @@ const AddNewProduct = () => {
                                                             <div className="col s12  l6 xl2"></div>
                                                             <div className="col s12 l6 xl8 mb-3">
                                                                 <div className={`${addSize === "add-color" ? "new-value-close" : " new-value-open"}`}>
-                                                                    <div className="mb-3">
+                                                                    <div className={`mb-3 `}>
                                                                         <div className={`option-one  `} >
                                                                             <label>Option Name</label>
                                                                             <select className="option-select" onChange={(e) => { handleOptionSelect(e.target.value, index) }}>
-                                                                                <option value="">Select</option>
-                                                                                <option value="color">Color</option>
-                                                                                <option value="size">Size</option>
+                                                                                <option value={item}>Select</option>
+                                                                                <option value={item}>Color</option>
+                                                                                <option value={item}>Size</option>
                                                                             </select>
                                                                         </div>
                                                                         {<div className={`option-value mt-4 `}>

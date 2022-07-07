@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -66,9 +67,12 @@ const ReturnOrderView = () => {
                                         </tbody>
                                     </table>
                                     <div className="return-btn mt-4">
-                                        <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">
-                                            Refund
-                                        </button>
+                                        <NavLink to="/refund">
+                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">
+                                                Refund
+                                            </button>
+                                        </NavLink>
+
                                     </div>
                                 </div>
 

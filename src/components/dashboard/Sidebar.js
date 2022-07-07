@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 // import "../../js/materialize.js"
 
 const Sidebar = () => {
-    const [showWaves, setShowWaves] = useState();
+    // const [showWaves, setShowWaves] = useState();
     const [showSidebar, setShowSidebar] = useState();
     const [showCollapsible, setShowCollapsible] = useState(true);
 
@@ -18,7 +18,7 @@ const Sidebar = () => {
                     </a><a className="navbar-toggler" href="#">
                             <i className="material-icons">radio_button_checked</i></a></h1>
                 </div>
-                <ul className={`sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow ${showSidebar == true ? "sidebar-show1" : "sidebar-close1"}`} id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+                <ul className={`sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow  ${showSidebar == true ? "sidebar-show1" : "sidebar-close1"}`} id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
                     <li className="bold active">
                         <NavLink className="ripple2 active" to="/dashboard">
                             <i className="material-icons">settings_input_svideo</i><span className="menu-title" data-i18n="Dashboard">Dashboard</span>
@@ -131,7 +131,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "3dmodal" ? "" : "3dmodal") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">3D Modal</span></a>
+                    {/* <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "3dmodal" ? "" : "3dmodal") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">3D Modal</span></a>
                         <div className={`collapsible-body ${showCollapsible === "3dmodal" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>
@@ -144,7 +144,7 @@ const Sidebar = () => {
                             </ul>
                         </div>
 
-                    </li>
+                    </li> */}
                     <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "profile" ? "" : "profile") }}><a className="collapsible-header ripple2" href="#!"><i className="material-icons">person_outline</i><span className="menu-title" data-i18n="Invoice">Profile</span></a>
                         <div className={`collapsible-body ${showCollapsible === "profile" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
