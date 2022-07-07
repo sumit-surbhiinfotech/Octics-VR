@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -7,6 +7,7 @@ import { Editor, EditorTools } from "@progress/kendo-react-editor";
 // import content from "./content";
 import 'antd/dist/antd.css';
 import { Radio, Select } from 'antd';
+import $ from "jquery";
 
 
 const {
@@ -105,7 +106,36 @@ const ProductView = () => {
         };
     }
 
+    useEffect(() => {
+        $(document).ready(function () {
+            if (window.File && window.FileList && window.FileReader) {
+                $("#files").on("change", function (e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function (e) {
+                            var file = e.target;
+                            $("<span class=\"pip\">" +
+                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                "<br/><span class=\"remove\">Remove image</span>" +
+                                "</span>").insertAfter("#files");
+                            $(".remove").click(function () {
+                                $(this).parent(".pip").remove();
+                            });
 
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                    console.log("files", files);
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
+        });
+
+    })
 
     return (
 
@@ -113,7 +143,7 @@ const ProductView = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <section className="add-new-product-section">
+                <section className="add-new-product-section animate fadeUp">
                     <div className="container">
                         <div className="row mt-1">
                             <div className="row">
@@ -129,7 +159,7 @@ const ProductView = () => {
                                     <div className="title-product">
                                         <h5>Title</h5>
                                         <div className="add-tital">
-                                            <input type="text" placeholder="Add Product Name"></input>
+                                            <input type="text" placeholder="Add Product Name" readOnly=""></input>
                                         </div>
                                     </div>
                                     <div className="description-product">
@@ -145,6 +175,7 @@ const ProductView = () => {
                                                     [AlignLeft, AlignCenter, AlignRight],
                                                     [OrderedList, UnorderedList, Indent, Outdent],
                                                 ]}
+                                                readOnly=""
                                                 contentStyle={{ height: 320 }}
                                             // defaultContent={content}
                                             />
@@ -155,40 +186,12 @@ const ProductView = () => {
                                     <div className="image-upload">
                                         <h5>Images</h5>
                                         <div className="image-new-upload">
-                                            <div
-                                                onDragEnter={(e) => handleEnter(e)}
-                                                onDragLeave={(e) => handleLeave(e)}
-                                                onDragOver={(e) => handleOver(e)}
-                                                onDrop={(e) => handleUpload(e)}
-                                                className={`upload${highlight ? " is-highlight" : drop ? " is-drop" : ""
-                                                    }`}
-                                            // style={{ backgroundImage: `url(${preview})` }}
-                                            >
-                                                <form className="my-form add-new-product">
-                                                    <div className="preview-imgs">
-
-                                                        {
-                                                            files && files.map((item, index) => (
-                                                                <span className={`new-priview-class ${closeImage == true ? "close-img-priview" : "none"}`}>
-                                                                    <span key={index} className="close-icon-img" onClick={() => { setCloseImage(!closeImage) }}>X</span>
-                                                                    <img src={item} key={index} />
-                                                                </span>
-                                                            ))
-                                                        }
-                                                    </div>
-                                                    <p>Drag and Drop image here</p>
-                                                    <div className="upload-button">
-                                                        <input
-                                                            multiple
-                                                            type="file"
-                                                            className="upload-file"
-                                                            accept="image/*"
-                                                            onChange={(e) => handleUpload(e)}
-                                                        />
-                                                        {/* <button className="button btn gradient-45deg-green-teal">Upload Here</button> */}
-                                                    </div>
-                                                </form>
-                                            </div>
+                                            <form className="my-form add-new-product">
+                                                <div className="field" align="left">
+                                                    <h5>Upload your Media Files</h5>
+                                                    <input type="file" id="files" name="files[]" multiple />
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -252,21 +255,21 @@ const ProductView = () => {
                                                         <td>Red</td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00"></input>
+                                                                <input type="text" placeholder=" $ 0.00" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="quantity-btn">
-                                                                <div class="qty-input">
-                                                                    <button class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                <div className="qty-input">
+                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
+                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU"></input>
+                                                                <input type="text" placeholder="SKU" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         {/* <td>
@@ -277,21 +280,21 @@ const ProductView = () => {
                                                         <td>Green</td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00"></input>
+                                                                <input type="text" placeholder=" $ 0.00" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="quantity-btn">
-                                                                <div class="qty-input">
-                                                                    <button class="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input class="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                <div className="qty-input">
+                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
+                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU"></input>
+                                                                <input type="text" placeholder="SKU" readOnly=""></input>
                                                             </div>
                                                         </td>
                                                         {/* <td>
@@ -314,13 +317,13 @@ const ProductView = () => {
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label> SKU</label>
-                                                    <input type="text" placeholder=""></input>
+                                                    <input type="text" placeholder="" readOnly=""></input>
                                                 </div>
                                             </div>
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Quantity</label>
-                                                    <input type="text" placeholder=" 0"></input>
+                                                    <input type="text" placeholder=" 0" readOnly=""></input>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,13 +338,13 @@ const ProductView = () => {
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label> Price</label>
-                                                    <input type="text" placeholder="$ 0.00"></input>
+                                                    <input type="text" placeholder="$ 0.00" readOnly=""></input>
                                                 </div>
                                             </div>
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Compare at Price</label>
-                                                    <input type="text" placeholder="$ 0.00"></input>
+                                                    <input type="text" placeholder="$ 0.00" readOnly=""></input>
                                                 </div>
                                             </div>
                                         </div>
@@ -364,6 +367,7 @@ const ProductView = () => {
                                                         style={{
                                                             width: '100%',
                                                         }}
+                                                        readOnly=""
                                                     >
                                                         {children}
                                                     </Select>
@@ -388,6 +392,7 @@ const ProductView = () => {
                                                     style={{
                                                         width: '100%',
                                                     }}
+                                                    readOnly=""
                                                 >
                                                     {children}
                                                 </Select>

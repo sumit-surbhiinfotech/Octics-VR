@@ -21,7 +21,7 @@ const data = [
         Customer: 'John Brown',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
     {
         key: '2',
@@ -30,7 +30,7 @@ const data = [
         Customer: 'John Brown',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
     {
         key: '3',
@@ -39,7 +39,7 @@ const data = [
         Customer: 'John Brown',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
     {
         key: '4',
@@ -48,7 +48,7 @@ const data = [
         Customer: 'raj',
         PaymentStatus: 'Pending',
         FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
     },
 
 ];
@@ -215,7 +215,7 @@ const AllOrder = () => {
                     </div>
                     <div className="col s12">
                         <div className="container">
-                            <div className="section section-data-tables">
+                            <div className="section section-data-tables  animate fadeUp">
 
                                 <div className="row">
                                     <div className="col s12">
@@ -239,10 +239,10 @@ const AllOrder = () => {
                                                             <div className="col s2 m6 l8"></div>
                                                             <div className="col s2 m6 l3">
                                                                 <div className="new-data-search">
-                                                                    <div class="search-bar">
-                                                                        <input class="form-control" />
+                                                                    <div className="search-bar">
+                                                                        <input className="form-control" />
                                                                         <span>
-                                                                            <i class="material-icons">search</i>
+                                                                            <i className="material-icons">search</i>
                                                                         </span>
                                                                     </div>
                                                                 </div>

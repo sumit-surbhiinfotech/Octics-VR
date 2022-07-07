@@ -9,11 +9,11 @@ const OrderFulfillAndTracking = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <div className="product-fulfill-section">
+                <div className="product-fulfill-section animate fadeUp">
                     <div className="container">
                         <div className="row">
-                            <div className="col s12  l6 xl2"></div>
-                            <div className="col s12 m6 l6 xl5 mt-5">
+                            <div className="col s12  l6 xl1"></div>
+                            <div className="col s12 m6 l6 xl6 mt-5">
                                 <div className="add-left-product">
                                     <h6>Fulfilled</h6>
                                     <table id="page-length-option" className="display">
@@ -97,7 +97,7 @@ const OrderFulfillAndTracking = () => {
                                 </div>
 
                             </div>
-                            <div className="col s12 m6 l6 xl3 mt-5">
+                            <div className="col s12 m6 l6 xl4 mt-5">
                                 <div className="add-left-product">
                                     <h6>Customer</h6>
                                     <div className="customer-new-name">
@@ -132,7 +132,7 @@ const OrderFulfillAndTracking = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col s12  l6 xl2"></div>
+                            <div className="col s12  l6 xl1"></div>
                         </div>
                     </div>
                 </div>

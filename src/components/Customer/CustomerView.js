@@ -10,7 +10,7 @@ const CustomerView = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <div className="row">
+                <div className="row ">
                     <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
                     <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                         <div className="container">
@@ -31,7 +31,7 @@ const CustomerView = () => {
                     </div>
                     <div className="col s12">
                         <div className="container">
-                            <div className="section users-view">
+                            <div className="section users-view animate fadeUp">
                                 <div className="card-panel">
                                     <div className="row">
                                         <div className="col s12 m7">
@@ -130,7 +130,7 @@ const CustomerView = () => {
                                                 <div className=" mt-2">
                                                     <div className="ad-btn-action">
                                                         <div className="">
-                                                            <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-1 "><span class="material-icons">delete_forever</span></button>
+                                                            <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-1 "><span className="material-icons">delete_forever</span></button>
                                                             <NavLink to="/customer-listing">
                                                                 <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 ">Back To List</button>
                                                             </NavLink>

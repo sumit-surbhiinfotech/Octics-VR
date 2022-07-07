@@ -10,7 +10,7 @@ const ProductListing = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <div className="row">
+                <div className="row ">
                     <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
                     <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                         <div className="container">

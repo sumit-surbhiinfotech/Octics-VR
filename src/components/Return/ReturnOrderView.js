@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -9,11 +10,11 @@ const ReturnOrderView = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <div className="product-fulfill-section">
+                <div className="product-fulfill-section animate fadeUp">
                     <div className="container">
                         <div className="row">
-                            <div className="col s12  l6 xl2"></div>
-                            <div className="col s12 m6 l6 xl5 mt-5">
+                            <div className="col s12  l6 xl1"></div>
+                            <div className="col s12 m6 l6 xl6 mt-5">
                                 <div className="add-left-product">
                                     <h6>Return</h6>
                                     <table id="page-length-option" className="display">
@@ -66,9 +67,12 @@ const ReturnOrderView = () => {
                                         </tbody>
                                     </table>
                                     <div className="return-btn mt-4">
-                                        <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">
-                                            Refund
-                                        </button>
+                                        <NavLink to="/refund">
+                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">
+                                                Refund
+                                            </button>
+                                        </NavLink>
+
                                     </div>
                                 </div>
 
@@ -100,7 +104,7 @@ const ReturnOrderView = () => {
                                 </div> */}
 
                             </div>
-                            <div className="col s12 m6 l6 xl3 mt-5">
+                            <div className="col s12 m6 l6 xl4 mt-5">
                                 {/* <div className="add-left-product">
 
                                 </div> */}
@@ -138,7 +142,7 @@ const ReturnOrderView = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col s12  l6 xl2"></div>
+                            <div className="col s12  l6 xl1"></div>
                         </div>
                     </div>
                 </div>
