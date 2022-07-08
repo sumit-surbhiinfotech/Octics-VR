@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -24,7 +25,10 @@ const EditYourProfile = () => {
                                         <div className="profile-details">
                                             <h5>Avatar</h5>
                                             <p>Surat, Gujarat.</p>
-                                            <button className="mt-3 ripple3 btn gradient-45deg-green-teal"> Edit Profile</button>
+                                            <NavLink to="/changed-profile-information">
+                                                <button className="mt-3 ripple3 btn gradient-45deg-green-teal"> Edit Profile</button>
+                                            </NavLink>
+
                                         </div>
                                     </div>
                                 </div>

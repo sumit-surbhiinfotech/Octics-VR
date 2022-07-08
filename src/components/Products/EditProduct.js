@@ -149,7 +149,7 @@ const EditProduct = () => {
                             <div className="row">
                                 <div className="col s12 l6 xl2"></div>
                                 <div className="col s12 l6 xl5">
-                                    <h3 className="new-product-title">Collection</h3>
+                                    <h3 className="new-product-title">Product Name</h3>
                                 </div>
                                 <div className="col s12 l6 xl3"></div>
                             </div>
@@ -354,6 +354,31 @@ const EditProduct = () => {
                                 <div className="add-left-product-one mt-2 ">
                                     <div>
                                         <h5>Category</h5>
+                                    </div>
+                                    <div>
+                                        <div className="row">
+                                            <div className="col s12  l6 xl12">
+                                                <div className="add-tital">
+                                                    <Select
+                                                        mode="multiple"
+                                                        size={size}
+                                                        placeholder="Please select"
+                                                        defaultValue={['a10', 'c12']}
+                                                        onChange={handleChange}
+                                                        style={{
+                                                            width: '100%',
+                                                        }}
+                                                    >
+                                                        {children}
+                                                    </Select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="add-left-product-one mt-2 ">
+                                    <div>
+                                        <h5>Collection</h5>
                                     </div>
                                     <div>
                                         <div className="row">

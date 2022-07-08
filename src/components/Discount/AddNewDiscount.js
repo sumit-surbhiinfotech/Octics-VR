@@ -169,8 +169,8 @@ const AddNewDiscount = () => {
                                     <div className="add-left-product mt-3">
                                         <h6>Customer Spends</h6>
                                         <div className="costomer-spends mb-3">
-                                            <div>
-                                                <p><input type="radio" name="mini-quntity" onClick={(e) => { setAddMinQuntity(addMinQuntity === "mi-quantity" ? "" : "mi-quantity") }} /> Minimum Quantity of Item</p>
+                                            <div className="mtb-10">
+                                                <label htmlFor="mi-quantity"><input id="mi-quantity" type="radio" name="mini-quntity" onClick={(e) => { setAddMinQuntity(addMinQuntity === "mi-quantity" ? "" : "mi-quantity") }} /> Minimum Quantity of Item</label>
                                                 <div className={`minimum-quantity ${addMinQuntity === "mi-quantity" ? "collections-add-open" : "collections-add-close"}`}>
                                                     <div className="row">
                                                         <div className="col s12 m6 l6 xl4">
@@ -192,8 +192,8 @@ const AddNewDiscount = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p><input type="radio" name="mini-quntity" onClick={(e) => { setAddMinQuntity(addMinQuntity === "any-amount" ? "" : "any-amount") }} /> Minimum Purchase Amount</p>
+                                            <div className="mtb-10">
+                                                <label htmlFor="any-amount"><input id="any-amount" type="radio" name="mini-quntity" onClick={(e) => { setAddMinQuntity(addMinQuntity === "any-amount" ? "" : "any-amount") }} /> Minimum Purchase Amount</label>
                                                 <div className={`minimum-quantity ${addMinQuntity === "any-amount" ? "collections-add-open" : "collections-add-close"}`}>
                                                     <div className="row">
                                                         <div className="col s12 m6 l6 xl4">
@@ -259,11 +259,11 @@ const AddNewDiscount = () => {
                                         <div className="at-a-discounted-value mb-3">
                                             <p className="valur-discount">AT A DISCOUNTED VALUE</p>
                                             <div className="values-for-discount">
-                                                <div>
-                                                    <p><input type="radio" name="pre-1" onClick={(e) => { setAddAnyFree(addAnyFree === "any-perecentage" ? "" : "any-perecentage") }} /> Perecentage</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="any-perecentage"><input id="any-perecentage" type="radio" name="pre-1" onClick={(e) => { setAddAnyFree(addAnyFree === "any-perecentage" ? "" : "any-perecentage") }} /> Perecentage</label>
                                                 </div>
-                                                <div>
-                                                    <p><input type="radio" name="pre-1" onClick={(e) => { setAddAnyFree(addAnyFree === "any-free" ? "" : "any-free") }} /> Free</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="any-free"><input id="any-free" type="radio" name="pre-1" onClick={(e) => { setAddAnyFree(addAnyFree === "any-free" ? "" : "any-free") }} /> Free</label>
                                                 </div>
                                                 <div className="row">
                                                     <div className="col s12 m6 l6 xl3">
@@ -279,7 +279,7 @@ const AddNewDiscount = () => {
                                         </div>
                                         <hr />
                                         <div className="set-meximum-number">
-                                            <p><input type="checkbox" onClick={(e) => { setAddUsesOreder(addUsesOreder === "set-meximum-number1" ? "" : "set-meximum-number1") }} /> Set A Meximum Number of Uses Per Order</p>
+                                            <label htmlFor="set-meximum-number1"><input id="set-meximum-number1" type="checkbox" onClick={(e) => { setAddUsesOreder(addUsesOreder === "set-meximum-number1" ? "" : "set-meximum-number1") }} /> Set A Meximum Number of Uses Per Order</label>
                                             <div className={`add-uses-per-order ${addUsesOreder === "set-meximum-number1" ? "collections-add-open" : "collections-add-close"}`}>
                                                 <div className="row">
                                                     <div className="col s12 m6 l6 xl3">
@@ -296,11 +296,11 @@ const AddNewDiscount = () => {
                                         <h6>Countries</h6>
                                         <div className="countries mb-3">
                                             <div className="countries-input">
-                                                <div>
-                                                    <p><input type="radio" name="all-coun" onClick={(e) => { setAddAllCountries(addAllCountries === "any-all" ? "" : "any-all") }} /> All Countries</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="any-all"><input id="any-all" type="radio" name="all-coun" onClick={(e) => { setAddAllCountries(addAllCountries === "any-all" ? "" : "any-all") }} /> All Countries</label>
                                                 </div>
-                                                <div>
-                                                    <p><input type="radio" name="all-coun" onClick={(e) => { setAddAllCountries(addAllCountries === "selected-countries" ? "" : "selected-countries") }} /> Selected Countries</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="selected-countries"><input id="selected-countries" type="radio" name="all-coun" onClick={(e) => { setAddAllCountries(addAllCountries === "selected-countries" ? "" : "selected-countries") }} /> Selected Countries</label>
                                                     <div className={`all-addres-cont  ${addAllCountries === "selected-countries" ? "collections-add-open" : "collections-add-close"}`}>
                                                         <div className="row mt-2">
                                                             <div className="col s12 m6 l6 xl6">
@@ -328,8 +328,8 @@ const AddNewDiscount = () => {
                                         <div className="mt-3 shipping-rates">
                                             <p className="new-data-rates">SHIPPING RATES</p>
                                             <div className="mt-3 new-shipping">
-                                                <div>
-                                                    <p><input type="checkbox" onClick={(e) => { setAddShpping(addShpping === "Shpping" ? "" : "Shpping") }} /> Exclude Shipping Rates Over a Certain Amount</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="Shpping"><input id="Shpping" type="checkbox" onClick={(e) => { setAddShpping(addShpping === "Shpping" ? "" : "Shpping") }} /> Exclude Shipping Rates Over a Certain Amount</label>
                                                     <div className={`${addShpping === "Shpping" ? "collections-add-open" : "collections-add-close"}`}>
                                                         <div className="row mt-1">
                                                             <div className="col s12 m6 l6 xl3">
@@ -352,8 +352,8 @@ const AddNewDiscount = () => {
                                             {/* <div>
                                             <p><input type="radio" /> Entire Order</p>
                                         </div> */}
-                                            <div>
-                                                <p><input type="radio" name="collections-customer" onClick={(e) => { setAddCollProduct(addCollProduct === "collections" ? "" : "collections") }} /> Specific Collections</p>
+                                            <div className="mtb-10">
+                                                <label htmlFor="collections"><input id="collections" type="radio" name="collections-customer" onClick={(e) => { setAddCollProduct(addCollProduct === "collections" ? "" : "collections") }} /> Specific Collections</label>
                                                 <div className={`input-code new-input pt-2 ${addCollProduct === "collections" ? "collections-add-open" : "collections-add-close"}`}>
                                                     <div className="code-genreted">
                                                         <span>
@@ -364,8 +364,8 @@ const AddNewDiscount = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p><input type="radio" name="collections-customer" onClick={(e) => { setAddCollProduct(addCollProduct === "products" ? "" : "products") }} /> Specific Products</p>
+                                            <div className="mtb-10">
+                                                <label htmlFor="products"><input id="products" type="radio" name="collections-customer" onClick={(e) => { setAddCollProduct(addCollProduct === "products" ? "" : "products") }} /> Specific Products</label>
                                                 <div className={`input-code new-input pt-2 ${addCollProduct === "products" ? "products-add-open-new" : "products-add-close-new"}`}>
                                                     <div className="code-genreted">
                                                         <span>
@@ -387,11 +387,11 @@ const AddNewDiscount = () => {
                                         <h6>Minimum Purchase Requirements</h6>
                                         <div className="minimum-requirements">
                                             <div className="minimum-input">
-                                                <div>
-                                                    <p><input type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "noone" ? "" : "noone") }} /> No Minimum Requirements</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="noone"><input id="noone" type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "noone" ? "" : "noone") }} /> No Minimum Requirements</label>
                                                 </div>
-                                                <div>
-                                                    <p><input type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "amount" ? "" : "amount") }} /> Minimum Purchase Amount</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="amount"><input id="amount" type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "amount" ? "" : "amount") }} /> Minimum Purchase Amount</label>
                                                     <div className={`amout-to-add ${addAmoutItem === "amount" ? "amout-add-open" : "amout-add-close"}`}>
                                                         <div className="row">
                                                             <div className="col s12 m6 l6 xl3">
@@ -402,8 +402,8 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p><input type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "item" ? "" : "item") }} /> Minimum Quntity of item</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="item"><input id="item" type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "item" ? "" : "item") }} /> Minimum Quntity of item</label>
                                                     <div className={`item-to-add ${addAmoutItem === "item" ? "item-add-open" : "item-add-close"}`}>
                                                         <div className="row">
                                                             <div className="col s12 m6 l6 xl3">
@@ -425,11 +425,11 @@ const AddNewDiscount = () => {
                                         <h6>Customer eligibility</h6>
                                         <div className="customer-eligibility">
                                             <div className="eligibility">
-                                                <div>
-                                                    <p><input type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "allcust" ? "" : "allcust") }} /> All Customers</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="allcust"><input id="allcust" type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "allcust" ? "" : "allcust") }} /> All Customers</label>
                                                 </div>
-                                                <div>
-                                                    <p><input type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "segments" ? "" : "segments") }} /> Specific Customers Segments</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="segments"><input id="segments" type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "segments" ? "" : "segments") }} /> Specific Customers Segments</label>
                                                     <div className={`input-code new-input pt-2 ${addSpecific === "segments" ? "amout-add-open" : "amout-add-close"} `}>
                                                         <div className="code-genreted">
                                                             <span>
@@ -440,8 +440,8 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p><input type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "Specificc" ? "" : "Specificc") }} /> Specific Customers</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="Specificc"><input id="Specificc" type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "Specificc" ? "" : "Specificc") }} /> Specific Customers</label>
                                                     <div className={`input-code new-input pt-2 ${addSpecific === "Specificc" ? "amout-add-open" : "amout-add-close"}`}>
                                                         <div className="code-genreted">
                                                             <span>
@@ -462,8 +462,8 @@ const AddNewDiscount = () => {
                                         <h6>Maximum Discount Uses</h6>
                                         <div className="maximum-discount-uses">
                                             <div className="discount-uses">
-                                                <div>
-                                                    <p><input type="checkbox" name="discout-use-on" onClick={(e) => { setAddLimitUse(addLimitUse === "limitnumber" ? "" : "limitnumber") }} /> Limit Number Of Times this Discount can be used in total</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="limitnumber"><input id="limitnumber" type="checkbox" name="discout-use-on" onClick={(e) => { setAddLimitUse(addLimitUse === "limitnumber" ? "" : "limitnumber") }} /> Limit Number Of Times this Discount can be used in total</label>
                                                     <div className={`dicount-add-uses mt-1 ${addLimitUse === "limitnumber" ? "amout-add-open" : "amout-add-close"}`}>
                                                         <div className="row">
                                                             <div className="col s12 m6 l6 xl3">
@@ -472,8 +472,15 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p><input type="checkbox" name="discout-use-on" /> Limit to one use per Customer</p>
+                                                <div className="mtb-10">
+                                                    <label htmlFor="limitpercustomer"><input id="limitpercustomer" type="checkbox" name="discout-use-on" onClick={(e) => { setAddLimitUse(addLimitUse === "limitpercustomer" ? "" : "limitpercustomer") }} /> Limit to one use per Customer</label>
+                                                    <div className={`dicount-add-uses mt-1 ${addLimitUse === "limitpercustomer" ? "amout-add-open" : "amout-add-close"}`}>
+                                                        <div className="row">
+                                                            <div className="col s12 m6 l6 xl3">
+                                                                <input type="text" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -493,7 +500,7 @@ const AddNewDiscount = () => {
                                             </div>
                                             <div className="set-end-date">
                                                 <div className="open-end-date">
-                                                    <p><input type="checkbox" onClick={() => { setEndDate(!endDate) }} /> Set End Date</p>
+                                                    <label htmlFor="endDate"><input id="endDate" type="checkbox" onClick={() => { setEndDate(!endDate) }} /> Set End Date</label>
                                                     <div className={`mt-3 ${endDate == true ? "date-set-open" : "date-set-close"}`}>
                                                         <div className="row">
                                                             <div className="col s12 m6 l6 xl6">

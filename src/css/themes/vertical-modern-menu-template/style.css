@@ -7454,9 +7454,9 @@ nav.display-none.search-sm .nav-wrapper form .input-field i {
     width: inherit;
     height: 100%;
     padding-bottom: 65px;
-
-    -webkit-transition: auto !important;
-    transition: auto !important;
+    /* 
+    -webkit-transition: auto !important; */
+    /* transition: auto !important; */
 
     border: none;
     box-shadow: 0 4px 7px 0 rgba(0, 0, 0, .2);

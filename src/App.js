@@ -35,6 +35,8 @@ import EditYourProfile from './components/Profile/EditYourProfile';
 import ChangedProfileInformation from './components/Profile/ChangedProfileInformation';
 import ListOfUpload3DModal from './components/3DModal/ListOfUpload3DModal';
 import Refund from './components/Return/Refund';
+import ListofCollection from './components/Products/ListofCollection';
+import CreateCollections from './components/Products/CreateCollections';
 
 function App() {
   return (
@@ -64,6 +66,8 @@ function App() {
           <Route path="/changed-profile-information" element={<ChangedProfileInformation />} />
           <Route path="/list-upload-3d-modal" element={<ListOfUpload3DModal />} />
           <Route path="/refund" element={<Refund />} />
+          <Route path="/list-of-collection" element={<ListofCollection />} />
+          <Route path="/create-collection" element={<CreateCollections />} />
         </Routes>
       </div>
     </BrowserRouter>

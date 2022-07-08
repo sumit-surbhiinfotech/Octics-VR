@@ -136,7 +136,7 @@ const CustomerListing = () => {
 
     const columns = [
         {
-            title: 'Custome rName',
+            title: 'Customer Name',
             dataIndex: 'CustomerName',
             key: 'CustomerName',
             width: '10%',
@@ -178,7 +178,7 @@ const CustomerListing = () => {
                                     <h5 className="breadcrumbs-title mt-0 mb-0"><span>Customers</span></h5>
                                     <ol className="breadcrumbs mb-0">
                                         <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li className="breadcrumb-item active">customer List </li>
+                                        <li className="breadcrumb-item active">Customer List </li>
                                     </ol>
                                 </div>
                                 <div className="col s2 m6 l6">
