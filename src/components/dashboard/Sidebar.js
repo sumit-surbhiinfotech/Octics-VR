@@ -49,6 +49,11 @@ const Sidebar = () => {
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Product Edit</span>
                                     </NavLink>
                                 </li>
+                                <li>
+                                    <NavLink to="/list-of-collection">
+                                        <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Collections</span>
+                                    </NavLink>
+                                </li>
                             </ul>
                         </div>
 

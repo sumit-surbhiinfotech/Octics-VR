@@ -28,12 +28,12 @@ const Refund = () => {
                         <div className="row">
                             <div className="row">
                                 <div className="col s12  l6 xl1"></div>
-                                <div className="col s12  l6 xl6">
+                                <div className="col s12  l6 xl6 mt-2">
                                     <h3>Refund</h3>
                                 </div>
                             </div>
                             <div className="col s12  l6 xl1"></div>
-                            <div className="col s12  xl6 mt-3">
+                            <div className="col s12  xl6">
                                 <div className="add-left-product">
                                     <h6>Unfulfilled</h6>
                                     <table id="page-length-option" className="display">
@@ -129,7 +129,7 @@ const Refund = () => {
 
 
                             </div>
-                            <div className="col s12  xl4 mt-3">
+                            <div className="col s12  xl4">
                                 {/* <div className="add-left-product">
 
                                 </div> */}

@@ -44,7 +44,9 @@ const ProductListing = () => {
                                                 <div className="card-content">
                                                     <p>Headphone</p>
                                                     <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="text-center">
+                                                        <img src="images/gaming-vrp4.png" className="obj-fit-img" alt="" />
+                                                    </div>
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
                                                         <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
@@ -59,7 +61,9 @@ const ProductListing = () => {
                                                 <div className="card-content">
                                                     <p>Headphone</p>
                                                     <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
+                                                    </div>
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
                                                         <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
@@ -74,7 +78,9 @@ const ProductListing = () => {
                                                 <div className="card-content">
                                                     <p>Headphone</p>
                                                     <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
+                                                    </div>
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
                                                         <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
@@ -89,38 +95,9 @@ const ProductListing = () => {
                                                 <div className="card-content">
                                                     <p>Headphone</p>
                                                     <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
-                                                    <div className="display-flex flex-wrap justify-content-center">
-                                                        <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
-                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
                                                     </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div className="col s12 m4 l4">
-                                            <div className="card animate fadeUp">
-                                                <div className="card-content">
-                                                    <p>Headphone</p>
-                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
-                                                    <div className="display-flex flex-wrap justify-content-center">
-                                                        <h5 className="mt-3">$249.00</h5>
-                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
-                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div className="col s12 m4 l4">
-                                            <div className="card animate fadeUp">
-                                                <div className="card-content">
-                                                    <p>Headphone</p>
-                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
                                                         <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
@@ -136,7 +113,9 @@ const ProductListing = () => {
                                                 <div className="card-content">
                                                     <p>Headphone</p>
                                                     <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
+                                                    </div>
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
                                                         <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
@@ -151,7 +130,9 @@ const ProductListing = () => {
                                                 <div className="card-content">
                                                     <p>Headphone</p>
                                                     <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
+                                                    </div>
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
                                                         <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
@@ -167,7 +148,44 @@ const ProductListing = () => {
                                                 <div className="card-content">
                                                     <p>Headphone</p>
                                                     <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                                    <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
+                                                    </div>
+                                                    <div className="display-flex flex-wrap justify-content-center">
+                                                        <h5 className="mt-3">$249.00</h5>
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div className="col s12 m4 l4">
+                                            <div className="card animate fadeUp">
+                                                <div className="card-content">
+                                                    <p>Headphone</p>
+                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
+                                                    </div>
+                                                    <div className="display-flex flex-wrap justify-content-center">
+                                                        <h5 className="mt-3">$249.00</h5>
+                                                        <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
+                                                            href="#modal1" onClick={() => { setModalShow(!modalShow) }}>View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div className="col s12 m4 l4">
+                                            <div className="card animate fadeUp">
+                                                <div className="card-content">
+                                                    <p>Headphone</p>
+                                                    <span className="card-title text-ellipsis">Purple Solo 2 Wireless</span>
+                                                    <div className="text-center">
+                                                        <img src="images/watch-2.png" className="obj-fit-img" alt="" />
+                                                    </div>
                                                     <div className="display-flex flex-wrap justify-content-center">
                                                         <h5 className="mt-3">$249.00</h5>
                                                         <a className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4"
@@ -215,7 +233,7 @@ const ProductListing = () => {
                         <a className="modal-close right"><i className="material-icons" onClick={() => { setModalShow(false) }}>close</i></a>
                         <div className="row" id="product-two">
                             <div className="col m6 s12">
-                                <img src="images/watch-2.png" className="responsive-img" alt="" />
+                                <img src="images/watch-2.png" className="obj-fit-img" alt="" />
                             </div>
                             <div className="col m6 s12">
                                 <p>Headphone</p>

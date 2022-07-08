@@ -4,10 +4,8 @@ import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
 import '@progress/kendo-theme-default/dist/all.css';
 import { Editor, EditorTools } from "@progress/kendo-react-editor";
-// import content from "./content";
 import 'antd/dist/antd.css';
 import { Badge, Button, Radio, Select } from 'antd';
-// import Sortable from 'sortablejs';
 import $ from "jquery";
 
 const {
@@ -94,7 +92,6 @@ const AddNewProduct = () => {
         setColorOption(temp);
     }
 
-
     const handleAdd2 = () => {
         let temp = [...addNewOption];
         temp.push({
@@ -111,7 +108,6 @@ const AddNewProduct = () => {
         temp.push("");
         setAddButton(temp)
     }
-
 
     const dropzones = [...document.querySelectorAll(".dropzone")];
     const draggables = [...document.querySelectorAll(".draggable")];
@@ -161,8 +157,6 @@ const AddNewProduct = () => {
             }
         });
     });
-
-
 
     const handleEnter = (e) => {
         e.preventDefault();
@@ -689,6 +683,31 @@ const AddNewProduct = () => {
                                 <div className="add-left-product-one mt-2 ">
                                     <div>
                                         <h5>Category</h5>
+                                    </div>
+                                    <div>
+                                        <div className="row">
+                                            <div className="col s12  l6 xl12">
+                                                <div className="add-tital">
+                                                    <Select
+                                                        mode="multiple"
+                                                        size={size}
+                                                        placeholder="Please select"
+                                                        defaultValue={['a10', 'c12']}
+                                                        onChange={handleChange}
+                                                        style={{
+                                                            width: '100%',
+                                                        }}
+                                                    >
+                                                        {children}
+                                                    </Select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="add-left-product-one mt-2 ">
+                                    <div>
+                                        <h5>Collection</h5>
                                     </div>
                                     <div>
                                         <div className="row">
