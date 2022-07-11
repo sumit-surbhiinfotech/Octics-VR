@@ -15,7 +15,7 @@ const ProductListing = () => {
                     <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                         <div className="container">
                             <div className="row">
-                                <div className="col s10 m6 l2">
+                                <div className="col s4 m6 l2">
                                     <h5 className="breadcrumbs-title mt-0 mb-0"><span>Product List</span></h5>
                                     <ol className="breadcrumbs mb-0">
                                         <li className="breadcrumb-item"><a href="index.html">Home</a>
@@ -24,7 +24,7 @@ const ProductListing = () => {
                                         </li>
                                     </ol>
                                 </div>
-                                <div className="col s2 m6 l10">
+                                <div className="col s8 m6 l10">
                                     <div className="search-bar">
                                         <input className="form-control"></input>
                                         <span><i className="material-icons">search</i></span>
@@ -34,7 +34,7 @@ const ProductListing = () => {
                         </div>
                     </div>
                     <div className="col s12">
-                        <div className="container">
+                        <div className="container mb-5">
                             <div className="section">
                                 <div className="row" id="ecommerce-products">
 

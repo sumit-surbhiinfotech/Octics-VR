@@ -244,63 +244,65 @@ const ProductView = () => {
                                         <div className="variants-table">
                                             <div >
                                                 <table>
-                                                    <tr>
-                                                        <th>Variant</th>
-                                                        <th>Price</th>
-                                                        <th>Quantity</th>
-                                                        <th>SKU</th>
-                                                        {/* <th>Edit</th> */}
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Red</td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00" readOnly=""></input>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="quantity-btn">
-                                                                <div className="qty-input">
-                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Variant</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>SKU</th>
+                                                            {/* <th>Edit</th> */}
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Red</td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder=" $ 0.00" readOnly=""></input>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU" readOnly=""></input>
-                                                            </div>
-                                                        </td>
-                                                        {/* <td>
+                                                            </td>
+                                                            <td>
+                                                                <div className="quantity-btn">
+                                                                    <div className="qty-input">
+                                                                        <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                        <input className="product-qty" type="number" name="product-qty" min="0" readOnly max="10" value="1" />
+                                                                        <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder="SKU" readOnly=""></input>
+                                                                </div>
+                                                            </td>
+                                                            {/* <td>
                                                             <button className="btn gradient-45deg-green-teal">Edit</button>
                                                         </td> */}
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Green</td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00" readOnly=""></input>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="quantity-btn">
-                                                                <div className="qty-input">
-                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Green</td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder=" $ 0.00" readOnly=""></input>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU" readOnly=""></input>
-                                                            </div>
-                                                        </td>
-                                                        {/* <td>
+                                                            </td>
+                                                            <td>
+                                                                <div className="quantity-btn">
+                                                                    <div className="qty-input">
+                                                                        <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                        <input className="product-qty" type="number" name="product-qty" min="0" readOnly max="10" value="1" />
+                                                                        <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder="SKU" readOnly=""></input>
+                                                                </div>
+                                                            </td>
+                                                            {/* <td>
                                                             <button className="btn gradient-45deg-green-teal">Edit</button>
                                                         </td> */}
-                                                    </tr>
+                                                        </tr>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -401,7 +403,7 @@ const ProductView = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="add-left-product-one mt-2">
+                                <div className="add-left-product-one mt-2 mb-5 ">
                                     <div>
                                         <h5>Tags</h5>
                                     </div>
@@ -425,6 +427,9 @@ const ProductView = () => {
 
                                         </div>
                                     </div>
+                                </div>
+                                <div className="mb-5">
+                                    &nbsp;
                                 </div>
                                 {/* <div className="pablish-btn mt-5">
                                     <button className="mt-2 ripple3 btn gradient-45deg-green-teal" type="button">Update</button>

@@ -237,7 +237,7 @@ const AllOrder = () => {
                                                                 </div>
                                                             </div>
                                                             <div className="col s2 m6 l8"></div>
-                                                            <div className="col s2 m6 l3">
+                                                            <div className="col s8 m6 l3">
                                                                 <div className="new-data-search">
                                                                     <div className="search-bar">
                                                                         <input className="form-control" />

@@ -54,7 +54,7 @@ const Refund = () => {
                                                     <div className="fill-item">
                                                         <div className="get-button">
                                                             <div className="limit-item">
-                                                                <input type="text" min={0} max={5} placeholder="0" value={count} />
+                                                                <input type="text" min={0} max={5} placeholder="0" value={count} readOnly />
                                                                 <span>/ 5</span>
                                                             </div>
                                                             <div className="btn-seting">
@@ -82,7 +82,7 @@ const Refund = () => {
                                                     <div className="fill-item">
                                                         <div className="get-button">
                                                             <div className="limit-item">
-                                                                <input type="text" min={0} max={5} placeholder="0" value={count} />
+                                                                <input type="text" min={0} max={5} placeholder="0" value={count} readOnly />
                                                                 <span>/ 1</span>
                                                             </div>
                                                             <div className="btn-seting">
@@ -110,7 +110,7 @@ const Refund = () => {
                                                     <div className="fill-item">
                                                         <div className="get-button">
                                                             <div className="limit-item">
-                                                                <input type="text" min={0} max={5} placeholder="0" value={count} />
+                                                                <input type="text" min={0} max={5} placeholder="0" value={count} readOnly />
                                                                 <span>/ 2</span>
                                                             </div>
                                                             <div className="btn-seting">
@@ -125,37 +125,49 @@ const Refund = () => {
                                         </tbody>
                                     </table>
                                 </div>
+                                <div className="add-left-product mt-3 mb-3">
+                                    <h6>Reason For Refund</h6>
+                                    <div className="reson-refund" >
+                                        <select>
+                                            <option>Customer No longer wants Product.</option>
+                                            <option>Customer No longer wants Product.</option>
+                                            <option>Customer No longer wants Product.</option>
+                                        </select>
+                                    </div>
+                                </div>
 
 
 
                             </div>
-                            <div className="col s12  xl4">
+                            <div className="col s12  xl4 mb-5">
                                 {/* <div className="add-left-product">
 
                                 </div> */}
-                                <div className="add-left-product">
+                                <div className="add-left-product mb-5">
                                     <h6>Summary</h6>
                                     <div className="customer-new-name">
                                         <table className="summary-table">
-                                            <tr>
-                                                <td className="summary-item">
-                                                    Item Subtotal
-                                                    <p>Item: 1</p>
-                                                </td>
-                                                <td>₹ 500.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tax</td>
-                                                <td>₹ 125.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shipping</td>
-                                                <td>₹ 00</td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Refund Total</b></td>
-                                                <td>₹ 625.00</td>
-                                            </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <td className="summary-item">
+                                                        Item Subtotal
+                                                        <p>Item: 1</p>
+                                                    </td>
+                                                    <td>₹ 500.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tax</td>
+                                                    <td>₹ 125.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Shipping</td>
+                                                    <td>₹ 00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Refund Total</b></td>
+                                                    <td>₹ 625.00</td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                         <h6>Refund Amount</h6>
                                         <p>Manual</p>

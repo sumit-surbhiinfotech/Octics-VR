@@ -25,8 +25,22 @@ const Sidebar = () => {
                         </NavLink>
                     </li>
 
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "user" ? "" : "user") }}>
+                        <a className="collapsible-header ripple2 " href="#!"><i className="material-icons">person_outline</i><span className="menu-title" >User</span></a>
+                        <div className={`collapsible-body ${showCollapsible === "user" ? "showcollapsible-open" : "showcollapsible-close"}`}>
+                            <ul className="collapsible collapsible-sub" data-collapsible="accordion">
+                                <li>
+                                    <NavLink to="/user-list">
+                                        <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice List">User List</span>
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
 
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "product" ? "" : "product") }}><a className="collapsible-header ripple2 " href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" >Products</span></a>
+
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "product" ? "" : "product") }}>
+                        <a className="collapsible-header ripple2 " href="#!"><i className="material-icons">add_shopping_cart</i><span className="menu-title" >Products</span></a>
                         <div className={`collapsible-body ${showCollapsible === "product" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>

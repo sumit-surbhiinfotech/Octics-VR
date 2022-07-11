@@ -70,9 +70,11 @@ const OrderFulfillAndTracking = () => {
                                 </div>
 
                                 <div className="add-left-product mt-4 mb-5">
+                                    <p>Order tracking <span>#0000134</span></p>
                                     <table id="page-length-option" className="display">
+
                                         <tbody>
-                                            <p>Order tracking <span>#0000134</span></p>
+
                                             <tr>
                                                 <td>
                                                     <div>
@@ -98,7 +100,7 @@ const OrderFulfillAndTracking = () => {
 
                             </div>
                             <div className="col s12 m6 l6 xl4 mt-5">
-                                <div className="add-left-product">
+                                <div className="add-left-product mb-5">
                                     <h6>Customer</h6>
                                     <div className="customer-new-name">
                                         <p>John Doe</p>
@@ -130,6 +132,9 @@ const OrderFulfillAndTracking = () => {
                                             </p>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="mb-5">
+                                    &nbsp;
                                 </div>
                             </div>
                             <div className="col s12  l6 xl1"></div>
