@@ -245,63 +245,65 @@ const EditProduct = () => {
                                         <div className="variants-table">
                                             <div >
                                                 <table>
-                                                    <tr>
-                                                        <th>Variant</th>
-                                                        <th>Price</th>
-                                                        <th>Quantity</th>
-                                                        <th>SKU</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Red</td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00"></input>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="quantity-btn">
-                                                                <div className="qty-input">
-                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Variant</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>SKU</th>
+                                                            <th>Edit</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Red</td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder=" $ 0.00"></input>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU"></input>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <button className="btn gradient-45deg-green-teal">Edit</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Green</td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder=" $ 0.00"></input>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="quantity-btn">
-                                                                <div className="qty-input">
-                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
-                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value="1" />
-                                                                    <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                            </td>
+                                                            <td>
+                                                                <div className="quantity-btn">
+                                                                    <div className="qty-input">
+                                                                        <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                        <input className="product-qty" type="number" name="product-qty" min="0" readOnly max="10" value="1" />
+                                                                        <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="add-tital new-input-text">
-                                                                <input type="text" placeholder="SKU"></input>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <button className="btn gradient-45deg-green-teal">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder="SKU"></input>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button className="btn gradient-45deg-green-teal">Edit</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Green</td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder=" $ 0.00"></input>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="quantity-btn">
+                                                                    <div className="qty-input">
+                                                                        <button className="qty-count qty-count--minus" data-action="minus" type="button">-</button>
+                                                                        <input className="product-qty" type="number" name="product-qty" min="0" readOnly max="10" value="1" />
+                                                                        <button className="qty-count qty-count--add" data-action="add" type="button">+</button>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="add-tital new-input-text">
+                                                                    <input type="text" placeholder="SKU"></input>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button className="btn gradient-45deg-green-teal">Edit</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -425,8 +427,11 @@ const EditProduct = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="pablish-btn mt-5">
+                                <div className="pablish-btn mt-5 mb-5">
                                     <button className="mt-2 ripple3 btn gradient-45deg-green-teal" type="button">Update</button>
+                                </div>
+                                <div className="mb-5">
+                                    &nbsp;
                                 </div>
                             </div>
                             <div className="col s12 l6 xl2"></div>

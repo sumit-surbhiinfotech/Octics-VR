@@ -11,71 +11,76 @@ import { NavLink } from "react-router-dom";
 const data = [
     {
         key: '1',
-        Image:
+        UserImage:
             <div className="return-order-img">
-                <img src="images/watch-2.png" />
+                <img src="images/avatar-15.png" />
             </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
+        UserName: 'Sumit',
+        Email: 'sumit@gmail.com',
+        PhoneNumber: '9876543210',
         Action:
-            <NavLink to="/">
+            <div>
+                <NavLink to="/user">
+                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
+            </div>,
     },
     {
         key: '2',
-        Image:
+        UserImage:
             <div className="return-order-img">
-                <img src="images/watch-2.png" />
+                <img src="images/avatar-15.png" />
             </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
+        UserName: 'Sumit',
+        Email: 'sumit@gmail.com',
+        PhoneNumber: '9876543210',
         Action:
-            <NavLink to="/">
+            <div>
+                <NavLink to="/user">
+                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
+            </div>,
     },
     {
         key: '3',
-        Image:
+        UserImage:
             <div className="return-order-img">
-                <img src="images/watch-2.png" />
+                <img src="images/avatar-15.png" />
             </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
+        UserName: 'Sumit',
+        Email: 'sumit@gmail.com',
+        PhoneNumber: '9876543210',
         Action:
-            <NavLink to="/">
+            <div>
+                <NavLink to="/user">
+                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
+            </div>,
     },
     {
         key: '4',
-        Image:
+        UserImage:
             <div className="return-order-img">
-                <img src="images/watch-2.png" />
+                <img src="images/avatar-15.png" />
             </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
+        UserName: 'Sumit',
+        Email: 'sumit@gmail.com',
+        PhoneNumber: '9876543210',
         Action:
-            <NavLink to="/">
+            <div>
+                <NavLink to="/user">
+                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
+            </div>,
+
     },
 ];
 
-const ListofCollection = () => {
+const UserList = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
@@ -170,61 +175,65 @@ const ListofCollection = () => {
 
     const columns = [
         {
-            title: '',
-            dataIndex: 'Image',
-            key: 'Image',
-            width: '1%',
-            ...getColumnSearchProps('Image'),
-        },
-
-        {
-            title: 'Product Name',
-            dataIndex: 'ProductName',
-            key: 'ProductName',
+            title: 'User Image',
+            dataIndex: 'UserImage',
+            key: 'UserImage',
             width: '10%',
-            ...getColumnSearchProps('ProductName'),
+            ...getColumnSearchProps('UserImage'),
         },
         {
-            title: 'Product Conditions',
-            dataIndex: 'ProductConditions',
-            key: 'ProductConditions',
-            width: '20%',
-            ...getColumnSearchProps('ProductConditions'),
+            title: 'User Name',
+            dataIndex: 'UserName',
+            key: 'UserName',
+            width: '10%',
+            ...getColumnSearchProps('UserName'),
+        },
+        {
+            title: 'Email',
+            dataIndex: 'Email',
+            key: 'Email',
+            width: '10%',
+            ...getColumnSearchProps('Email'),
+        },
+        {
+            title: 'Phone Number',
+            dataIndex: 'PhoneNumber',
+            key: 'PhoneNumber',
+            width: '10%',
+            ...getColumnSearchProps('PhoneNumber'),
         },
         {
             title: 'Action',
             dataIndex: 'Action',
             key: 'Action',
-            width: '1%',
+            width: '10%',
             ...getColumnSearchProps('Action'),
         },
     ];
-
     return (
         <>
             <Header />
             <Sidebar />
             <div id="main">
-                <div className="list-of-collection">
+                <div className="user-list">
                     <div className="container">
-                        <div className="collection-list">
+                        <div className="list-return-order ">
                             <div className="row">
                                 <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
                                 <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col s10 m6 l6">
-                                                <h5 className="breadcrumbs-title mt-0 mb-0"><span>Collection List</span></h5>
+                                            <div className="col s4 m6 l6">
+                                                <h5 className="breadcrumbs-title mt-0 mb-0"><span>User list</span></h5>
                                                 <ol className="breadcrumbs mb-0">
                                                     <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                                                    <li className="breadcrumb-item active">Collections </li>
+                                                    <li className="breadcrumb-item active">User </li>
                                                 </ol>
                                             </div>
-                                            <div className="col s10 m6 l2"></div>
-                                            <div className="col s2 m6 l4">
+                                            <div className="col s8 m6 l6">
                                                 <div className="add-discount">
-                                                    <NavLink to="/create-collection">
-                                                        <Button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">Create Collections</Button>
+                                                    <NavLink to="/user">
+                                                        <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">Create User</button>
                                                     </NavLink>
                                                 </div>
                                             </div>
@@ -254,7 +263,7 @@ const ListofCollection = () => {
                                                                             </div>
                                                                         </div>
                                                                         <div className="col s2 m6 l8"></div>
-                                                                        <div className="col s2 m6 l3">
+                                                                        <div className="col s8 m6 l3">
                                                                             <div className="new-data-search">
                                                                                 <div className="search-bar">
                                                                                     <input className="form-control" />
@@ -269,11 +278,14 @@ const ListofCollection = () => {
 
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div className="mb-5">
+                                                &nbsp;
+                                            </div>
                                         </div>
 
                                     </div>
@@ -289,4 +301,4 @@ const ListofCollection = () => {
     )
 }
 
-export default ListofCollection;
+export default UserList;

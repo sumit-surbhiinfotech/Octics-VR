@@ -25,7 +25,7 @@ const data = [
         Total: '$ 250.00',
         Action:
             <NavLink to="/return-order-view">
-                <buttton className="edit-return"><span className="material-icons">remove_red_eye </span></buttton>
+                <Button className="edit-return"><span className="material-icons">remove_red_eye </span></Button>
             </NavLink>,
     },
     {
@@ -44,7 +44,7 @@ const data = [
         Total: '$ 250.00',
         Action:
             <NavLink to="/return-order-view">
-                <buttton className="edit-return"><span className="material-icons">remove_red_eye </span></buttton>
+                <Button className="edit-return"><span className="material-icons">remove_red_eye </span></Button>
             </NavLink>,
     },
     {
@@ -63,7 +63,7 @@ const data = [
         Total: '$ 250.00',
         Action:
             <NavLink to="/return-order-view">
-                <buttton className="edit-return"><span className="material-icons">remove_red_eye </span></buttton>
+                <Button className="edit-return"><span className="material-icons">remove_red_eye </span></Button>
             </NavLink>,
     },
     {
@@ -82,7 +82,7 @@ const data = [
         Total: '$ 250.00',
         Action:
             <NavLink to="/return-order-view">
-                <buttton className="edit-return"><span className="material-icons">remove_red_eye </span></buttton>
+                <Button className="edit-return"><span className="material-icons">remove_red_eye </span></Button>
             </NavLink>,
     },
 ];
@@ -273,7 +273,7 @@ const ListOfReturnOrder = () => {
                                                                         </div>
                                                                     </div>
                                                                     <div className="col s2 m6 l8"></div>
-                                                                    <div className="col s2 m6 l3">
+                                                                    <div className="col s8 m6 l3">
                                                                         <div className="new-data-search">
                                                                             <div className="search-bar">
                                                                                 <input className="form-control" />
@@ -288,11 +288,14 @@ const ListOfReturnOrder = () => {
 
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div className="mb-5">
+                                            &nbsp;
+                                        </div>
                                     </div>
 
                                 </div>

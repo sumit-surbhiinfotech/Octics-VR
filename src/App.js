@@ -37,6 +37,8 @@ import ListOfUpload3DModal from './components/3DModal/ListOfUpload3DModal';
 import Refund from './components/Return/Refund';
 import ListofCollection from './components/Products/ListofCollection';
 import CreateCollections from './components/Products/CreateCollections';
+import User from './components/User/User';
+import UserList from './components/User/UserList';
 
 function App() {
   return (
@@ -68,6 +70,8 @@ function App() {
           <Route path="/refund" element={<Refund />} />
           <Route path="/list-of-collection" element={<ListofCollection />} />
           <Route path="/create-collection" element={<CreateCollections />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/user-list" element={<UserList />} />
         </Routes>
       </div>
     </BrowserRouter>

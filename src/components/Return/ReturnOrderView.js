@@ -17,9 +17,10 @@ const ReturnOrderView = () => {
                             <div className="col s12 m6 l6 xl6 mt-5">
                                 <div className="add-left-product">
                                     <h6>Return</h6>
+                                    <p>Order tracking <span>#0000134</span></p>
                                     <table id="page-length-option" className="display">
                                         <tbody>
-                                            <p>Order tracking <span>#0000134</span></p>
+
                                             <tr>
                                                 <td>
                                                     <div>
@@ -34,7 +35,7 @@ const ReturnOrderView = () => {
                                                 <td>$ 44.50 <span>x 1</span></td>
                                                 <td>$ 44.50</td>
                                             </tr>
-                                            <p>Order tracking <span>#0000134</span></p>
+                                            {/* <p>Order tracking <span>#0000134</span></p> */}
                                             <tr>
                                                 <td>
                                                     <div>
@@ -49,7 +50,7 @@ const ReturnOrderView = () => {
                                                 <td>$ 44.50 <span>x 1</span></td>
                                                 <td>$ 44.50</td>
                                             </tr>
-                                            <p>Order tracking <span>#0000134</span></p>
+                                            {/* <p>Order tracking <span>#0000134</span></p> */}
                                             <tr>
                                                 <td>
                                                     <div>

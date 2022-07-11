@@ -47,7 +47,7 @@ const AddNewProduct = () => {
     const [editOpen, setEditOpen] = useState();
     const [addNewOption, setAddNewOption] = useState([{
         name: "",
-        value: []
+        value: ['']
     }]);
     const { Option } = Select;
     const children = [<Option key={1}>test1</Option>, <Option key={2}>test2</Option>, <Option key={3}>test3</Option>, <Option key={4}>test4</Option>, <Option key={5}>test5</Option>];
@@ -66,7 +66,7 @@ const AddNewProduct = () => {
 
     const addTwo = () => {
         addToList()
-        setAddSize(!addSize === "add-color" ? "" : "add-color")
+
         setAddVariants(!addVariants === "add-variants" ? "" : "add-variants")
         handleAdd3()
     }
@@ -74,10 +74,15 @@ const AddNewProduct = () => {
         setValue(e.target.value)
         handleChange(index, e.target.value)
     }
-    const handleChange = (index, value) => {
-        let temp = [...colorOption];
-        temp[index] = value;
-        setColorOption(temp);
+    const handleChange = (index, value1, mainIndex) => {
+        console.log("index, value, mainIndex", index, value1, mainIndex)
+        let temp = [...addNewOption];
+        let obj = temp[mainIndex];
+        console.log("54564", obj)
+        obj.value[index] = value1;
+        temp[mainIndex] = obj;
+        console.log("dfsbfhj", temp)
+        // setColorOption(temp);
     }
 
     const handleAdd = () => {
@@ -92,6 +97,13 @@ const AddNewProduct = () => {
         setColorOption(temp);
     }
 
+
+    const handleRemove2 = (index) => {
+        let temp = [...colorOption];
+        temp.splice(index, 1);
+        setColorOption(temp);
+    }
+
     const handleAdd2 = () => {
         let temp = [...addNewOption];
         temp.push({
@@ -100,7 +112,7 @@ const AddNewProduct = () => {
         });
         setAddNewOption(temp);
     }
-    console.log(addNewOption);
+    console.log("addNewOption", addNewOption);
 
 
     const handleAdd3 = () => {
@@ -259,11 +271,11 @@ const AddNewProduct = () => {
     const handleOptionSelect = (val, index) => {
         console.log("index", index)
         let temp = [...addNewOption];
-        console.log("temp", temp[0])
         let obj = temp[index];
         console.log("obj", obj)
         obj.name = val;
         temp[index] = obj;
+        console.log("temp", temp[index])
         setAddNewOption(temp);
     }
     console.log("dcvdfs", addNewOption)
@@ -327,7 +339,7 @@ const AddNewProduct = () => {
             <Header />
             <Sidebar />
             <div id="main">
-                <section className="add-new-product-section animate fadeUp">
+                <section className="add-new-product-section animate fadeUp ">
                     <div className="container">
 
                         <div className="row mt-1">
@@ -371,22 +383,13 @@ const AddNewProduct = () => {
                                     <div className="image-upload">
                                         <h5>Images</h5>
                                         <div className="image-new-upload">
-                                            {/* <div
-                                                onDragEnter={(e) => handleEnter(e)}
-                                                onDragLeave={(e) => handleLeave(e)}
-                                                onDragOver={(e) => handleOver(e)}
-                                                onDrop={(e) => handleUpload(e)}
-                                                className={`upload${highlight ? " is-highlight" : drop ? " is-drop" : ""
-                                                    }`}
-                                            > */}
+
                                             <form className="my-form add-new-product">
                                                 <div className="field" align="left">
                                                     <h5>Upload your Media Files</h5>
                                                     <input type="file" id="files" name="files[]" multiple />
                                                 </div>
                                             </form>
-
-                                            {/* </div> */}
                                         </div>
                                     </div>
                                 </div>
@@ -428,29 +431,29 @@ const AddNewProduct = () => {
                                     <div>
                                         <div className="row">
                                             <div className="options-select-section" >
-                                                {/* <Checkbox onChange={onChange}>Checkbox</Checkbox>; */}
                                                 <input id="vehicle1" type="checkbox" onClick={() => { setOpenOption(!openOption) }} />
                                                 <label htmlFor="vehicle1"> This Product Has  Options, Like Size Or Color</label>
                                             </div>
                                             <div className={`option-name  ${openOption == true ? "open-option-open" : "open-option-close"}`}>
                                                 <hr />
-                                                {addNewOption && addNewOption.map((item, index) => (
+                                                {addNewOption && addNewOption.map((item, temp) => (
 
-                                                    <div key={index} className={`new-code-foe-size  `} >
+                                                    <div key={temp} className={`new-code-foe-size  `} >
                                                         <div className="row">
                                                             {
-                                                                console.log("dsxcdxcz", index)
+                                                                console.log("dsxcdxcz", temp)
                                                             }
                                                             <div className="col s12  l6 xl2"></div>
                                                             <div className="col s12 l6 xl8 mb-3">
-                                                                <div className={`${addSize === "add-color" ? "new-value-close" : " new-value-open"}`}>
+                                                                <div className={``}>
                                                                     <div className={`mb-3 `}>
                                                                         <div className={`option-one  `} >
                                                                             <label>Option Name</label>
-                                                                            <select className="option-select" onChange={(e) => { handleOptionSelect(e.target.value, index) }}>
-                                                                                <option value={item}>Select</option>
-                                                                                <option value={item}>Color</option>
-                                                                                <option value={item}>Size</option>
+                                                                            {/* <select className="option-select" onChange={(e) => { console.log("sdaxczdzscx ", e.target.value, temp) }} value={item.name}> */}
+                                                                            <select className="option-select" onChange={(e) => { handleOptionSelect(e.target.value, temp) }}>
+                                                                                <option value="">Select</option>
+                                                                                <option value="color">Color</option>
+                                                                                <option value="size">Size</option>
                                                                             </select>
                                                                         </div>
                                                                         {<div className={`option-value mt-4 `}>
@@ -461,16 +464,17 @@ const AddNewProduct = () => {
                                                                                     <div className="row">
                                                                                         <div className="col s8  l6 xl12">
                                                                                             <div className="add-remover-input">
+                                                                                                {console.log("sde", item.value)}
                                                                                                 {
-                                                                                                    colorOption && colorOption.map((item, index) => (
-                                                                                                        <div key={index} className="new-size-color-add-remove">
-                                                                                                            <input className="mb-2 " type="type" value={item.value} onChange={(e) => { handleChange(index, e.target.value); }} />
+                                                                                                    item.value && item.value.map((optionItem, ind) => (
+                                                                                                        <div key={temp} className="new-size-color-add-remove">
+                                                                                                            <input className="mb-2 " type="type" value={optionItem} onChange={(e) => { handleChange(ind, e.target.value, temp); console.log("dsjbjf", ind) }} />
                                                                                                             {
-                                                                                                                index == colorOption.length - 1 && <>
-                                                                                                                    <button className="plus-btn" type='button' onClick={handleAdd}>+</button> </>
+                                                                                                                temp == item.value.length - 1 && <>
+                                                                                                                    <button className="plus-btn" type='button' onClick={() => { handleAdd(temp); console.log("fsfsf", temp) }}>+</button> </>
                                                                                                             }
                                                                                                             {
-                                                                                                                index !== 0 && <button className="remove-btn" type='button' onClick={() => { handleRemove(index)(index) }}>-</button>
+                                                                                                                temp !== 0 && <button className="remove-btn" type='button' onClick={() => { handleRemove(temp) }}>-</button>
                                                                                                             }
                                                                                                         </div>
                                                                                                     ))
@@ -482,7 +486,7 @@ const AddNewProduct = () => {
 
                                                                             </div>
                                                                             <div>
-                                                                                {
+                                                                                {/* {
                                                                                     addButton && addButton.map((item, index) => (
                                                                                         <div key={index}>
                                                                                             {
@@ -496,7 +500,7 @@ const AddNewProduct = () => {
                                                                                             }
                                                                                         </div>
                                                                                     ))
-                                                                                }
+                                                                                } */}
                                                                             </div>
                                                                         </div>}
                                                                     </div>
@@ -509,26 +513,27 @@ const AddNewProduct = () => {
                                                             <div className="col s12  l6 xl2"></div>
                                                             <div className="col s12 l6 xl8">
                                                                 {
-                                                                    index = addButton && <>
+                                                                    temp == addButton && <>
                                                                         <div className="row">
                                                                             <div className="col s12 l6 xl6">
 
-                                                                                <div className={`all-size-color ${addSize === "add-color" ? "new-value-open" : "new-value-close"}`}>
+                                                                                <div className={`all-size-color `}>
                                                                                     <div className="size-list">
                                                                                         <h6>Size Added</h6>
                                                                                         <ul>
-                                                                                            {colorOption.length > 0 &&
+                                                                                            {item.value.length > 0 &&
 
-                                                                                                colorOption.map((item, i) => <li onClick={() => handleRemove(i)}>{item} </li>)}
+                                                                                                item.value.map((item, i) => <li>{item} </li>)}
+                                                                                            {console.log("fdsbhfsf", item)}
                                                                                         </ul>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div className="col s12 l6 xl6">
-                                                                                <div className={`edit-Size ${addSize === "add-color" ? "new-value-open" : "new-value-close"}`}>
+                                                                            {/* <div className="col s12 l6 xl6">
+                                                                                <div className={`edit-Size `}>
                                                                                     <span >Edit</span>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> */}
                                                                         </div>
 
                                                                     </>
@@ -540,7 +545,7 @@ const AddNewProduct = () => {
                                                         <div className="add-new-option mt-3">
                                                             <div className="">
                                                                 {
-                                                                    index = addNewOption && <>
+                                                                    <>
                                                                         <h6 className="new-filed" onClick={handleAdd2} >Add New Option +</h6></>}
                                                             </div>
                                                         </div>
@@ -557,77 +562,82 @@ const AddNewProduct = () => {
                                 <div className="mb-5 pb-5">
                                     {
                                         addButton && <>
-                                            <div className={`add-left-product-one mt-2 ${addVariants === "add-variants" ? "variants-open" : "variants-close"}`}>
+                                            <div className={`add-left-product-one mt-2 `}>
                                                 <div>
                                                     <h5>Variants</h5>
                                                 </div>
                                                 <div className="variants-table">
                                                     <div >
                                                         <table>
-                                                            <tr>
-                                                                <th></th>
-                                                                <th>Variant</th>
-                                                                <th>Price</th>
-                                                                <th>Quantity</th>
-                                                                <th>SKU</th>
-                                                                <th>Edit</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><div className="upaload-new-short-image">
-                                                                    <div
-                                                                        onDragEnter={(e) => handleEnterNew(e)}
-                                                                        onDragLeave={(e) => handleLeave(e)}
-                                                                        onDragOver={(e) => handleOver(e)}
-                                                                        onDrop={(e) => handleUploadNew(e)}
-                                                                        className={`upload${highlightNew ? " is-highlight" : dropNew ? " is-drop" : ""
-                                                                            }`}
-                                                                        style={{ backgroundImage: `url(${previewNew})` }}
-                                                                    >
-                                                                        <form className="my-form">
-                                                                            <p>
-                                                                                <img src="images/plus-icon-plus-svg-png-icon-download-1.png" />
-                                                                            </p>
-                                                                            <div className="upload-button">
-                                                                                <input
-                                                                                    type="file"
-                                                                                    className="upload-file"
-                                                                                    accept="image/*"
-                                                                                    onChange={(e) => handleUploadNew(e)}
-                                                                                />
-                                                                                {/* <button className="button">+</button> */}
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div></td>
-                                                                {colorOption.length > 0 &&
-                                                                    colorOption.map((item, i) => <td>{item}</td>)}
-                                                                <td>
-                                                                    <div className="add-tital new-input-text">
-                                                                        <input type="text" placeholder=" $ 0.00"></input>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div className="quantity-btn">
-                                                                        <div className="qty-input">
-                                                                            {items.map((item, index) => (
-                                                                                <div className="qty-input">
-                                                                                    <button className="qty-count qty-count--minus" data-action="minus" type="button" onClick={() => handleQuantityDecrease(index)} >-</button>
-                                                                                    <input className="product-qty" type="number" name="product-qty" min="0" max="10" value={item.quantity} />
-                                                                                    <button className="qty-count qty-count--add" data-action="add" type="button" onClick={() => handleQuantityIncrease(index)} >+</button>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Variant</th>
+                                                                    <th>Price</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>SKU</th>
+                                                                    <th>Edit</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><div className="upaload-new-short-image">
+                                                                        <div
+                                                                            onDragEnter={(e) => handleEnterNew(e)}
+                                                                            onDragLeave={(e) => handleLeave(e)}
+                                                                            onDragOver={(e) => handleOver(e)}
+                                                                            onDrop={(e) => handleUploadNew(e)}
+                                                                            className={`upload${highlightNew ? " is-highlight" : dropNew ? " is-drop" : ""
+                                                                                }`}
+                                                                            style={{ backgroundImage: `url(${previewNew})` }}
+                                                                        >
+                                                                            <form className="my-form">
+                                                                                <p>
+                                                                                    <img src="images/plus-icon-plus-svg-png-icon-download-1.png" />
+                                                                                </p>
+                                                                                <div className="upload-button">
+                                                                                    <input
+                                                                                        type="file"
+                                                                                        className="upload-file"
+                                                                                        accept="image/*"
+                                                                                        onChange={(e) => handleUploadNew(e)}
+                                                                                    />
+                                                                                    {/* <button className="button">+</button> */}
                                                                                 </div>
-                                                                            ))}
+                                                                            </form>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div className="add-tital new-input-text">
-                                                                        <input type="text" placeholder="SKU"></input>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <button className="btn gradient-45deg-green-teal">Edit</button>
-                                                                </td>
-                                                            </tr>
+                                                                    </div></td>
+                                                                    {/* {colorOption.length > 0 &&
+                                                                        colorOption.map((item, i) => <td>{item}</td>)} */}
+                                                                    <td>
+                                                                        M
+                                                                    </td>
+                                                                    <td>
+                                                                        <div className="add-tital new-input-text">
+                                                                            <input type="text" placeholder=" $ 0.00"></input>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div className="quantity-btn">
+                                                                            <div className="qty-input">
+                                                                                {items.map((item, index) => (
+                                                                                    <div className="qty-input">
+                                                                                        <button className="qty-count qty-count--minus" data-action="minus" type="button" onClick={() => handleQuantityDecrease(index)} >-</button>
+                                                                                        <input className="product-qty" type="number" name="product-qty" min="0" max="10" value={item.quantity} readOnly />
+                                                                                        <button className="qty-count qty-count--add" data-action="add" type="button" onClick={() => handleQuantityIncrease(index)} >+</button>
+                                                                                    </div>
+                                                                                ))}
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div className="add-tital new-input-text">
+                                                                            <input type="text" placeholder="SKU"></input>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button className="btn gradient-45deg-green-teal">Edit</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -754,8 +764,11 @@ const AddNewProduct = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="pablish-btn mt-5">
+                                <div className="pablish-btn mt-5 mb-5 ">
                                     <button className="mt-2 ripple3 btn gradient-45deg-green-teal" type="button">Submit</button>
+                                </div>
+                                <div className="mb-5">
+                                    &nbsp;
                                 </div>
 
 
