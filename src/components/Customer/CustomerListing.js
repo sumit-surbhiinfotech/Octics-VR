@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../Footer";
 // import "../../css/pages/data-tables.css"
 import { NavLink } from "react-router-dom";
@@ -9,43 +9,51 @@ import { useRef, useState } from 'react';
 import 'antd/dist/antd.css';
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
-
-const data = [
-    {
-        key: '1',
-        CustomerName: 'Sumit Kachariya',
-        Location: 'Surat',
-        Orders: '2',
-        Action: <NavLink to="/customer-view"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-    {
-        key: '2',
-        CustomerName: 'Sumit Kachariya',
-        Location: 'Surat',
-        Orders: '2',
-        Action: <NavLink to="/customer-view"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-    {
-        key: '3',
-        CustomerName: 'Sumit Kachariya',
-        Location: 'Surat',
-        Orders: '2',
-        Action: <NavLink to="/customer-view"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-    {
-        key: '4',
-        CustomerName: 'Sumit Kachariya',
-        Location: 'Surat',
-        Orders: '2',
-        Action: <NavLink to="/customer-view"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-];
+import { changeStatusOfUser, getAllUserList } from "../../action";
 
 const CustomerListing = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        getData();
+    }, [])
 
+    const getData = () => {
+        getAllUserList().then((res) => {
+            if (res.data) {
+                let temp = res.data.data;
+                let arr = [];
+                temp.map((item, index) => {
+                    let obj = {
+                        key: index,
+                        CustomerName: item.first_name + ' ' + item.last_name,
+                        Location: item.phone,
+                        Orders: '2',
+                        Action: <NavLink to="/customer-view"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+                    }
+                    arr.push(obj);
+                })
+                setData(arr)
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const handleConfirmDelete = (id) => {
+        let body = {
+            id: id
+        }
+        changeStatusOfUser(body).then((res) => {
+            if (res.data) {
+                getData();
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
@@ -143,7 +151,7 @@ const CustomerListing = () => {
             ...getColumnSearchProps('CustomerName'),
         },
         {
-            title: 'Location',
+            title: 'Mobile No.',
             dataIndex: 'Location',
             key: 'Location',
             width: '10%',

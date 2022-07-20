@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -7,78 +7,56 @@ import { Button, Input, Space, Table } from 'antd';
 import { useRef, useState } from 'react';
 import 'antd/dist/antd.css';
 import { NavLink } from "react-router-dom";
+import { deleteCollection, getCollections } from "../../action";
+import parse from 'html-react-parser';
 
-const data = [
-    {
-        key: '1',
-        Image:
-            <div className="return-order-img">
-                <img src="images/watch-2.png" />
-            </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
-        Action:
-            <NavLink to="/">
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
-    },
-    {
-        key: '2',
-        Image:
-            <div className="return-order-img">
-                <img src="images/watch-2.png" />
-            </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
-        Action:
-            <NavLink to="/">
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
-    },
-    {
-        key: '3',
-        Image:
-            <div className="return-order-img">
-                <img src="images/watch-2.png" />
-            </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
-        Action:
-            <NavLink to="/">
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
-    },
-    {
-        key: '4',
-        Image:
-            <div className="return-order-img">
-                <img src="images/watch-2.png" />
-            </div>,
-        ProductName:
-            <div>
-                <p>Apple Watch</p>
-            </div>,
-        ProductConditions: 'Product tag is equal to Dress',
-        Action:
-            <NavLink to="/">
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </NavLink>,
-    },
-];
 
 const ListofCollection = () => {
+    const [data, setData] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
+    useEffect(() => {
+        getData();
+    }, [])
+    const getData = () => {
+        getCollections().then((res) => {
+            let arr = []
+            res.data.data && res.data.data.map((item, index) => {
+                let temp = {
+                    key: `${index}`,
+                    Image:
+                        <div className="return-order-img">
+                            <img src={`${item.feature_img}`} />
+                        </div>,
+                    ProductName:
+                        <div>
+                            <p>{item.title}</p>
+                        </div>,
+                    ProductConditions: parse(item.description),
+                    Action:
+                        <>
+                            <NavLink to={`/create-collection?id=${item._id}`}>
+                                <Button className="edit-return">Edit</Button>
+                            </NavLink>
+                            <Button className="edit-return" onClick={() => { handleConfirmDelete(item._id); }}><span className="material-icons">delete_forever </span></Button>
+                        </>,
+                }
+                arr.push(temp);
+            })
+            setData(arr)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const handleConfirmDelete = (id) => {
+        deleteCollection(id).then((res) => {
+            getData();
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -185,7 +163,7 @@ const ListofCollection = () => {
             ...getColumnSearchProps('ProductName'),
         },
         {
-            title: 'Product Conditions',
+            title: 'Product Description',
             dataIndex: 'ProductConditions',
             key: 'ProductConditions',
             width: '20%',

@@ -8,7 +8,8 @@ import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import $ from "jquery";
 import { TileLayout } from "@progress/kendo-react-layout";
-
+import { uploadImageOfProduct, getCollections, createProduct, getSpecificProduct, updateProduct } from "../../action";
+import { useNavigate } from "react-router-dom";
 const {
     Bold,
     Italic,
@@ -27,6 +28,7 @@ const {
 } = EditorTools;
 
 const AddNewProduct = () => {
+    const navigate = useNavigate();
     const editorRef = useRef();
     const textarea = React.createRef();
     const [list, setList] = useState([]);
@@ -57,35 +59,68 @@ const AddNewProduct = () => {
     const [comparePrice, setComparePrice] = useState(0);
     const [type, setType] = useState("");
     const [category, setCategory] = useState([]);
-    const [tags, seTags] = useState([]);
+    const [tags, setTags] = useState([]);
     const [handle, setHandle] = useState("");
     const [images, setImages] = useState([]);
+    const [avtarImage, setAvtarImage] = useState("");
+    const [hangerImage, setHangerImage] = useState("");
     const [error, setError] = useState({});
+    const [collectionData, setCollectionData] = useState([]);
     const { Option } = Select;
     const children = [<Option key={1}>test1</Option>, <Option key={2}>test2</Option>, <Option key={3}>test3</Option>, <Option key={4}>test4</Option>, <Option key={5}>test5</Option>];
+    const [edit, setEdit] = useState(false);
+    const [editData, setEditData] = useState({});
 
+    useEffect(() => {
+        getCollectionData();
+        let url = window.location.href;
+        let slug = url.split('=');
+        if (slug.length >= 2) {
+            setEdit(true);
+            let body = {
+                id: slug[1]
+            }
+            getSpecificProduct(body).then((res) => {
+                if (res.data) {
+                    setEditData(res.data.data);
+                    handlesetEditData(res.data.data);
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    }, []);
 
-    const addToList = (index) => {
-        let tempArr = list.filter((item, i) => i !== index);
+    const handlesetEditData = (data) => {
+        setTitle(data?.title)
+        setDescription(data?.description)
+        setHtml(data?.description)
+        setImages(data?.images)
+        setHangerImage(data?.hanger_image)
+        setAvtarImage(data?.avtar_image)
+        setCategory(data?.category);
+        setComparePrice(data?.compare_price);
+        setPrice(data?.price);
+        setAddNewOption(data?.options);
+        setQuantity(data?.quantity);
+        setType(data?.type);
+        setSku(data?.sku);
+        setTags(data?.tags);
+        setVarientList(data?.varient);
+        setHandle(data?.handle)
+        setOpenOption(true);
+        document.getElementById('vehicle1').checked = true;
+    }
 
-        tempArr.push(value);
-
-        setList(tempArr);
-
-        setValue("");
-
+    const setHtml = (html) => {
+        if (editorRef.current) {
+            const view = editorRef.current.view;
+            if (view) {
+                EditorUtils.setHtml(view, html)
+            }
+        }
     };
 
-    const addTwo = () => {
-        addToList()
-
-        setAddVariants(!addVariants === "add-variants" ? "" : "add-variants")
-        handleAdd3()
-    }
-    const addOnChange = (e, index) => {
-        setValue(e.target.value)
-        handleChange(index, e.target.value)
-    }
     const handleChange = (index, value1, mainIndex) => {
         // console.log("index, value, mainIndex", index, value1, mainIndex)
         let temp = [...addNewOption];
@@ -112,13 +147,6 @@ const AddNewProduct = () => {
         setColorOption(temp);
     }
 
-
-    const handleRemove2 = (index) => {
-        let temp = [...colorOption];
-        temp.splice(index, 1);
-        setColorOption(temp);
-    }
-
     const handleAdd2 = () => {
         let temp = [...addNewOption];
         temp.push({
@@ -126,13 +154,6 @@ const AddNewProduct = () => {
             value: ['']
         });
         setAddNewOption(temp);
-    }
-    // console.log("addNewOption", addNewOption);
-
-    const handleAdd3 = () => {
-        let temp = [...addButton];
-        temp.push("");
-        setAddButton(temp)
     }
 
     const dropzones = [...document.querySelectorAll(".dropzone")];
@@ -207,26 +228,11 @@ const AddNewProduct = () => {
         setHighlight(false);
     };
 
-    const handleUpload = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("drop!");
-        setHighlight(false);
-        setDrop(true);
-        console.log("rfdscxsdf", e.target.files);
-        for (let i = 0; i < e.target.files.length; i++) {
-            let file = e.target.files[i];
-            uploadFile(file);
-        }
-
-    };
     const handleUploadNew = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("dropNew!");
         setHighlight(false);
         setDropNew(true);
-        console.log("rfdscxsdf", e.target.files);
         for (let i = 0; i < e.target.files.length; i++) {
             let file = e.target.files[i];
             uploadFileNew(file);
@@ -234,27 +240,6 @@ const AddNewProduct = () => {
 
     };
 
-    function uploadFile(file) {
-        console.log("fesdcxz", file);
-        const reader = new FileReader();
-        reader.readAsBinaryString(file);
-
-
-        reader.onload = () => {
-            // this is the base64 data
-            const fileRes = btoa(reader.result);
-            console.log(`data:image/jpg;base64,${fileRes}`);
-            let temp = files;
-            temp.push({ url: `data:image/jpg;base64,${fileRes}`, type: file.name.split('.')[1] });
-            setFiles(temp);
-            setPreview(`data:image/jpg;base64,${fileRes}`);
-        };
-
-        reader.onerror = () => {
-            console.log("There is a problem while uploading...");
-        };
-    }
-    console.log("fesdcsffs", files)
     function uploadFileNew(file) {
         const reader = new FileReader();
         reader.readAsBinaryString(file);
@@ -282,12 +267,66 @@ const AddNewProduct = () => {
         temp[index] = obj;
         setAddNewOption(temp);
     }
-    // console.log("saxzhn", title.length)
+
+    const handleUploadImages = (e) => {
+        let files = e.target.files;
+        // console.log("files", files[0], files[1])
+        console.log("typeof files", typeof files, files);
+        for (const key in files) {
+            if (Object.hasOwnProperty.call(files, key)) {
+                const element = files[key];
+                let file = element
+                let body = new FormData();
+                body.append('file', file);
+                uploadImageOfProduct(body).then((res) => {
+                    let temp = [...images];
+                    temp.push(res.data.data);
+                    setImages(temp);
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }
+        }
+    }
+
+    const getCollectionData = () => {
+        getCollections().then((res) => {
+            if (res.data) {
+                setCollectionData(res.data.data);
+            }
+        })
+    }
+
+    const handleAvtarUpload = (e) => {
+        let file = e.target.files[0];
+        let body = new FormData();
+        body.append('file', file);
+        uploadImageOfProduct(body).then((res) => {
+            if (res.data.data) {
+                setAvtarImage(res.data.data.original)
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const handleHangerUpload = (e) => {
+        let file = e.target.files[0];
+        let body = new FormData();
+        body.append('file', file);
+        uploadImageOfProduct(body).then((res) => {
+            if (res.data.data) {
+                setHangerImage(res.data.data.original)
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     const handleSubmit = () => {
         let validate = true;
         let err = {};
         if (title.length == 0) {
-
             validate = false;
             err.title = "Please Enter Product Title.";
         }
@@ -298,10 +337,12 @@ const AddNewProduct = () => {
                 title: title,
                 description: description,
                 images: images,
+                avtar_image: avtarImage,
+                hanger_image: hangerImage,
                 sku: sku,
-                quantity: quantity,
-                price: price,
-                compare_price: comparePrice,
+                quantity: parseInt(quantity),
+                price: parseInt(price),
+                compare_price: parseInt(comparePrice),
                 type: type,
                 category: category,
                 options: addNewOption,
@@ -319,41 +360,26 @@ const AddNewProduct = () => {
                 tempVarient.quantity = 0;
                 body.varient = tempVarient
             }
-            console.log("sdhbnm ", body);
+            if (edit) {
+                body._id = editData._id;
+                updateProduct(body).then((res) => {
+                    if (res.data) {
+                        navigate('/product-listing')
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                })
+            } else {
+                createProduct(body).then((res) => {
+                    if (res.data) {
+                        navigate('/product-listing')
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }
         }
     }
-
-
-    useEffect(() => {
-        $(document).ready(function () {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#files").on("change", function (e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function (e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\">Remove image</span>" +
-                                "</span>").insertAfter("#files");
-                            console.log("data", file)
-                            $(".remove").click(function () {
-                                $(this).parent(".pip").remove();
-                            });
-
-                        });
-                        fileReader.readAsDataURL(f);
-                    }
-                    console.log("files", files);
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
-            }
-        });
-    })
 
     const handleQuantityIncrease = (index) => {
         const newItems = [...varientList];
@@ -425,16 +451,14 @@ const AddNewProduct = () => {
     }
 
     const getHtml = () => {
-        if (editorRef.current && textarea.current) {
+        if (editorRef.current) {
             const view = editorRef.current.view;
-
             if (view) {
                 setDescription(EditorUtils.getHtml(view.state))
             }
         }
     };
-    // const html = EditorUtils.getHtml(view);
-    // console.log("dghcoidd=>", view)
+
     return (
 
         <>
@@ -459,7 +483,7 @@ const AddNewProduct = () => {
                                     <div className="title-product">
                                         <h5>Title</h5>
                                         <div className="add-tital">
-                                            <input type="text" placeholder="Add Product Name" onChange={(e) => { setTitle(e.target.value); }}></input>
+                                            <input type="text" placeholder="Add Product Name" onChange={(e) => { setTitle(e.target.value); }} value={title}></input>
                                         </div>
                                         {
                                             error && error.title &&
@@ -496,7 +520,7 @@ const AddNewProduct = () => {
                                             <form className="my-form add-new-product">
                                                 <div className="field" align="left">
                                                     <h5>Upload your Media Files</h5>
-                                                    <input type="file" id="files" name="files[]" multiple />
+                                                    <input type="file" id="files" name="files[]" multiple onChange={(e) => { handleUploadImages(e); }} />
                                                 </div>
                                             </form>
                                         </div>
@@ -510,7 +534,7 @@ const AddNewProduct = () => {
                                                 <form className="my-form add-new-product">
                                                     <div className="field" align="left">
                                                         <h5>Upload  Files</h5>
-                                                        <input type="file" id="files" name="files[]" />
+                                                        <input type="file" id="files" name="files[]" onChange={(e) => { handleAvtarUpload(e); }} />
 
                                                     </div>
                                                 </form>
@@ -524,9 +548,16 @@ const AddNewProduct = () => {
                                                 <form className="my-form add-new-product">
                                                     <div className="field" align="left">
                                                         <h5>Upload  Files</h5>
-                                                        <input type="file" id="files" name="files[]" />
+                                                        <input type="file" id="files" name="files[]" onChange={(e) => { handleHangerUpload(e); }} />
                                                     </div>
                                                 </form>
+                                                <div>
+                                                    {
+                                                        images && images.map((imgItem, imgIndex) => (
+                                                            <img style={{ "height": "100px", "width": "100px" }} src={imgItem} key={imgIndex} />
+                                                        ))
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -548,7 +579,6 @@ const AddNewProduct = () => {
                                                 {addNewOption && addNewOption.map((item, temp) => (
 
                                                     <div key={temp} className={`new-code-foe-size  `} >
-                                                        {console.log('dznjd ', item)}
                                                         <div className="row">
                                                             <div className="col s12  l6 xl2"></div>
                                                             <div className="col s12 l6 xl8 mb-3">
@@ -725,6 +755,7 @@ const AddNewProduct = () => {
                                 </div>
 
                             </div>
+
                             <div className="col s12 m6 xl3">
                                 <div className="add-left-product-one">
                                     <div>
@@ -735,13 +766,13 @@ const AddNewProduct = () => {
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label> SKU</label>
-                                                    <input type="text" placeholder=""></input>
+                                                    <input type="text" placeholder="" onChange={(e) => { setSku(e.target.value); }} value={sku}></input>
                                                 </div>
                                             </div>
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Quantity</label>
-                                                    <input type="text" placeholder=" 0"></input>
+                                                    <input type="text" placeholder=" 0" onChange={(e) => { setQuantity(e.target.value); }} value={quantity}></input>
                                                 </div>
                                             </div>
                                         </div>
@@ -756,19 +787,26 @@ const AddNewProduct = () => {
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label> Price</label>
-                                                    <input type="text" placeholder="$ 0.00"></input>
+                                                    <input type="text" placeholder="$ 0.00" onChange={(e) => { setPrice(e.target.value); }} value={price}></input>
                                                 </div>
                                             </div>
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Compare at Price</label>
-                                                    <input type="text" placeholder="$ 0.00"></input>
+                                                    <input type="text" placeholder="$ 0.00" onChange={(e) => { setComparePrice(e.target.value); }} value={comparePrice}></input>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                                <div className="col s12 x12">
+                                    <div className="title-product">
+                                        <h5>Hanlde</h5>
+                                        <div className="add-tital">
+                                            <input type="text" placeholder="Add Handle Name" onChange={(e) => { setHandle(e.target.value); }} value={handle}></input>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="add-left-product-one mt-2 ">
                                     <div>
                                         <h5>Collection</h5>
@@ -781,13 +819,18 @@ const AddNewProduct = () => {
                                                         mode="multiple"
                                                         size={size}
                                                         placeholder="Please select"
-                                                        defaultValue={['a10', 'c12']}
-                                                        onChange={handleChange}
+                                                        defaultValue={[]}
+                                                        onChange={(e) => { setCategory(e) }}
                                                         style={{
                                                             width: '100%',
                                                         }}
+                                                        value={category}
                                                     >
-                                                        {children}
+                                                        {
+                                                            collectionData && collectionData.map((collectionItem, collectionIndex) => (
+                                                                <Option value={collectionItem._id}>{collectionItem.title}</Option>
+                                                            ))
+                                                        }
                                                     </Select>
                                                 </div>
                                             </div>
@@ -805,13 +848,15 @@ const AddNewProduct = () => {
                                                     mode="tags"
                                                     size={size}
                                                     placeholder="Please select"
-                                                    defaultValue={['a10', 'c12']}
-                                                    onChange={handleChange}
+                                                    defaultValue={[]}
+                                                    onChange={(e) => { setTags(e) }}
                                                     style={{
                                                         width: '100%',
                                                     }}
+                                                    value={tags}
                                                 >
-                                                    {children}
+                                                    <Option key={1}>Latest</Option>
+                                                    <Option key={2}>Electronic</Option>
                                                 </Select>
                                             </div>
 

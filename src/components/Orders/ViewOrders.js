@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../dashboard/Header";
 import Footer from "../Footer";
 import Sidebar from "../dashboard/Sidebar";
 import { NavLink } from "react-router-dom";
+import { getSpecificOrderData } from "../../action";
 
 const ViewOrder = () => {
+    const [id, setId] = useState((window.location.href).split('=')[1]);
+    const [data, setData] = useState({});
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        getSpecificOrderData(id).then((res) => {
+            if (res.data) {
+                setData(res.data.data.data)
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+    console.log("scxza", data)
+
     return (
         <>
             <Header />
@@ -18,7 +36,7 @@ const ViewOrder = () => {
                                 <div className="col s10 m6 l6">
                                     <h5 className="breadcrumbs-title mt-0 mb-0"><span>Order View</span></h5>
                                     <ol className="breadcrumbs mb-0">
-                                        <li className="breadcrumb-item"><a href="#">Home</a>
+                                        <li className="breadcrumb-item"><NavLink to="/">Home</NavLink>
                                         </li>
                                         <li className="breadcrumb-item active">Order View
                                         </li>
@@ -39,14 +57,14 @@ const ViewOrder = () => {
                                                 <div className="media-body">
                                                     <h6 className="media-heading">
                                                         <span className="grey-text">Order Number : </span>
-                                                        <span className="grey-text">#1005</span>
+                                                        <span className="grey-text">{data?._id}</span>
                                                     </h6>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col s12 m5 quick-action-btns display-flex justify-content-end align-items-center">
                                             <div>
-                                                <span className="btn-small btn-light-indigo">Pending</span>
+                                                <span className="btn-small btn-light-indigo">{data?.fullfillment_status}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -60,47 +78,21 @@ const ViewOrder = () => {
                                                         <div className="card-content">
                                                             <table className="responsive-table">
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td width="100px">
-                                                                            <img src="images/avatar-15.png" width="80px" height="80px" />
-                                                                        </td>
-                                                                        <td>
-                                                                            <p>Paisley Printed Ruffle Dress</p>
-                                                                            <p>XXL / MULTICOLOR / Female</p>
-                                                                        </td>
-                                                                        <td><span>₹1,299.00 × 1</span></td>
-                                                                        <td><span>₹1,299.00</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="100px">
-                                                                            <img src="images/avatar-15.png" width="80px" height="80px" />
-                                                                        </td>
-                                                                        <td>
-                                                                            <p>Paisley Printed Ruffle Dress</p>
-                                                                            <p>XXL / MULTICOLOR / Female</p>
-                                                                        </td>
-                                                                        <td><span>₹1,299.00 × 1</span></td>
-                                                                        <td><span>₹1,299.00</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="100px">
-                                                                            <img src="images/avatar-15.png" width="80px" height="80px" />
-                                                                        </td>
-                                                                        <td>
-                                                                            <p>Paisley Printed Ruffle Dress</p>
-                                                                            <p>XXL / MULTICOLOR / Female</p>
-                                                                        </td>
-                                                                        <td><span>₹1,299.00 × 1</span></td>
-                                                                        <td><span>₹1,299.00</span></td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td colSpan="4" className="right-align">
-                                                                            <NavLink to="/order-fulfill-and-tracking">
-                                                                                <button className="btn ripple2 gradient-45deg-green-teal">Fulfill items</button>
-                                                                            </NavLink>
-                                                                        </td>
-                                                                    </tr>
+                                                                    {
+                                                                        data && data.product_Data.map((item, index) => (
+                                                                            <tr key={index}>
+                                                                                <td width="100px">
+                                                                                    <img src={item.images[0].original} width="80px" height="80px" />
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p>{item.title}</p>
+                                                                                    <p>XXL / MULTICOLOR / Female</p>
+                                                                                </td>
+                                                                                <td><span>₹1,299.00 × 1</span></td>
+                                                                                <td><span>₹1,299.00</span></td>
+                                                                            </tr>
+                                                                        ))
+                                                                    }
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -148,19 +140,19 @@ const ViewOrder = () => {
                                                             <tbody>
                                                                 <tr>
                                                                     <td className="indigo-text">Name:</td>
-                                                                    <td className="users-view-name">Dean Stanley</td>
+                                                                    <td className="users-view-name">{data?.user_data && data?.user_data[0] && data?.user_data[0].first_name + ' ' + data?.user_data[0].last_name}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">E-mail:</td>
-                                                                    <td className="users-view-email">deanstanley@gmail.com</td>
+                                                                    <td className="users-view-email">{data?.user_data && data?.user_data[0] && data?.user_data[0].email}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">Mobile:</td>
-                                                                    <td>1234567890</td>
+                                                                    <td>{data?.user_data && data?.user_data[0] && data?.user_data[0].phone}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">Address:</td>
-                                                                    <td>1st Floor, Nityanandeshwar Complex, Dharmajiwan Chowk, beside Manibag Farm, Katargam, Surat, Gujarat 395004</td>
+                                                                    <td>{data?.shipping_address}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
