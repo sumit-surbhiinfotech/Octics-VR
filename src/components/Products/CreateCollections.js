@@ -27,6 +27,36 @@ const CreateCollections = () => {
     const [addAutomated, setAddAutomated] = useState();
     const [addConditions, setAddConditions] = useState();
 
+    const [title, setTitle] = useState("");
+    const [type, setType] = useState("");
+    const [files, setFiles] = useState("");
+    const [error, setError] = useState({});
+
+    const handleSubmit = () => {
+        let validate = true;
+        let err = {};
+        if (title === "") {
+            err.title = "Please Enter Title";
+            validate = false;
+        }
+        if (type === "") {
+            err.type = "Select one";
+            validate = false;
+        }
+
+        if (files === "") {
+            err.files = 'Please select image.';
+            validate = false;
+        } else if (!(/\.(jpg|jpeg|png|gif)$/.test(files))) {
+            err.files = 'Please select valid image.';
+            validate = false;
+        }
+        setError(err);
+        if (validate) {
+
+        }
+    }
+
     return (
         <>
             <Header />
@@ -50,7 +80,8 @@ const CreateCollections = () => {
                                     <div className="title-product">
                                         <h5>Title</h5>
                                         <div className="add-tital">
-                                            <input type="text" placeholder="Summer Collection"></input>
+                                            <input type="text" placeholder="Summer Collection" name="title" value={title} onChange={(e) => { setTitle(e.target.value); }}></input>
+                                            <p className="error-p">{error?.title}</p>
                                         </div>
                                     </div>
                                     <div className="description-product">
@@ -75,7 +106,7 @@ const CreateCollections = () => {
 
                                 <div className="add-left-product mt-3 ">
                                     <h5>Collection Type</h5>
-                                    <div className="add-manual">
+                                    <div className="add-manual" onChange={(e) => { setType(e.target.value); }}>
                                         <div className="mtb-10">
                                             <label htmlFor="manual"><input id="manual" name="m-id" type="radio" onClick={(e) => { setAddAutomated(addAutomated === "manual" ? "" : "manual") }} /> Manual</label>
                                             <p>Add Product to this collection one by one</p>
@@ -85,6 +116,7 @@ const CreateCollections = () => {
                                             <p>Automatically be Added this Collection</p>
                                         </div>
                                     </div>
+                                    <p className="error-p">{error?.type}</p>
                                     <div className={`condition ${addAutomated === "automated" ? "automated-open" : "automated-close"}`}>
                                         <hr />
                                         <h5>Conditions</h5>
@@ -132,7 +164,8 @@ const CreateCollections = () => {
                                                 <form className="my-form add-new-product">
                                                     <div className="field" align="left">
                                                         <h5>Collection Image</h5>
-                                                        <input type="file" id="files" name="files[]" />
+                                                        <input type="file" id="files" name="files" value={files} onChange={(e) => { setFiles(e.target.value); }} />
+                                                        <p className="error-p">{error?.files}</p>
                                                     </div>
                                                 </form>
                                             </div>
@@ -144,7 +177,7 @@ const CreateCollections = () => {
                                     </div>
                                     <div className="col s6  l6 xl6">
                                         <div className="save-btn">
-                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">Save</button>
+                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2" onClick={() => { handleSubmit(); }}>Save</button>
                                         </div>
                                     </div>
                                 </div>

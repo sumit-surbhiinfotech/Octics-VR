@@ -7,8 +7,6 @@ import { Radio, Select } from 'antd';
 
 const AddNewDiscount = () => {
     const [endDate, setEndDate] = useState();
-    // const [percentageOpen, setPercentageOpen] = useState(true);
-    // const [fixedValue, setFixedValue] = useState(true);
     const [valueType, setValueType] = useState("per")
     const [addAmoutItem, setAddAmoutItem] = useState(true);
     const [addCollProduct, setAddCollProduct] = useState(true);
@@ -20,14 +18,51 @@ const AddNewDiscount = () => {
     const [addAllCountries, setAddAllCountries] = useState(true);
     const [addShpping, setAddShpping] = useState(true);
     const [type, setType] = useState("amount_of_product");
-    const [openOption, setOpenOption] = useState();
-    const [openValue, setOpenValue] = useState("");
-    const [newValue, setNewValue] = useState("");
     const { Option } = Select;
     const children = [<Option key={1}>India</Option>, <Option key={2}>Uas</Option>, <Option key={3}>Canada</Option>, <Option key={4}>Nepal</Option>, <Option key={5}>Bhutan</Option>];
     // for (let i = 10; i < 36; i++) {
     //     // children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
     // }
+    const [discountcode, setDiscountCode] = useState("");
+    const [cspends, setCspends] = useState("");
+    const [fdiscount, setFdiscount] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+    const [imgfile, setImgFile] = useState("");
+    const [error, setError] = useState({});
+
+    const handleSubmit = () => {
+        let validate = true;
+        let err = {};
+        if (discountcode === "") {
+            err.discountcode = "Please Enter Discount Code Or Generate";
+            validate = false;
+        }
+        if (cspends === "") {
+            err.cspends = "Please Select Customer Spends";
+            validate = false;
+        }
+        if (fdiscount === "") {
+            err.fdiscount = "Please Select One";
+            validate = false;
+        }
+
+        if (password === "") {
+            err.password = "Please Enter Password.";
+            validate = false;
+        }
+        if (imgfile === "") {
+            err.imgfile = 'Please select image.';
+            validate = false;
+        } else if (!(/\.(jpg|jpeg|png|gif)$/.test(imgfile))) {
+            err.imgfile = 'Please select valid image.';
+            validate = false;
+        }
+        setError(err);
+        if (validate) {
+
+        }
+    }
     const handleChange = (value) => {
         console.log(`Selected: ${value}`);
     };
@@ -128,9 +163,10 @@ const AddNewDiscount = () => {
                                     <h6>Discount Code</h6>
                                     <div className="input-code pt-2">
                                         <div className="code-genreted">
-                                            <input type="text" placeholder="Enter code" />
+                                            <input type="text" placeholder="Enter code" name="discountcode" value={discountcode} onChange={(e) => { setDiscountCode(e.target.value); }} />
                                             <button className="ml-1 btn-generate">Generate</button>
                                         </div>
+                                        <p className="error-p">{error?.discountcode}</p>
                                     </div>
                                 </div>
                                 {
@@ -168,7 +204,7 @@ const AddNewDiscount = () => {
 
                                     <div className="add-left-product mt-3">
                                         <h6>Customer Spends</h6>
-                                        <div className="costomer-spends mb-3">
+                                        <div className="costomer-spends mb-3" onChange={(e) => { setCspends(e.target.value); }}>
                                             <div className="mtb-10">
                                                 <label htmlFor="mi-quantity"><input id="mi-quantity" type="radio" name="mini-quntity" onClick={(e) => { setAddMinQuntity(addMinQuntity === "mi-quantity" ? "" : "mi-quantity") }} /> Minimum Quantity of Item</label>
                                                 <div className={`minimum-quantity ${addMinQuntity === "mi-quantity" ? "collections-add-open" : "collections-add-close"}`}>
@@ -224,6 +260,7 @@ const AddNewDiscount = () => {
                                                     <button className="ml-1 btn-generate">Browse</button>
                                                 </div>
                                             </div>
+                                            <p className="error-p">{error?.cspends}</p>
                                         </div>
                                         <hr />
                                         <h6 className="mt-3">Customer Gets</h6>
@@ -258,7 +295,7 @@ const AddNewDiscount = () => {
                                         </div>
                                         <div className="at-a-discounted-value mb-3">
                                             <p className="valur-discount">AT A DISCOUNTED VALUE</p>
-                                            <div className="values-for-discount">
+                                            <div className="values-for-discount" onChange={(e) => { setFdiscount(e.target.value); }}>
                                                 <div className="mtb-10">
                                                     <label htmlFor="any-perecentage"><input id="any-perecentage" type="radio" name="pre-1" onClick={(e) => { setAddAnyFree(addAnyFree === "any-perecentage" ? "" : "any-perecentage") }} /> Perecentage</label>
                                                 </div>
@@ -275,6 +312,7 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <p className="error-p">{error?.fdiscount}</p>
                                             </div>
                                         </div>
                                         <hr />
@@ -524,7 +562,7 @@ const AddNewDiscount = () => {
                                     </div>
                                     <div className="col s6  l6 xl6">
                                         <div className="save-btn">
-                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">Save</button>
+                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2" onClick={() => { handleSubmit(); }}>Save</button>
                                         </div>
                                     </div>
                                 </div>

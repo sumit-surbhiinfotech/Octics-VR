@@ -21,7 +21,7 @@ const data = [
         Action:
             <div>
                 <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                    <Button className="edit-return"><span className="material-icons">edit </span></Button>
                 </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
             </div>,
@@ -38,7 +38,7 @@ const data = [
         Action:
             <div>
                 <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                    <Button className="edit-return"><span className="material-icons">edit </span></Button>
                 </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
             </div>,
@@ -55,7 +55,7 @@ const data = [
         Action:
             <div>
                 <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                    <Button className="edit-return"><span className="material-icons">edit </span></Button>
                 </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
             </div>,
@@ -72,7 +72,7 @@ const data = [
         Action:
             <div>
                 <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                    <Button className="edit-return"><span className="material-icons"> edit </span></Button>
                 </NavLink>
                 <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
             </div>,

@@ -286,7 +286,7 @@ const Dashboard = () => {
                </div>
             </div>
          </div>
-         <script src="../../vendors/chartjs/chart.min.js"></script>
+         {/* <script src="../../vendors/chartjs/chart.min.js"></script> */}
       </>
    )
 }
