@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
     return (
@@ -41,7 +42,10 @@ const Login = () => {
                                         </div>
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <a href="dashboard" className="btn ripple2 border-round gradient-45deg-purple-deep-orange col s12">Login</a>
+                                                <NavLink className="btn ripple2 border-round gradient-45deg-purple-deep-orange col s12" to="/dashboard">
+                                                    Login
+                                                </NavLink>
+                                                {/* <a href="dashboard" >Login</a> */}
                                             </div>
                                         </div>
                                         <div className="row">

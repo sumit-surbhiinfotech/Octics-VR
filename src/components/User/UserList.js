@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
@@ -7,83 +7,62 @@ import { Button, Input, Space, Table } from 'antd';
 import { useRef, useState } from 'react';
 import 'antd/dist/antd.css';
 import { NavLink } from "react-router-dom";
-
-const data = [
-    {
-        key: '1',
-        UserImage:
-            <div className="return-order-img">
-                <img src="images/avatar-15.png" />
-            </div>,
-        UserName: 'Sumit',
-        Email: 'sumit@gmail.com',
-        PhoneNumber: '9876543210',
-        Action:
-            <div>
-                <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
-                </NavLink>
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </div>,
-    },
-    {
-        key: '2',
-        UserImage:
-            <div className="return-order-img">
-                <img src="images/avatar-15.png" />
-            </div>,
-        UserName: 'Sumit',
-        Email: 'sumit@gmail.com',
-        PhoneNumber: '9876543210',
-        Action:
-            <div>
-                <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
-                </NavLink>
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </div>,
-    },
-    {
-        key: '3',
-        UserImage:
-            <div className="return-order-img">
-                <img src="images/avatar-15.png" />
-            </div>,
-        UserName: 'Sumit',
-        Email: 'sumit@gmail.com',
-        PhoneNumber: '9876543210',
-        Action:
-            <div>
-                <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
-                </NavLink>
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </div>,
-    },
-    {
-        key: '4',
-        UserImage:
-            <div className="return-order-img">
-                <img src="images/avatar-15.png" />
-            </div>,
-        UserName: 'Sumit',
-        Email: 'sumit@gmail.com',
-        PhoneNumber: '9876543210',
-        Action:
-            <div>
-                <NavLink to="/user">
-                    <Button className="edit-return"><span className="material-icons">save </span></Button>
-                </NavLink>
-                <Button className="edit-return"><span className="material-icons">delete_forever </span></Button>
-            </div>,
-
-    },
-];
+import { changeStatusOfUser, getAllUserList } from "../../action";
 
 const UserList = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = () => {
+        getAllUserList().then((res) => {
+            if (res.data) {
+                let temp = res.data.data;
+                let arr = [];
+                temp.map((item, index) => {
+                    let obj = {
+                        key: index,
+                        UserImage:
+                            <div className="return-order-img">
+                                <img src={item.profile_img} />
+                            </div>,
+                        UserName: item.first_name,
+                        Email: item.email,
+                        PhoneNumber: item.phone,
+                        Action:
+                            <div>
+                                <NavLink to="/user">
+                                    <Button className="edit-return"><span className="material-icons">save </span></Button>
+                                </NavLink>
+                                <Button className="edit-return" onClick={() => { handleConfirmDelete(item._id) }}><span className="material-icons">delete_forever </span></Button>
+                            </div>
+
+                    }
+                    arr.push(obj);
+                })
+                setData(arr)
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const handleConfirmDelete = (id) => {
+        let body = {
+            id: id
+        }
+        changeStatusOfUser(body).then((res) => {
+            if (res.data) {
+                getData();
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();

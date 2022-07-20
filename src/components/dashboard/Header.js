@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Header = () => {
 
     return (
@@ -8,7 +9,7 @@ const Header = () => {
                 <div className="navbar navbar-fixed">
                     <nav className="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
                         <div className="nav-wrapper">
-
+                            <ToastContainer />
                             <ul className="navbar-list right">
 
                                 <li className="hide-on-med-and-down"><a className="ripple1 toggle-fullscreen" href="#!;"><i className="material-icons">settings_overscan</i></a></li>

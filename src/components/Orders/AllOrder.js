@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 // import "../../css/pages/data-tables.css"
 import Header from "../dashboard/Header";
@@ -11,53 +11,92 @@ import { useRef, useState } from 'react';
 // import Highlighter from 'react-highlight-words';
 import 'antd/dist/antd.css';
 import { Option } from "antd/lib/mentions";
+import { getAllOrder } from "../../action";
 
+// const data = [
+//     {
+//         key: '1',
+//         Order: '#1001A',
+//         Date: 'May 22, 4:21PM',
+//         Customer: 'John Brown',
+//         PaymentStatus: 'Pending',
+//         FulfillmentStatus: 'Unfulfilled',
+//         Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+//     },
+//     {
+//         key: '2',
+//         Order: '#1001A',
+//         Date: 'May 22, 4:21PM',
+//         Customer: 'John Brown',
+//         PaymentStatus: 'Pending',
+//         FulfillmentStatus: 'Unfulfilled',
+//         Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+//     },
+//     {
+//         key: '3',
+//         Order: '#1001A',
+//         Date: 'May 22, 4:21PM',
+//         Customer: 'John Brown',
+//         PaymentStatus: 'Pending',
+//         FulfillmentStatus: 'Unfulfilled',
+//         Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+//     },
+//     {
+//         key: '4',
+//         Order: '#1001A',
+//         Date: 'May 22, 4:21PM',
+//         Customer: 'raj',
+//         PaymentStatus: 'Pending',
+//         FulfillmentStatus: 'Unfulfilled',
+//         Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+//     },
 
-const data = [
-    {
-        key: '1',
-        Order: '#1001A',
-        Date: 'May 22, 4:21PM',
-        Customer: 'John Brown',
-        PaymentStatus: 'Pending',
-        FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-    {
-        key: '2',
-        Order: '#1001A',
-        Date: 'May 22, 4:21PM',
-        Customer: 'John Brown',
-        PaymentStatus: 'Pending',
-        FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-    {
-        key: '3',
-        Order: '#1001A',
-        Date: 'May 22, 4:21PM',
-        Customer: 'John Brown',
-        PaymentStatus: 'Pending',
-        FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-    {
-        key: '4',
-        Order: '#1001A',
-        Date: 'May 22, 4:21PM',
-        Customer: 'raj',
-        PaymentStatus: 'Pending',
-        FulfillmentStatus: 'Unfulfilled',
-        Action: <NavLink to="/view-orders"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
-    },
-
-];
+// ];
 
 const AllOrder = () => {
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
+    const [data, setData] = useState([]);
 
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = () => {
+        getAllOrder().then((res) => {
+            if (res.data) {
+                // console.log("scxgyhb", )
+                let temp = res.data.data.data;
+                // setData(res.data.data);
+                console.log("scxz", temp.length)
+                let arr = [];
+                for (let i = 0; i < temp.length; i++) {
+                    console.log("scx z", temp[i])
+                    let obj = {
+                        key: i,
+                        Order: temp[i]._id,
+                        Date: (new Date(temp[i].createdAt)).getDate() + '/' + ((new Date(temp[i].createdAt)).getMonth() + 1) + '/' + (new Date(temp[i].createdAt)).getFullYear(),
+                        Customer: temp[i]?.user_data[0]?.first_name + ' ' + temp[i]?.user_data[0]?.last_name,
+                        PaymentStatus: temp[i].financial_status,
+                        FulfillmentStatus: temp[i].fullfillment_status,
+                        Action: <NavLink to={`/view-orders?id=${temp[i]._id}`}><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+                    };
+                    console.log("edcdscx", obj)
+                    arr.push(obj);
+                }
+                // temp.map((item, index) => {
+                //     console.log("scxdscxz", index)
+                //     console.log("obj", obj)
+                // });
+                // console.log("edscxz1111", data)
+                setData(arr);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+    console.log("edscxz", data)
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
