@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
 import '@progress/kendo-theme-default/dist/all.css';
-import { Editor, EditorTools } from "@progress/kendo-react-editor";
+import { Editor, EditorTools, EditorUtils } from "@progress/kendo-react-editor";
 import 'antd/dist/antd.css';
+import { Select } from "antd";
+import { createCollection, editCollection, getSpecificCollection, uploadImageOfCollection } from "../../action";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const {
     Bold,
@@ -24,38 +28,128 @@ const {
 } = EditorTools;
 
 const CreateCollections = () => {
+    const navigate = useNavigate();
+
+    const editorRef = useRef();
     const [addAutomated, setAddAutomated] = useState();
     const [addConditions, setAddConditions] = useState();
-
     const [title, setTitle] = useState("");
-    const [type, setType] = useState("");
-    const [files, setFiles] = useState("");
+    const [description, setDescription] = useState("");
+    const [tags, setTags] = useState([]);
+    const [featureImg, setFeatureImg] = useState("");
+    const [handle, setHandle] = useState("");
+    const [size, setSize] = useState('middle');
+    const { Option } = Select;
     const [error, setError] = useState({});
+    const [edit, setEdit] = useState(false);
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        let url = window.location.href;
+        let slug = url.split('=');
+        if (slug.length === 2) {
+            setEdit(true);
+            getSpecificCollection(slug[1]).then((res) => {
+                setData(res.data.data);
+                handleEdit(res.data.data);
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    }, []);
+    const handleEdit = (data) => {
+        setTitle(data.title);
+        setDescription(data.description);
+        setTags(data.tags);
+        setFeatureImg(data.feature_img);
+        setHandle(data.handle);
+        setHtml(data.description);
+    }
+    const setHtml = (html) => {
+        if (editorRef.current) {
+            const view = editorRef.current.view;
+            if (view) {
+                EditorUtils.setHtml(view, html)
+            }
+        }
+    };
+    const getHtml = () => {
+        if (editorRef.current) {
+            const view = editorRef.current.view;
+            if (view) {
+                setDescription(EditorUtils.getHtml(view.state))
+            }
+        }
+    };
+    const handleUpload = (e) => {
+        if (e.target.files[0]) {
+            let body = new FormData();
+            body.append("file", e.target.files[0])
+            uploadImageOfCollection(body).then((res) => {
+                if (res.data.statusCode == 200) {
+                    setFeatureImg(res.data.data);
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    }
 
     const handleSubmit = () => {
         let validate = true;
         let err = {};
         if (title === "") {
+            validate = false;
             err.title = "Please Enter Title";
-            validate = false;
         }
-        if (type === "") {
-            err.type = "Select one";
+        if (description === "") {
             validate = false;
+            err.description = "Please Enter Description";
         }
-
-        if (files === "") {
-            err.files = 'Please select image.';
+        if (tags.length === 0) {
             validate = false;
-        } else if (!(/\.(jpg|jpeg|png|gif)$/.test(files))) {
-            err.files = 'Please select valid image.';
+            err.tags = "Please Enter Tags";
+        }
+        if (handle === "") {
             validate = false;
+            err.handle = "Please Enter Handle";
+        }
+        if (featureImg === "") {
+            validate = false;
+            err.featureImg = "Please Upload Feature Image";
         }
         setError(err);
         if (validate) {
-
+            let body = {
+                title: title,
+                description: description,
+                tags: tags,
+                handle: handle,
+                feature_img: featureImg,
+            }
+            if (edit) {
+                body._id = data._id
+                editCollection(body).then((res) => {
+                    toast("Edited Successfully");
+                    navigate('/list-of-collection')
+                }).catch((err) => {
+                    console.log("scx ", err);
+                })
+            } else {
+                createCollection(body).then((res) => {
+                    toast("Added Successfully");
+                    navigate('/list-of-collection')
+                }).catch((err) => {
+                    console.log("scx ", err);
+                })
+            }
         }
+
     }
+
+    const [type, setType] = useState("");
+    const [files, setFiles] = useState("");
+
 
     return (
         <>
@@ -69,7 +163,7 @@ const CreateCollections = () => {
                             <div className="row">
                                 <div className="col s12 l6 xl3"></div>
                                 <div className="col s12 l6 xl6">
-                                    <h3 className="new-product-title">Create Collection</h3>
+                                    <h3 className="new-product-title">{edit ? 'Edit' : 'Create'} Collection</h3>
                                 </div>
                                 <div className="col s12 l6 xl2"></div>
                             </div>
@@ -80,16 +174,18 @@ const CreateCollections = () => {
                                     <div className="title-product">
                                         <h5>Title</h5>
                                         <div className="add-tital">
-                                            <input type="text" placeholder="Summer Collection" name="title" value={title} onChange={(e) => { setTitle(e.target.value); }}></input>
-                                            <p className="error-p">{error?.title}</p>
+                                            <input type="text" placeholder="Name Of Collection" onChange={(e) => { setTitle(e.target.value); }} value={title}></input>
                                         </div>
+                                        {error && error.title && <div className="error">{error.title}</div>}
                                     </div>
                                     <div className="description-product">
                                         <h5>
-                                            Description (Optional)
+                                            Description
+                                            {/* (Optional) */}
                                         </h5>
                                         <div className="text-editer">
                                             <Editor
+                                                ref={editorRef}
                                                 tools={[
                                                     [Bold, Italic, Underline],
                                                     [Undo, Redo],
@@ -98,62 +194,42 @@ const CreateCollections = () => {
                                                     [OrderedList, UnorderedList, Indent, Outdent],
                                                 ]}
                                                 contentStyle={{ height: 320 }}
+                                                onChange={() => { getHtml(); }}
                                             // defaultContent={content}
                                             />
                                         </div>
-                                    </div>
-                                </div>
+                                        {error && error.description && <div className="error">{error.description}</div>}
 
-                                <div className="add-left-product mt-3 ">
-                                    <h5>Collection Type</h5>
-                                    <div className="add-manual" onChange={(e) => { setType(e.target.value); }}>
-                                        <div className="mtb-10">
-                                            <label htmlFor="manual"><input id="manual" name="m-id" type="radio" onClick={(e) => { setAddAutomated(addAutomated === "manual" ? "" : "manual") }} /> Manual</label>
-                                            <p>Add Product to this collection one by one</p>
-                                        </div>
-                                        <div className="mtb-10">
-                                            <label htmlFor="automated"><input id="automated" name="m-id" type="radio" onClick={(e) => { setAddAutomated(addAutomated === "automated" ? "" : "automated") }} /> Automated</label>
-                                            <p>Automatically be Added this Collection</p>
+                                    </div>
+                                    <div>
+                                        <div className="row">
+                                            <div className="col s12  l6 xl12">
+                                                <h5>Tags</h5>
+                                                <Select
+                                                    mode="tags"
+                                                    size={size}
+                                                    placeholder="Please select"
+                                                    defaultValue={[]}
+                                                    onChange={(e) => { setTags(e) }}
+                                                    style={{
+                                                        width: '100%',
+                                                    }}
+                                                    value={tags}
+                                                >
+                                                    <Option key={1}>Latest</Option>
+                                                    <Option key={2}>Electronic</Option>
+                                                </Select>
+                                            </div>
+                                            {error && error.tags && <div className="error">{error.tags}</div>}
+
                                         </div>
                                     </div>
-                                    <p className="error-p">{error?.type}</p>
-                                    <div className={`condition ${addAutomated === "automated" ? "automated-open" : "automated-close"}`}>
-                                        <hr />
-                                        <h5>Conditions</h5>
-                                        <div className="product-match">
-                                            <p>Product Must Match:&nbsp;&nbsp; <label htmlFor="all-condi"><input id="all-condi" name="a-condition" type="radio" onClick={(e) => { setAddConditions(addConditions === "all-condi" ? "" : "all-condi") }} /> All Conditions</label>&nbsp;&nbsp; <label htmlFor="any-condi"><input name="a-condition" id="any-condi" type="radio" onClick={(e) => { setAddConditions(addConditions === "any-condi" ? "" : "any-condi") }} /> Any Conditions</label></p>
-                                            <div className={`all-conditions mt-2 ${addConditions === "all-condi" ? "automated-open" : "automated-close"}`}>
-                                                <div className="row">
-                                                    <div className="col s12 m6 xl4">
-                                                        <div className="product-tag">
-                                                            <select>
-                                                                <option>Product Tag</option>
-                                                                <option>Product Tag</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col s12 m6 xl4">
-                                                        <div className="equal-to">
-                                                            <select>
-                                                                <option>is equal to</option>
-                                                                <option>is equal to</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col s12 m6 xl4">
-                                                        <div className="other-to">
-                                                            <select>
-                                                                <option></option>
-                                                                <option></option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className={`any-conditions mt-2 ${addConditions === "any-condi" ? "automated-open" : "automated-close"}`}>
-
-                                            </div>
+                                    <div className="title-product">
+                                        <h5>Handle</h5>
+                                        <div className="add-tital">
+                                            <input type="text" placeholder="Handle Name" onChange={(e) => { setHandle(e.target.value); }} value={handle}></input>
                                         </div>
+                                        {error && error.handle && <div className="error">{error.handle}</div>}
                                     </div>
                                 </div>
 
@@ -164,20 +240,23 @@ const CreateCollections = () => {
                                                 <form className="my-form add-new-product">
                                                     <div className="field" align="left">
                                                         <h5>Collection Image</h5>
-                                                        <input type="file" id="files" name="files" value={files} onChange={(e) => { setFiles(e.target.value); }} />
-                                                        <p className="error-p">{error?.files}</p>
+                                                        <input type="file" id="files" name="files[]" onChange={(e) => { handleUpload(e); }} />
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
+                                        <div className="" style={{ "height": "100px", "width": "100px" }}>
+                                            <img src={data?.feature_img} style={{ "height": "100px", "width": "100px" }} />
+                                        </div>
                                     </div>
+                                    {error && error.featureImg && <div className="error">{error.featureImg}</div>}
                                 </div>
                                 <div className="row mb-5">
                                     <div className="col s6  l6 xl6">
                                     </div>
                                     <div className="col s6  l6 xl6">
                                         <div className="save-btn">
-                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2" onClick={() => { handleSubmit(); }}>Save</button>
+                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2" type="button" onClick={() => { handleSubmit() }}>{edit ? 'Update' : 'Save'}</button>
                                         </div>
                                     </div>
                                 </div>
