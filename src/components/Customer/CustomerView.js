@@ -1,10 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { changeUserStatus, getLastOrderDetailsOfCustomer } from "../../action";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
 
 const CustomerView = () => {
+    const [id, setId] = useState(window.location.href.split('=').pop());
+    const [userData, setUserData] = useState({});
+    const [productData, setProductData] = useState([]);
+    const [orderData, setOrderData] = useState({});
+    useEffect(() => {
+        getData();
+    }, [])
+    const getData = () => {
+        getLastOrderDetailsOfCustomer(id).then((res) => {
+            if (res.data) {
+
+                if (res.data.data) {
+                    if (res.data.data.data.order_data) {
+                        setOrderData(res.data.data.data.order_data);
+                    }
+                    if (res.data.data.data.product_data) {
+                        setProductData(res.data.data.data.product_data);
+                    }
+                    if (res.data.data.data.user_data) {
+                        setUserData(res.data.data.data.user_data[0]);
+                    }
+                }
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+    const changeStatus = () => {
+        let body = {
+            id: id
+        }
+        changeUserStatus(body).then((res) => {
+            if (res.data) {
+                getData();
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     return (
         <>
             <Header />
@@ -38,14 +80,14 @@ const CustomerView = () => {
                                             <div className="display-flex media">
                                                 <div className="media-body">
                                                     <h6 className="media-heading">
-                                                        <span className="grey-text">Sumit Kachariya</span>
+                                                        <span className="grey-text">{userData?.first_name + ' ' + userData?.last_name}</span>
                                                     </h6>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col s12 m5 quick-action-btns display-flex justify-content-end align-items-center">
                                             <div>
-                                                <span className="btn-small btn-light-indigo">Block</span>
+                                                <span className="btn-small btn-light-indigo" onClick={changeStatus}>{userData.status ? 'Block' : 'Active'}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -60,42 +102,23 @@ const CustomerView = () => {
                                                             <table className="responsive-table">
                                                                 <caption className="text-left d-flex">Last Order List</caption>
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td width="100px">
-                                                                            <img src="images/avatar-15.png" width="80px" height="80px" />
-                                                                        </td>
-                                                                        <td>
-                                                                            <p>Paisley Printed Ruffle Dress</p>
-                                                                            <p>XXL / MULTICOLOR / Female</p>
-                                                                            <a href="#"><p>#1002</p></a>
-                                                                        </td>
-                                                                        <td><span>₹1,299.00 × 1</span></td>
-                                                                        <td><span>₹1,299.00</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="100px">
-                                                                            <img src="images/avatar-15.png" width="80px" height="80px" />
-                                                                        </td>
-                                                                        <td>
-                                                                            <p>Paisley Printed Ruffle Dress</p>
-                                                                            <p>XXL / MULTICOLOR / Female</p>
-                                                                            <a href="#"><p>#1002</p></a>
-                                                                        </td>
-                                                                        <td><span>₹1,299.00 × 1</span></td>
-                                                                        <td><span>₹1,299.00</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="100px">
-                                                                            <img src="images/avatar-15.png" width="80px" height="80px" />
-                                                                        </td>
-                                                                        <td>
-                                                                            <p>Paisley Printed Ruffle Dress</p>
-                                                                            <p>XXL / MULTICOLOR / Female</p>
-                                                                            <a href="#"><p>#1002</p></a>
-                                                                        </td>
-                                                                        <td><span>₹1,299.00 × 1</span></td>
-                                                                        <td><span>₹1,299.00</span></td>
-                                                                    </tr>
+                                                                    {
+                                                                        productData && productData.map((item, index) => (
+                                                                            <tr key={index}>
+                                                                                <td width="100px">
+                                                                                    <img src={item.images && item.images[0] && item.images[0].original} width="80px" height="80px" />
+                                                                                </td>
+                                                                                <td>
+                                                                                    <p>{item.title}</p>
+                                                                                    <p>{item.varient && item.varient[0].name}</p>
+                                                                                    {/* <a href="#"><p>#1002</p></a> */}
+                                                                                </td>
+                                                                                <td><span>₹{item.varient && item.varient[0].price}</span></td>
+                                                                                <td><span>₹{item.varient && item.varient[0].price}</span></td>
+                                                                            </tr>
+
+                                                                        ))
+                                                                    }
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -109,19 +132,19 @@ const CustomerView = () => {
                                                             <tbody>
                                                                 <tr>
                                                                     <td className="indigo-text">Name:</td>
-                                                                    <td className="users-view-name">Dean Stanley</td>
+                                                                    <td className="users-view-name">{userData?.first_name + ' ' + userData?.last_name}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">E-mail:</td>
-                                                                    <td className="users-view-email">deanstanley@gmail.com</td>
+                                                                    <td className="users-view-email">{userData?.email}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">Mobile:</td>
-                                                                    <td>1234567890</td>
+                                                                    <td>{userData?.phone}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">Address:</td>
-                                                                    <td>1st Floor, Nityanandeshwar Complex, Dharmajiwan Chowk, beside Manibag Farm, Katargam, Surat, Gujarat 395004</td>
+                                                                    <td>{orderData.shipping_address}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

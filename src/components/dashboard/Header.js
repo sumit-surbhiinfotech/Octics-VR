@@ -14,8 +14,8 @@ const Header = () => {
 
                                 <li className="hide-on-med-and-down"><a className="ripple1 toggle-fullscreen" href="#!;"><i className="material-icons">settings_overscan</i></a></li>
                                 <li className="hide-on-large-only search-input-wrapper"><a className="ripple1 search-button" href="#!;"><i className="material-icons">search</i></a></li>
-                                <li><a className="ripple1 notification-button" href="#!;" data-target="notifications-dropdown"><i className="material-icons">notifications_none<small className="notification-badge">5</small></i></a></li>
-                                <li><a className="ripple1 profile-button new-pro-btn-mt" href="#!;" data-target="profile-dropdown"><span className="avatar-status avatar-online"><img src="images/avatar/avatar-7.png" alt="avatar" /><i></i></span></a></li>
+                                {/* <li><a className="ripple1 notification-button" href="#!;" data-target="notifications-dropdown"><i className="material-icons">notifications_none<small className="notification-badge">5</small></i></a></li>
+                                <li><a className="ripple1 profile-button new-pro-btn-mt" href="#!;" data-target="profile-dropdown"><span className="avatar-status avatar-online"><img src="images/avatar/avatar-7.png" alt="avatar" /><i></i></span></a></li> */}
                             </ul>
                             <ul className="dropdown-content" id="notifications-dropdown">
                                 <li>
