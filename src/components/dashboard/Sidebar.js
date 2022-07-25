@@ -37,8 +37,6 @@ const Sidebar = () => {
                             </ul>
                         </div>
                     </li>
-
-
                     <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "product" ? "" : "product") }}>
                         <a className="collapsible-header ripple2 " href="Javascript:void(0)"><i className="material-icons">add_shopping_cart</i><span className="menu-title" >Products</span></a>
                         <div className={`collapsible-body ${showCollapsible === "product" ? "showcollapsible-open" : "showcollapsible-close"}`}>
