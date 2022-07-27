@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
@@ -7,62 +7,50 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table } from 'antd';
 import { useRef, useState } from 'react';
 import 'antd/dist/antd.css';
-
-const data = [
-    {
-        key: '1',
-        Code:
-            <div>
-                <p>xyz</p>
-                <p>$10 off entire order</p>
-            </div>,
-        Status: <div className="expired">Expired</div>,
-        Used: '1/1',
-        Start: 'Mar 24',
-        End: 'Jun 30',
-    },
-    {
-        key: '2',
-        Code:
-            <div>
-                <p>xyz</p>
-                <p>$10 off entire order</p>
-            </div>,
-        Status: <div className="active">Active</div>,
-        Used: '0/1',
-        Start: 'Mar 24',
-        End: 'Jun 30',
-    },
-    {
-        key: '3',
-        Code:
-            <div>
-                <p>xyz</p>
-                <p>$10 off entire order</p>
-            </div>,
-        Status: <div className="expired">Expired</div>,
-        Used: '1/1',
-        Start: 'Mar 24',
-        End: 'Jun 30',
-    },
-    {
-        key: '4',
-        Code:
-            <div>
-                <p>xyz</p>
-                <p>$10 off entire order</p>
-            </div>,
-        Status: <div className="expired">Expired</div>,
-        Used: '1/1',
-        Start: 'Mar 24',
-        End: 'Jun 30',
-    },
-];
+import { getAllDiscounts } from "../../action";
 
 const ListOfAddedDiscount = () => {
+    const [data, setData] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = () => {
+        getAllDiscounts().then((res) => {
+            if (res.data) {
+                let temp = res.data.data;
+                let arr = [];
+                temp.map((item, index) => {
+                    let obj = {
+                        key: index,
+                        Code:
+                            <div>
+                                <p>{item.type}</p>
+                                <p>{item.discount_code}</p>
+                            </div>,
+                        Status: <div className="expired">
+                            {
+                                !item.end_date ? 'Active' :
+                                    new Date(item.end_date) - new Date(item.start_date) > 0 ? 'Active' : 'Exprire'
+                            }
+
+                        </div>,
+                        Used: item?.count ? item?.count : 0,
+                        Start: item.start_date,
+                        End: item.end_date ? item.end_date : '--',
+                    }
+                    arr.push(obj);
+                })
+                setData(arr);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();

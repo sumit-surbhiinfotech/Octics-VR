@@ -492,7 +492,7 @@ const AddNewProduct = () => {
                             <div className="row">
                                 <div className="col s12 l6 xl2"></div>
                                 <div className="col s12 l6 xl5">
-                                    <h3 className="new-product-title">Add Product</h3>
+                                    <h3 className="new-product-title">{edit ? 'Edit Product' : 'Add Product'}</h3>
                                 </div>
                                 <div className="col s12 l6 xl3"></div>
                             </div>
@@ -543,6 +543,11 @@ const AddNewProduct = () => {
                                                     <input type="file" id="files" name="files[]" multiple onChange={(e) => { handleUploadImages(e); }} />
                                                 </div>
                                             </form>
+                                            {
+                                                images && images.map((imageItem, imageIndex) => (
+                                                    <img style={{ "height": "100px", "width": "100px" }} src={imageItem?.original} />
+                                                ))
+                                            }
                                         </div>
                                     </div>
                                 </div> */}
@@ -601,9 +606,12 @@ const AddNewProduct = () => {
                                                     </div>
                                                 </form>
                                             </div>
+                                            {
+                                                avtarImage && <img style={{ "height": "100px", "width": "100px" }} src={avtarImage} />
+                                            }
                                         </div>
                                     </div>
-                                    <div className="col s12   xl6">
+                                    <div className="col s12 xl6">
                                         <div className="add-left-product-one mt-3">
                                             <h5>Hanger 3d Image</h5>
                                             <div className="for-avter">
@@ -615,9 +623,7 @@ const AddNewProduct = () => {
                                                 </form>
                                                 <div>
                                                     {
-                                                        images && images.map((imgItem, imgIndex) => (
-                                                            <img style={{ "height": "100px", "width": "100px" }} src={imgItem} key={imgIndex} />
-                                                        ))
+                                                        hangerImage && <img style={{ "height": "100px", "width": "100px" }} src={hangerImage} />
                                                     }
                                                 </div>
                                             </div>
@@ -904,6 +910,7 @@ const AddNewProduct = () => {
                                                     </Select>
                                                 </div>
                                             </div>
+                                            {console.log("scxz ", category)}
                                         </div>
                                     </div>
                                 </div>

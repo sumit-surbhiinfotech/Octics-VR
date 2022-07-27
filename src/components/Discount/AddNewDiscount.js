@@ -1,40 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
 import 'antd/dist/antd.css';
 import { Radio, Select } from 'antd';
+import { createDiscount, getAllProduct, getCollections, getNewDiscountCode } from "../../action";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddNewDiscount = () => {
-    const [endDate, setEndDate] = useState();
+    const navigate = useNavigate();
+    const [endDate, setEndDate] = useState('');
+    const [endDateStatus, setEndDateStatus] = useState(false);
     const [valueType, setValueType] = useState("per")
     const [addAmoutItem, setAddAmoutItem] = useState(true);
     const [addCollProduct, setAddCollProduct] = useState(true);
     const [addSpecific, setAddSpecific] = useState(true);
     const [addLimitUse, setAddLimitUse] = useState(true);
     const [addMinQuntity, setAddMinQuntity] = useState(true);
-    const [addAnyFree, setAddAnyFree] = useState(true);
-    const [addUsesOreder, setAddUsesOreder] = useState(true);
-    const [addAllCountries, setAddAllCountries] = useState(true);
+    // const [addAnyFree, setAddAnyFree] = useState(true);
+    // const [addUsesOreder, setAddUsesOreder] = useState(true);
+    // const [addAllCountries, setAddAllCountries] = useState(true);
     const [addShpping, setAddShpping] = useState(true);
     const [type, setType] = useState("amount_of_product");
     const { Option } = Select;
-    const children = [<Option key={1}>India</Option>, <Option key={2}>Uas</Option>, <Option key={3}>Canada</Option>, <Option key={4}>Nepal</Option>, <Option key={5}>Bhutan</Option>];
-    // for (let i = 10; i < 36; i++) {
-    //     // children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    // }
     const [discountcode, setDiscountCode] = useState("");
-    const [cspends, setCspends] = useState("");
-    const [fdiscount, setFdiscount] = useState("");
+    // const [cspends, setCspends] = useState("");
+    // const [fdiscount, setFdiscount] = useState("");
     const [fixed, setFixed] = useState("");
-    const [selectCountries, setSelectCountries] = useState("");
-    const [applies, setApplies] = useState("");
-    const [requirements, setRequirements] = useState("");
-    const [eligibility, setEligibility] = useState("");
-    const [maximum, setMaximum] = useState("");
+    const [applies, setApplies] = useState("collections");
+    const [requirements, setRequirements] = useState("none");
     const [start, setStart] = useState("");
     const [error, setError] = useState({});
-
+    const [collectionData, setCollectionData] = useState([]);
+    const [productData, setProductData] = useState([]);
+    const [collectionChk, setCollectionChk] = useState([]);
+    const [productChk, setProductChk] = useState([]);
+    const [minimumPurchaseAmount, setMinimumPurchaseAmount] = useState(0);
+    const [minimumQuantity, setMinimumQuantity] = useState(0);
+    const [customerSpendQuntity, setCustomerSpendQuntity] = useState(0);
+    const [customerSpendAmount, setCustomerSpendAmount] = useState(0);
+    const [customerSpendType, setCustomerSpendType] = useState('product');
+    const [customerGetQuntity, setCustomerGetQuntity] = useState(0);
+    const [customerGetType, setCustomerGetType] = useState('product');
+    const [customerGetDiscountType, setCustomerGetDiscountType] = useState('percentage');
+    const [customerGetCollectionChk, setCustomerGetCollectionChk] = useState([]);
+    const [customerGetProductChk, setCustomerGetProductChk] = useState([]);
+    const [customerSpendMainType, setCustomerSpendMainType] = useState("quantity");
+    const [customerGetDiscountPercentage, setCustomerGetDiscountPercentage] = useState(0)
+    // const [customerGetDiscount]
+    useEffect(() => {
+        getCollectionsList();
+        getProductsList();
+    }, [])
     const handleSubmit = () => {
         let validate = true;
         let err = {};
@@ -42,26 +60,33 @@ const AddNewDiscount = () => {
             err.discountcode = "Please Enter Discount Code Or Generate";
             validate = false;
         }
-        if (cspends === "") {
-            err.cspends = "Please Select Customer Spends";
-            validate = false;
+        // if (cspends === "" && type !== "amount_of_product") {
+        //     err.cspends = "Please Select Customer Spends";
+        //     validate = false;
+        // }
+        // if (fdiscount === "" && type !== "amount_of_product") {
+        //     err.fdiscount = "Please Select One";
+        //     validate = false;
+        // }
+        if (applies == "collections" && type !== "amount_of_orders") {
+            if (collectionChk.length == 0) {
+                err.collectionChk = "Please Select At Least One Item.";
+                validate = false;
+            }
         }
-        if (fdiscount === "") {
-            err.fdiscount = "Please Select One";
-            validate = false;
+        if (applies == "products" && type !== "amount_of_orders") {
+            if (productChk.length == 0) {
+                err.productChk = "Please Select At Least One Item.";
+                validate = false;
+            }
         }
 
-        if (fixed === "") {
+        if (fixed === "" && type !== "by_x_get_y") {
             err.fixed = "Please Enter fixed Amount or Percentage.";
             validate = false;
         }
 
-        if (selectCountries === "") {
-            err.selectCountries = "Please select Countries.";
-            validate = false;
-        }
-
-        if (applies === "") {
+        if (applies === "" && type !== "amount_of_product") {
             err.applies = "Please select  Specific Collections Or Products.";
             validate = false;
         }
@@ -71,14 +96,17 @@ const AddNewDiscount = () => {
             validate = false;
         }
 
-        if (eligibility === "") {
-            err.eligibility = "Please select Customer eligibility.";
-            validate = false;
+        if (requirements === "amount") {
+            if (minimumPurchaseAmount <= 0) {
+                err.minimumPurchaseAmount = "Please Enter Valid Amount.";
+                validate = false;
+            }
         }
-
-        if (maximum === "") {
-            err.maximum = "Please select Maximum Discount Uses.";
-            validate = false;
+        if (requirements === "quantity") {
+            if (minimumQuantity <= 0) {
+                err.minimumQuantity = "Please Enter Valid Quantity.";
+                validate = false;
+            }
         }
 
         if (start === "") {
@@ -86,88 +114,247 @@ const AddNewDiscount = () => {
             validate = false;
         }
 
-        // if (imgfile === "") {
-        //     err.imgfile = 'Please select image.';
-        //     validate = false;
-        // } else if (!(/\.(jpg|jpeg|png|gif)$/.test(imgfile))) {
-        //     err.imgfile = 'Please select valid image.';
-        //     validate = false;
-        // }
+        if (endDateStatus) {
+            if (!endDate) {
+                err.endDate = "Please select Expire Date.";
+                validate = false;
+            }
+        }
+
+        if (type == "by_x_get_y") {
+            if (customerSpendMainType === "quantity") {
+                console.log("customerSpendQuntity", customerSpendQuntity)
+                if (customerSpendQuntity <= 0) {
+                    err.customerSpendQuntity = "Please Enter Quantity.";
+                    validate = false;
+                }
+                if (customerSpendType === "product") {
+                    if (productChk.length == 0) {
+                        err.productChk = "Please Select At Least One Item.";
+                        validate = false;
+                    }
+                }
+                if (customerSpendType === "amount") {
+                    if (customerSpendAmount <= 0) {
+                        err.productChk = "Please enter valid amount.";
+                        validate = false;
+                    }
+                }
+            }
+            if (customerSpendMainType === "amount") {
+                if (customerSpendAmount <= 0) {
+                    err.customerSpendAmount = "Please Enter Valid Amount .";
+                    validate = false;
+                }
+                if (customerSpendType === "product") {
+                    if (productChk.length == 0) {
+                        err.productChk = "Please select products.";
+                        validate = false;
+                    }
+                }
+                if (customerSpendType === "amount") {
+                    if (customerSpendAmount <= 0) {
+                        err.productChk = "Please enter valid amount.";
+                        validate = false;
+                    }
+                }
+            }
+            if (customerGetQuntity <= 0) {
+                err.customerGetQuntity = "Please enter valid Quantity.";
+                validate = false;
+            }
+            if (customerGetType == "product") {
+                if (customerGetProductChk.length == 0) {
+                    err.customerGetProductChk = "Please enter valid Quantity.";
+                    validate = false;
+                }
+            }
+            if (customerGetType == "collection") {
+                if (customerGetCollectionChk.length == 0) {
+                    err.customerGetCollectionChk = "Please enter valid Quantity.";
+                    validate = false;
+                }
+            }
+            if (customerGetDiscountType == "percentage") {
+                if (customerGetDiscountPercentage <= 0) {
+                    err.customerGetDiscountPercentage = "Please enter valid Percentage.";
+                    validate = false;
+                }
+            }
+        }
+
         setError(err);
         if (validate) {
-
+            let body = {};
+            if (type === "amount_of_product") {
+                body.type = type
+                body.title = type
+                body.discount_code = discountcode
+                body.value_type = valueType === 'per' ? 'percentage' : 'amount'
+                body.value = fixed
+                body.minimum_requirement_type = requirements
+                if (requirements === "amount") {
+                    body.minimum_requirement_value = minimumPurchaseAmount
+                }
+                if (requirements === "quantity") {
+                    body.minimum_requirement_value = minimumQuantity
+                }
+                if (applies === "collections") {
+                    body.collections = collectionChk
+                }
+                if (applies === "products") {
+                    body.products = productChk
+                }
+                body.start_date = start
+                if (endDateStatus) {
+                    body.end_date = endDate
+                }
+            }
+            if (type === "amount_of_orders") {
+                body.type = type
+                body.title = type
+                body.discount_code = discountcode
+                body.value_type = valueType === 'per' ? 'percentage' : 'amount'
+                body.value = fixed
+                body.minimum_requirement_type = requirements
+                if (requirements === "amount") {
+                    body.minimum_requirement_value = minimumPurchaseAmount
+                }
+                if (requirements === "quantity") {
+                    body.minimum_requirement_value = minimumQuantity
+                }
+                body.start_date = start
+                if (endDateStatus) {
+                    body.end_date = endDate
+                }
+            }
+            if (type === "by_x_get_y") {
+                body.type = type
+                body.title = type
+                body.discount_code = discountcode
+                body.customer_spend_main_type = customerSpendMainType;
+                if (customerSpendMainType == "quantity") {
+                    body.customer_spend_quntity = customerSpendQuntity;
+                }
+                if (customerSpendMainType == "amount") {
+                    body.customer_spend_amount = customerSpendAmount;
+                }
+                body.customer_spend_type = customerSpendType;
+                if (customerSpendType === "collection") {
+                    body.collections = collectionChk;
+                }
+                if (customerSpendType === "product") {
+                    body.collections = productChk;
+                }
+                body.customer_get_quntity = customerGetQuntity
+                body.customer_spend_type = customerSpendType
+                if (customerSpendType === "collection") {
+                    body.collections = collectionChk
+                }
+                if (customerSpendType === "product") {
+                    body.collections = productChk
+                }
+                body.customer_get_discount_type = customerGetDiscountType
+                if (customerGetDiscountType === "percentage") {
+                    body.customer_get_discount_percentage = customerGetDiscountPercentage
+                }
+                body.start_date = start
+                if (endDateStatus) {
+                    body.end_date = endDate
+                }
+            }
+            console.log("sxuyus", body)
+            createDiscount(body).then((res) => {
+                if (res.data) {
+                    toast("Discount Created Successfully.")
+                    navigate('/list-of-addes-discount');
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
         }
     }
-    const handleChange = (value) => {
-        console.log(`Selected: ${value}`);
-    };
-    const [size, setSize] = useState('middle');
-
-    const handleSizeChange = (e) => {
-        setSize(e.target.value);
-    };
-    const [closeImage, setCloseImage] = useState();
-    const [highlight, setHighlight] = useState(false);
-    const [preview, setPreview] = useState("");
-    const [files, setFiles] = useState([]);
-    const [drop, setDrop] = useState(false);
-    const handleEnter = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("enter!");
-
-        preview === "" && setHighlight(true);
-    };
-
-    const handleOver = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("over!");
-
-        preview === "" && setHighlight(true);
-    };
-
-    const handleLeave = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("leave!");
-        setHighlight(false);
-    };
-
-    const handleUpload = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log("drop!");
-        setHighlight(false);
-        setDrop(true);
-        console.log("rfdscxsdf", e.target.files);
-        for (let i = 0; i < e.target.files.length; i++) {
-            let file = e.target.files[i];
-            uploadFile(file);
-        }
-        // const [file] = e.target.files || e.dataTransfer.files;
-
-    };
-
-    function uploadFile(file) {
-        const reader = new FileReader();
-        reader.readAsBinaryString(file);
-
-
-        reader.onload = () => {
-            // this is the base64 data
-            const fileRes = btoa(reader.result);
-            console.log(`data:image/jpg;base64,${fileRes}`);
-            let temp = files;
-            temp.push(`data:image/jpg;base64,${fileRes}`);
-            setFiles(temp);
-            setPreview(`data:image/jpg;base64,${fileRes}`);
-        };
-
-        reader.onerror = () => {
-            console.log("There is a problem while uploading...");
-        };
+    console.log("error", error, type);
+    const generateDiscountCode = () => {
+        getNewDiscountCode().then((res) => {
+            if (res.data) {
+                setDiscountCode(res.data.data);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
     }
+
+    const handleCollection = (value, checked) => {
+        let temp = [...collectionChk];
+        if (checked === false) {
+            temp = temp.filter(item => item !== value);
+            setCollectionChk(temp);
+        }
+        if (checked === true) {
+            temp.push(value);
+            setCollectionChk(temp);
+        }
+    }
+
+    const handleProduct = (value, checked) => {
+        let temp = [...productChk];
+        if (checked === false) {
+            temp = temp.filter(item => item !== value);
+            setProductChk(temp);
+        }
+        if (checked === true) {
+            temp.push(value);
+            setProductChk(temp);
+        }
+    }
+
+    const handleCustomerGetCollection = (value, checked) => {
+        let temp = [...customerGetCollectionChk];
+        if (checked === false) {
+            temp = temp.filter(item => item !== value);
+            setCustomerGetCollectionChk(temp);
+        }
+        if (checked === true) {
+            temp.push(value);
+            setCustomerGetCollectionChk(temp);
+        }
+    }
+
+    const handleCustomerGetProduct = (value, checked) => {
+        let temp = [...customerGetProductChk];
+        if (checked === false) {
+            temp = temp.filter(item => item !== value);
+            setCustomerGetProductChk(temp);
+        }
+        if (checked === true) {
+            temp.push(value);
+            setCustomerGetProductChk(temp);
+        }
+    }
+
+    const getCollectionsList = () => {
+        getCollections().then((res) => {
+            if (res.data) {
+                setCollectionData(res.data.data);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const getProductsList = () => {
+        getAllProduct().then((res) => {
+            if (res.data) {
+                setProductData(res.data.data);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+
+
     return (
         <>
             <Header />
@@ -189,7 +376,6 @@ const AddNewDiscount = () => {
                                             <option value="amount_of_product">Amount off Products</option>
                                             <option value="amount_of_orders">Amount off Orders</option>
                                             <option value="by_x_get_y">Buy X Get Y</option>
-                                            <option value="free_shipping">Free Shipping</option>
                                         </select>
                                     </div>
                                 </div>
@@ -198,8 +384,8 @@ const AddNewDiscount = () => {
                                     <h6>Discount Code</h6>
                                     <div className="input-code pt-2">
                                         <div className="code-genreted">
-                                            <input type="text" placeholder="Enter code" name="discountcode" value={discountcode} onChange={(e) => { setDiscountCode(e.target.value); }} />
-                                            <button className="ml-1 btn-generate">Generate</button>
+                                            <input type="text" placeholder="Enter code" name="discountcode" value={discountcode} onChange={(e) => { setDiscountCode(e.target.value); }} readOnly />
+                                            <button className="ml-1 btn-generate" type="button" onClick={() => { generateDiscountCode() }}>Generate</button>
                                         </div>
                                         <p className="error-p">{error?.discountcode}</p>
                                     </div>
@@ -213,24 +399,24 @@ const AddNewDiscount = () => {
                                                 <div className="col s12 l6 xl5">
                                                     <div className="discount-type">
                                                         <div className="type-discount"  >
-                                                            <p className="product-percentage  active-new  " onClick={(e) => { setValueType('per') }}>Percentage</p>
-                                                            <p className="product-amount" onClick={(e) => { setValueType('amt') }}>Fixed Amount</p>
+                                                            <p className={`product-percentage ${valueType === 'per' ? 'active-new' : ''}`} onClick={(e) => { setValueType('per') }}>Percentage</p>
+                                                            <p className={`product-amount ${valueType === 'amt' ? 'active-new' : ''}`} onClick={(e) => { setValueType('amt') }}>Fixed Amount</p>
 
                                                         </div>
 
                                                     </div>
                                                 </div>
                                                 <div className="col s12 l6 xl7">
-                                                    <div className="percentage-value" onChange={(e) => { setFixed(e.target.value); }}>
+                                                    <div className="percentage-value relative" onChange={(e) => { setFixed(e.target.value); }}>
                                                         {
                                                             valueType === "amt" ?
                                                                 <div className="">
-                                                                    <input type="text" placeholder="₹ 200" name="amt" />
+                                                                    <input type="text" placeholder="₹ 200" name="amt" onChange={(e) => { setFixed(e.target.value); }} value={fixed} />
                                                                     <span>₹</span>
                                                                 </div>
                                                                 :
                                                                 <div className="">
-                                                                    <input type="text" placeholder="50%" name="amt" />
+                                                                    <input type="text" placeholder="50%" name="amt" onChange={(e) => { setFixed(e.target.value); }} value={fixed} />
                                                                     <span>%</span>
                                                                 </div>
 
@@ -249,61 +435,85 @@ const AddNewDiscount = () => {
                                         <h6>Customer Spends</h6>
                                         <div className="costomer-spends mb-3" onChange={(e) => { setCspends(e.target.value); }}>
                                             <div className="mtb-10">
-                                                <label htmlFor="mi-quantity"><input id="mi-quantity" type="radio" name="mini-quntity" onClick={(e) => { setAddMinQuntity(addMinQuntity === "mi-quantity" ? "" : "mi-quantity") }} /> Minimum Quantity of Item</label>
-                                                <div className={`minimum-quantity ${addMinQuntity === "mi-quantity" ? "collections-add-open" : "collections-add-close"}`}>
+                                                <label htmlFor="mi-quantity"><input id="mi-quantity" type="radio" name="mini-quntity" onClick={(e) => { setCustomerSpendMainType("quantity") }} checked={customerSpendMainType === "quantity" ? true : false} /> Minimum Quantity of Item</label>
+                                                <div className={`minimum-quantity ${customerSpendMainType === "quantity" ? "collections-add-open" : "collections-add-close"}`}>
                                                     <div className="row">
                                                         <div className="col s12 m6 l6 xl4">
                                                             <div className="add-mini-quantity">
                                                                 <label>Quantity</label>
-                                                                <input type="text" />
+                                                                <input type="text" onChange={(e) => { setCustomerSpendQuntity(e.target.value); }} value={customerSpendQuntity} />
                                                             </div>
 
                                                         </div>
                                                         <div className="col s12 m6 l6 xl8">
                                                             <div className="add-spci-product">
                                                                 <label>Any Items From</label>
-                                                                <select>
-                                                                    <option>Specific Product</option>
-                                                                    <option>Specific Collections</option>
+                                                                <select onChange={(e) => { setCustomerSpendType(e.target.value); }}>
+                                                                    <option value='product'>Product</option>
+                                                                    <option value='collection'>Collections</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <p className="error-p">{error?.customerGetQuntity}</p>
                                                 </div>
                                             </div>
                                             <div className="mtb-10">
-                                                <label htmlFor="any-amount"><input id="any-amount" type="radio" name="mini-quntity" onClick={(e) => { setAddMinQuntity(addMinQuntity === "any-amount" ? "" : "any-amount") }} /> Minimum Purchase Amount</label>
-                                                <div className={`minimum-quantity ${addMinQuntity === "any-amount" ? "collections-add-open" : "collections-add-close"}`}>
+                                                <label htmlFor="any-amount"><input id="any-amount" type="radio" name="mini-quntity" onClick={(e) => { setCustomerSpendMainType("amount") }} /> Minimum Purchase Amount</label>
+                                                <div className={`minimum-quantity ${customerSpendMainType === "amount" ? "collections-add-open" : "collections-add-close"}`}>
                                                     <div className="row">
                                                         <div className="col s12 m6 l6 xl4">
                                                             <div className="add-mini-quantity">
                                                                 <label>Amount</label>
-                                                                <input type="text" placeholder="₹ 0.00" />
+                                                                <input type="text" placeholder="₹ 0.00" onChange={(e) => { setCustomerSpendAmount(e.target.value); }} value={customerSpendAmount} />
                                                             </div>
-
                                                         </div>
                                                         <div className="col s12 m6 l6 xl8">
                                                             <div className="add-spci-product">
                                                                 <label>Any Items From</label>
-                                                                <select>
-                                                                    <option>Specific Product</option>
-                                                                    <option>Specific Collections</option>
+                                                                <select onChange={(e) => { setCustomerSpendType(e.target.value); }} value={customerSpendType}>
+                                                                    <option value='product'>Product</option>
+                                                                    <option value='collection'>Collections</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <p className="error-p">{error?.customerSpendAmount}</p>
                                                 </div>
                                             </div>
+                                            {console.log("customerSpendType", customerSpendType)}
                                             <div className="input-code new-input pt-2 ">
-                                                <div className="code-genreted">
-                                                    <span>
-                                                        <i className="material-icons">search</i>
-                                                    </span>
-                                                    <input type="text" placeholder="Search Products" />
-                                                    <button className="ml-1 btn-generate">Browse</button>
-                                                </div>
+                                                {
+                                                    customerSpendType === "collection" && <>
+                                                        <div className="">
+                                                            {
+                                                                collectionData && collectionData.map((item, index) => (
+                                                                    <div key={index} className="custom-checkbox">
+                                                                        <input type="checkbox" id={item._id} name="collection" value={item._id} onClick={(e) => { handleCollection(e.target.value, e.target.checked) }} checked={collectionChk.indexOf(item._id) !== -1 ? true : false} />
+                                                                        <label htmlFor="item._id">{item.title}</label>
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    </>
+                                                }
+                                                {
+                                                    customerSpendType === "product" && <>
+                                                        <div className="">
+                                                            {
+                                                                productData && productData.map((item, index) => (
+                                                                    <div key={index} className="custom-checkbox">
+                                                                        <input type="checkbox" id={item._id} name="collection" value={item._id} onClick={(e) => { handleProduct(e.target.value, e.target.checked) }} checked={productChk.indexOf(item._id) !== -1 ? true : false} />
+                                                                        <label htmlFor="item._id">{item.title}</label>
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    </>
+                                                }
                                             </div>
-                                            <p className="error-p">{error?.cspends}</p>
+                                            <p className="error-p">{error?.productChk}</p>
+                                            <p className="error-p">{error?.collectionChk}</p>
                                         </div>
                                         <hr />
                                         <h6 className="mt-3">Customer Gets</h6>
@@ -312,146 +522,112 @@ const AddNewDiscount = () => {
                                                 <div className="col s12 m6 l6 xl4">
                                                     <div className="add-mini-quantity">
                                                         <label>Quantity</label>
-                                                        <input type="text" />
+                                                        <input type="text" onChange={(e) => { setCustomerGetQuntity(e.target.value); }} value={customerGetQuntity} />
                                                     </div>
 
                                                 </div>
                                                 <div className="col s12 m6 l6 xl8">
                                                     <div className="add-spci-product">
                                                         <label>Any Items From</label>
-                                                        <select>
-                                                            <option>Specific Product</option>
-                                                            <option>Specific Collections</option>
+                                                        <select onChange={(e) => { setCustomerGetType(e.target.value); }} value={customerGetType}>
+                                                            <option value='product'>Product</option>
+                                                            <option value='collection'>Collections</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="input-code new-input pt-2 ">
-                                            <div className="code-genreted">
-                                                <span>
-                                                    <i className="material-icons">search</i>
-                                                </span>
-                                                <input type="text" placeholder="Search Products" />
-                                                <button className="ml-1 btn-generate">Browse</button>
+                                            <div className="">
+                                                {
+                                                    customerGetType === "product" && <>
+                                                        <div className="">
+                                                            {
+                                                                collectionData && collectionData.map((item, index) => (
+                                                                    <div key={index} className="custom-checkbox">
+                                                                        <input type="checkbox" id={item._id} name="collection" value={item._id} onClick={(e) => { handleCustomerGetProduct(e.target.value, e.target.checked) }} checked={customerGetProductChk.indexOf(item._id) !== -1 ? true : false} />
+                                                                        <label htmlFor={item._id}>{item.title}</label>
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    </>
+                                                }
+                                                {
+                                                    customerGetType === "collection" && <>
+                                                        <div className="">
+                                                            {
+                                                                productData && productData.map((item, index) => (
+                                                                    <div key={index} className="custom-checkbox">
+                                                                        <input type="checkbox" id={item._id} name="collection" value={item._id} onClick={(e) => { handleCustomerGetCollection(e.target.value, e.target.checked) }} checked={customerGetCollectionChk.indexOf(item._id) !== -1 ? true : false} />
+                                                                        <label htmlFor="item._id">{item.title}</label>
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    </>
+                                                }
+                                                <p className="error-p">{error?.customerGetProductChk}</p>
+                                                <p className="error-p">{error?.customerGetCollectionChk}</p>
                                             </div>
                                         </div>
                                         <div className="at-a-discounted-value mb-3">
                                             <p className="valur-discount">AT A DISCOUNTED VALUE</p>
                                             <div className="values-for-discount" onChange={(e) => { setFdiscount(e.target.value); }}>
                                                 <div className="mtb-10">
-                                                    <label htmlFor="any-perecentage"><input id="any-perecentage" type="radio" name="pre-1" onClick={(e) => { setAddAnyFree(addAnyFree === "any-perecentage" ? "" : "any-perecentage") }} /> Perecentage</label>
+                                                    <label htmlFor="any-perecentage"><input id="any-perecentage" type="radio" name="pre-1" onClick={(e) => { setCustomerGetDiscountType("percentage") }} value="percentage" checked={customerGetDiscountType === "percentage" ? true : false} /> Perecentage</label>
                                                 </div>
                                                 <div className="mtb-10">
-                                                    <label htmlFor="any-free"><input id="any-free" type="radio" name="pre-1" onClick={(e) => { setAddAnyFree(addAnyFree === "any-free" ? "" : "any-free") }} /> Free</label>
+                                                    <label htmlFor="any-free"><input id="any-free" type="radio" name="pre-1" onClick={(e) => { setCustomerGetDiscountType("free") }} value="free" /> Free</label>
                                                 </div>
                                                 <div className="row">
                                                     <div className="col s12 m6 l6 xl3">
-                                                        <div className={`per-perecentage mt-4 ${addAnyFree === "any-perecentage" ? "collections-add-open" : "collections-add-close"}`}>
-                                                            <input type="text" placeholder="%" />
-                                                        </div>
-                                                        <div className={`per-free mt-4 ${addAnyFree === "any-free" ? "collections-add-open" : "collections-add-close"}`}>
-                                                            <input type="text" />
+                                                        <div className={`per-perecentage mt-4 ${customerGetDiscountType === "percentage" ? "collections-add-open" : "collections-add-close"}`}>
+                                                            <input type="text" placeholder="%" onChange={(e) => { setCustomerGetDiscountPercentage(e.target.value) }} />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <p className="error-p">{error?.fdiscount}</p>
+                                                <p className="error-p">{error?.customerGetDiscountPercentage}</p>
                                             </div>
                                         </div>
                                         <hr />
-                                        <div className="set-meximum-number">
-                                            <label htmlFor="set-meximum-number1"><input id="set-meximum-number1" type="checkbox" onClick={(e) => { setAddUsesOreder(addUsesOreder === "set-meximum-number1" ? "" : "set-meximum-number1") }} /> Set A Meximum Number of Uses Per Order</label>
-                                            <div className={`add-uses-per-order ${addUsesOreder === "set-meximum-number1" ? "collections-add-open" : "collections-add-close"}`}>
-                                                <div className="row">
-                                                    <div className="col s12 m6 l6 xl3">
-                                                        <input type="text" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                                {
-                                    type !== "amount_of_product" && type !== "amount_of_orders" && type !== "by_x_get_y" &&
-                                    <div className="add-left-product mt-3">
-                                        <h6>Countries</h6>
-                                        <div className="countries mb-3">
-                                            <div className="countries-input" onChange={(e) => { setSelectCountries(e.target.value); }}>
-                                                <div className="mtb-10">
-                                                    <label htmlFor="any-all"><input id="any-all" type="radio" name="all-coun" onClick={(e) => { setAddAllCountries(addAllCountries === "any-all" ? "" : "any-all") }} /> All Countries</label>
-                                                </div>
-                                                <div className="mtb-10">
-                                                    <label htmlFor="selected-countries"><input id="selected-countries" type="radio" name="all-coun" onClick={(e) => { setAddAllCountries(addAllCountries === "selected-countries" ? "" : "selected-countries") }} /> Selected Countries</label>
-                                                    <div className={`all-addres-cont  ${addAllCountries === "selected-countries" ? "collections-add-open" : "collections-add-close"}`}>
-                                                        <div className="row mt-2">
-                                                            <div className="col s12 m6 l6 xl6">
-                                                                <div className="sele-contries">
-                                                                    <Select
-                                                                        mode="multiple"
-                                                                        size={size}
-                                                                        placeholder="Select Countries"
-                                                                        // defaultValue={['India', 'Usa']}
-                                                                        onChange={handleChange}
-                                                                        style={{
-                                                                            width: '100%',
-                                                                        }}
-                                                                    >
-                                                                        {children}
-                                                                    </Select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p className="error-p">{error?.selectCountries}</p>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div className="mt-3 shipping-rates">
-                                            <p className="new-data-rates">SHIPPING RATES</p>
-                                            <div className="mt-3 new-shipping">
-                                                <div className="mtb-10">
-                                                    <label htmlFor="Shpping"><input id="Shpping" type="checkbox" onClick={(e) => { setAddShpping(addShpping === "Shpping" ? "" : "Shpping") }} /> Exclude Shipping Rates Over a Certain Amount</label>
-                                                    <div className={`${addShpping === "Shpping" ? "collections-add-open" : "collections-add-close"}`}>
-                                                        <div className="row mt-1">
-                                                            <div className="col s12 m6 l6 xl3">
-                                                                <div className="input-shpping">
-                                                                    <input type="text" placeholder="₹ 0.00" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 }
                                 {
                                     type !== "amount_of_orders" && type !== "by_x_get_y" && type !== "free_shipping" &&
                                     <div className="add-left-product mt-3">
                                         <h6>Applies to</h6>
-                                        <div className="code-apply mt-3" onChange={(e) => { setApplies(e.target.value); }}>
+                                        <div className="code-apply mt-3">
                                             <div className="mtb-10">
-                                                <label htmlFor="collections"><input id="collections" type="radio" name="collections-customer" onClick={(e) => { setAddCollProduct(addCollProduct === "collections" ? "" : "collections") }} /> Specific Collections</label>
-                                                <div className={`input-code new-input pt-2 ${addCollProduct === "collections" ? "collections-add-open" : "collections-add-close"}`}>
-                                                    <div className="code-genreted">
-                                                        <span>
-                                                            <i className="material-icons">search</i>
-                                                        </span>
-                                                        <input type="text" placeholder="Search Collections" />
-                                                        <button className="ml-1 btn-generate">Browse</button>
+                                                <label htmlFor="collections"><input id="collections" type="radio" name="collections-customer" onClick={(e) => { setApplies("collections") }} checked={applies === "collections" ? true : false} /> Specific Collections</label>
+                                                <div className={`input-code new-input pt-2 ${applies === "collections" ? "collections-add-open" : "collections-add-close"}`}>
+                                                    <div className="">
+                                                        {
+                                                            collectionData && collectionData.map((item, index) => (
+                                                                <div key={index} className="custom-checkbox">
+                                                                    <input type="checkbox" id={item._id} name="collection" value={item._id} onClick={(e) => { handleCollection(e.target.value, e.target.checked) }} checked={collectionChk.indexOf(item._id) !== -1 ? true : false} />
+                                                                    <label htmlFor="item._id">{item.title}</label>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                        <p className="error-p">{error?.collectionChk}</p>
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="mtb-10">
-                                                <label htmlFor="products"><input id="products" type="radio" name="collections-customer" onClick={(e) => { setAddCollProduct(addCollProduct === "products" ? "" : "products") }} /> Specific Products</label>
-                                                <div className={`input-code new-input pt-2 ${addCollProduct === "products" ? "products-add-open-new" : "products-add-close-new"}`}>
-                                                    <div className="code-genreted">
-                                                        <span>
-                                                            <i className="material-icons">search</i>
-                                                        </span>
-                                                        <input type="text" placeholder="Search Products" />
-                                                        <button className="ml-1 btn-generate">Browse</button>
+                                                <label htmlFor="products"><input id="products" type="radio" name="collections-customer" onClick={(e) => { setApplies("products"); }} /> Specific Products</label>
+                                                <div className={`input-code new-input pt-2 ${applies === "products" ? "products-add-open-new" : "products-add-close-new"}`}>
+                                                    <div className="">
+                                                        {
+                                                            productData && productData.map((item, index) => (
+                                                                <div key={index} className="custom-checkbox">
+                                                                    <input type="checkbox" id={item._id} name="collection" value={item._id} onClick={(e) => { handleProduct(e.target.value, e.target.checked) }} checked={productChk.indexOf(item._id) !== -1 ? true : false} />
+                                                                    <label htmlFor="item._id">{item.title}</label>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                        <p className="error-p">{error?.productChk}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -466,32 +642,38 @@ const AddNewDiscount = () => {
                                     <div className="add-left-product mt-3">
                                         <h6>Minimum Purchase Requirements</h6>
                                         <div className="minimum-requirements" >
-                                            <div className="minimum-input" onChange={(e) => { setRequirements(e.target.value); }}>
+                                            <div className="minimum-input">
                                                 <div className="mtb-10">
-                                                    <label htmlFor="noone"><input id="noone" type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "noone" ? "" : "noone") }} /> No Minimum Requirements</label>
+                                                    <label htmlFor="noone">
+                                                        <input id="noone" type="radio" name="minimum-customer" onClick={(e) => { setRequirements("none") }} checked={requirements === "none" ? true : false} /> No Minimum Requirements
+                                                    </label>
                                                 </div>
                                                 <div className="mtb-10">
-                                                    <label htmlFor="amount"><input id="amount" type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "amount" ? "" : "amount") }} /> Minimum Purchase Amount</label>
-                                                    <div className={`amout-to-add ${addAmoutItem === "amount" ? "amout-add-open" : "amout-add-close"}`}>
+                                                    <label htmlFor="amount">
+                                                        <input id="amount" type="radio" name="minimum-customer" onClick={(e) => { setRequirements("amount") }} /> Minimum Purchase Amount
+                                                    </label>
+                                                    <div className={`amout-to-add ${requirements === "amount" ? "amout-add-open" : "amout-add-close"}`}>
                                                         <div className="row">
                                                             <div className="col s12 m6 l6 xl3">
                                                                 <div className="input-minimum-amout">
-                                                                    <input type="text" placeholder="₹ 0.00" />
+                                                                    <input type="text" placeholder="₹ 0.00" onChange={(e) => { setMinimumPurchaseAmount(e.target.value); }} value={minimumPurchaseAmount} />
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <p className="error-p">{error?.minimumPurchaseAmount}</p>
                                                     </div>
                                                 </div>
                                                 <div className="mtb-10">
-                                                    <label htmlFor="item"><input id="item" type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "item" ? "" : "item") }} /> Minimum Quntity of item</label>
-                                                    <div className={`item-to-add ${addAmoutItem === "item" ? "item-add-open" : "item-add-close"}`}>
+                                                    <label htmlFor="item"><input id="item" type="radio" name="minimum-customer" onClick={(e) => { setRequirements("quantity") }} /> Minimum Quntity of item</label>
+                                                    <div className={`item-to-add ${requirements === "quantity" ? "item-add-open" : "item-add-close"}`}>
                                                         <div className="row">
                                                             <div className="col s12 m6 l6 xl3">
                                                                 <div className="input-minimum-item">
-                                                                    <input type="text" placeholder="0" />
+                                                                    <input type="text" placeholder="0" onChange={(e) => { setMinimumQuantity(e.target.value); }} />
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <p className="error-p">{error?.minimumQuantity}</p>
                                                     </div>
                                                 </div>
                                                 <p className="error-p">{error?.requirements}</p>
@@ -500,75 +682,6 @@ const AddNewDiscount = () => {
                                     </div>
                                 }
 
-                                {
-                                    type !== "amount_of_orders" &&
-                                    <div className="add-left-product mt-3">
-                                        <h6>Customer eligibility</h6>
-                                        <div className="customer-eligibility">
-                                            <div className="eligibility" onChange={(e) => { setEligibility(e.target.value); }}>
-                                                <div className="mtb-10">
-                                                    <label htmlFor="allcust"><input id="allcust" type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "allcust" ? "" : "allcust") }} /> All Customers</label>
-                                                </div>
-                                                <div className="mtb-10">
-                                                    <label htmlFor="segments"><input id="segments" type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "segments" ? "" : "segments") }} /> Specific Customers Segments</label>
-                                                    <div className={`input-code new-input pt-2 ${addSpecific === "segments" ? "amout-add-open" : "amout-add-close"} `}>
-                                                        <div className="code-genreted">
-                                                            <span>
-                                                                <i className="material-icons">search</i>
-                                                            </span>
-                                                            <input type="text" placeholder="Specific Customers Segments" />
-                                                            <button className="ml-1 btn-generate">Browse</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="mtb-10">
-                                                    <label htmlFor="Specificc"><input id="Specificc" type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "Specificc" ? "" : "Specificc") }} /> Specific Customers</label>
-                                                    <div className={`input-code new-input pt-2 ${addSpecific === "Specificc" ? "amout-add-open" : "amout-add-close"}`}>
-                                                        <div className="code-genreted">
-                                                            <span>
-                                                                <i className="material-icons">search</i>
-                                                            </span>
-                                                            <input type="text" placeholder="Specific Customers" />
-                                                            <button className="ml-1 btn-generate">Browse</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p className="error-p">{error?.eligibility}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                                {
-                                    type !== "amount_of_orders" &&
-                                    <div className="add-left-product mt-3">
-                                        <h6>Maximum Discount Uses</h6>
-                                        <div className="maximum-discount-uses">
-                                            <div className="discount-uses" onChange={(e) => { setMaximum(e.target.value); }}>
-                                                <div className="mtb-10">
-                                                    <label htmlFor="limitnumber"><input id="limitnumber" type="checkbox" name="discout-use-on" onClick={(e) => { setAddLimitUse(addLimitUse === "limitnumber" ? "" : "limitnumber") }} /> Limit Number Of Times this Discount can be used in total</label>
-                                                    <div className={`dicount-add-uses mt-1 ${addLimitUse === "limitnumber" ? "amout-add-open" : "amout-add-close"}`}>
-                                                        <div className="row">
-                                                            <div className="col s12 m6 l6 xl3">
-                                                                <input type="text" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="mtb-10">
-                                                    <label htmlFor="limitpercustomer"><input id="limitpercustomer" type="checkbox" name="discout-use-on" onClick={(e) => { setAddLimitUse(addLimitUse === "limitpercustomer" ? "" : "limitpercustomer") }} /> Limit to one use per Customer</label>
-                                                    <div className={`dicount-add-uses mt-1 ${addLimitUse === "limitpercustomer" ? "amout-add-open" : "amout-add-close"}`}>
-                                                        <div className="row">
-                                                            <div className="col s12 m6 l6 xl3">
-                                                                <input type="text" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <p className="error-p">{error?.maximum}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
                                 <div className="add-left-product mt-3">
                                     <h6>Active Date</h6>
                                     <div className="code-apply mt-3">
@@ -577,25 +690,27 @@ const AddNewDiscount = () => {
                                                 <div className="col s12 m6 l6 xl6">
                                                     <div className="date-input" onChange={(e) => { setStart(e.target.value); }}>
                                                         <label>Start Date</label>
-                                                        <input type="date" />
+                                                        <input type="date" onChange={(e) => { setStart(e.target.value); console.log("e.target.value", e.target.value) }} />
                                                         <p className="error-p">{error?.start}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="set-end-date">
                                                 <div className="open-end-date">
-                                                    <label htmlFor="endDate"><input id="endDate" type="checkbox" onClick={() => { setEndDate(!endDate) }} /> Set End Date</label>
-                                                    <div className={`mt-3 ${endDate == true ? "date-set-open" : "date-set-close"}`}>
+                                                    <label htmlFor="endDate"><input id="endDate" type="checkbox" onClick={() => { setEndDateStatus(!endDateStatus) }} /> Set End Date</label>
+                                                    <div className={`mt-3 ${endDateStatus == true ? "date-set-open" : "date-set-close"}`}>
                                                         <div className="row">
                                                             <div className="col s12 m6 l6 xl6">
                                                                 <div className="data-input">
                                                                     <label>End Date</label>
-                                                                    <input type="date" />
+                                                                    <input type="date" onChange={(e) => { setEndDate(e.target.value) }} />
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <p className="error-p">{error?.endDate}</p>
                                                     </div>
                                                 </div>
+                                                {console.log('sacxz', endDate)}
                                             </div>
                                         </div>
                                     </div>
@@ -608,7 +723,7 @@ const AddNewDiscount = () => {
                                     </div>
                                     <div className="col s6  l6 xl6">
                                         <div className="save-btn">
-                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2" onClick={() => { handleSubmit(); }}>Save</button>
+                                            <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2" onClick={() => { handleSubmit(); }} type="button">Save</button>
                                         </div>
                                     </div>
                                 </div>

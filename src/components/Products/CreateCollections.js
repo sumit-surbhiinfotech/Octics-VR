@@ -43,7 +43,8 @@ const CreateCollections = () => {
     const [error, setError] = useState({});
     const [edit, setEdit] = useState(false);
     const [data, setData] = useState({});
-
+    const [products, setProducts] = useState([]);
+    console.log("products", products, featureImg)
     useEffect(() => {
         let url = window.location.href;
         let slug = url.split('=');
@@ -51,7 +52,8 @@ const CreateCollections = () => {
             setEdit(true);
             getSpecificCollection(slug[1]).then((res) => {
                 setData(res.data.data);
-                handleEdit(res.data.data);
+                handleEdit(res.data.data.collectionData);
+                setProducts(res.data.data.products)
             }).catch((err) => {
                 console.log(err);
             })
@@ -246,10 +248,36 @@ const CreateCollections = () => {
                                             </div>
                                         </div>
                                         <div className="" style={{ "height": "100px", "width": "100px" }}>
-                                            <img src={data?.feature_img} style={{ "height": "100px", "width": "100px" }} />
+                                            <img src={featureImg} style={{ "height": "100px", "width": "100px" }} />
                                         </div>
                                     </div>
                                     {error && error.featureImg && <div className="error">{error.featureImg}</div>}
+                                </div>
+                                <div className="row mb-5">
+                                    <div className="">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Product Name</th>
+                                                    <th>Product Image</th>
+                                                    <th>Product Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {
+                                                    products && products.map((item, index) => (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td><span onClick={() => { navigate(`/add-new-product?id=${item._id}`) }}>{item.title}</span></td>
+                                                            <td><img src={item.images[0].original} style={{ "width": "50px", "height": "50px" }} /></td>
+                                                            <td>{item.price}</td>
+                                                        </tr>
+                                                    ))
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div className="row mb-5">
                                     <div className="col s6  l6 xl6">

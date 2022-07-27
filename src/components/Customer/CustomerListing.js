@@ -25,13 +25,15 @@ const CustomerListing = () => {
             if (res.data) {
                 let temp = res.data.data;
                 let arr = [];
+
                 temp.map((item, index) => {
+                    console.log("scxzsa", item)
                     let obj = {
                         key: index,
-                        CustomerName: item.first_name + ' ' + item.last_name,
-                        Location: item.phone,
-                        Orders: '2',
-                        Action: <NavLink to="/customer-view"><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
+                        CustomerName: item?.userData.first_name + ' ' + item?.userData?.last_name,
+                        Location: item?.userData?.phone,
+                        Orders: item.order,
+                        Action: <NavLink to={`/customer-view?id=${item?.userData._id}`}><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-2"><span className="material-icons">remove_red_eye </span></button></NavLink>,
                     }
                     arr.push(obj);
                 })
