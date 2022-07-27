@@ -95,3 +95,19 @@ export const createDiscount = async (body) => {
 export const getAllDiscounts = async () => {
     return axios.get(URL + `discount/list`, config)
 }
+
+export const adminLogin = async (body) => {
+    return axios.post(URL + `admin/login`, body, config)
+}
+
+export const currentUserDetails = (id) => {
+    return axios.get(URL + `admin/${id}`, config);
+}
+
+export const uploadImageOfAdmin = (body) => {
+    return axios.post(URL + `admin/profile/file-upload`, body, config);
+}
+
+export const updateAdminProfile = (body) => {
+    return axios.post(URL + `admin/update-profile`, body, config);
+}

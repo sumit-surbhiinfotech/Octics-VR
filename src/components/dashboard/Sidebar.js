@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 // importScripts('materialize.js')
 // import "../../js/materialize.js"
 
@@ -7,7 +7,12 @@ const Sidebar = () => {
     // const [showWaves, setShowWaves] = useState();
     const [showSidebar, setShowSidebar] = useState();
     const [showCollapsible, setShowCollapsible] = useState(true);
+    const navigate = useNavigate();
 
+    const handleLogout = () => {
+        localStorage.removeItem('admin');
+        navigate('/login');
+    }
     return (
         <>
             <aside className="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square ">
@@ -15,7 +20,7 @@ const Sidebar = () => {
                     <h1 className="logo-wrapper"><a className="brand-logo darken-1" href="dashboard">
                         <img className="hide-on-med-and-down" src="images/logo/logo.png" alt="logo" />
                         <img className="show-on-medium-and-down hide-on-med-and-up" src="images/logo/logo.png" alt="logo" />
-                    </a><a className="navbar-toggler" href="#">
+                    </a><a className="navbar-toggler" href="Javascript:void(0)">
                             <i className="material-icons">radio_button_checked</i></a></h1>
                 </div>
                 <ul className={`sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow  ${showSidebar == true ? "sidebar-show1" : "sidebar-close1"}`} id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
@@ -179,7 +184,8 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-
+                    <li className="bold" onClick={() => { handleLogout() }}><a className="ripple2" href="Javascript:void(0)"><i className="material-icons">person_outline</i><span className="menu-title" data-i18n="Invoice">Logout</span></a>
+                    </li>
 
                 </ul>
                 <div className="navigation-background"></div><a className="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium ripple3 hide-on-large-only" onClick={() => { setShowSidebar(!showSidebar) }} href="#" data-target="slide-out"><i className="material-icons">menu</i></a>
