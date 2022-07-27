@@ -5,12 +5,16 @@ import { changeUserStatus, getLastOrderDetailsOfCustomer } from "../../action";
 import Header from "../dashboard/Header";
 import Sidebar from "../dashboard/Sidebar";
 import Footer from "../Footer";
+import { toast } from "react-toastify";
 
 const CustomerView = () => {
     const [id, setId] = useState(window.location.href.split('=').pop());
     const [userData, setUserData] = useState({});
     const [productData, setProductData] = useState([]);
     const [orderData, setOrderData] = useState({});
+    const [data, setData] = useState([]);
+    const [modalShow, setModalShow] = useState();
+    const [deleteId, setDeleteId] = useState(null);
     useEffect(() => {
         getData();
     }, [])
@@ -29,6 +33,16 @@ const CustomerView = () => {
                         setUserData(res.data.data.data.user_data[0]);
                     }
                 }
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+    const handleConfirmDelete = (id) => {
+        changeUserStatus(id).then((res) => {
+            if (res.data) {
+                toast("Deleted Sucessfully");
+                getData();
             }
         }).catch((err) => {
             console.log(err);
@@ -153,7 +167,8 @@ const CustomerView = () => {
                                                 <div className=" mt-2">
                                                     <div className="ad-btn-action">
                                                         <div className="">
-                                                            <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-1 "><span className="material-icons">delete_forever</span></button>
+                                                            {/* <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-1 " onClick={() => { setModalShow(true); setDeleteId(); }}><span className="material-icons">delete_forever</span></button> */}
+
                                                             <NavLink to="/customer-listing">
                                                                 <button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 ">Back To List</button>
                                                             </NavLink>
@@ -170,6 +185,27 @@ const CustomerView = () => {
                             </div>
                         </div>
                         <div className="content-overlay"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="modal2" className={`modal  ${modalShow == true ? "modal-show" : "modal-show-close"}`}>
+                <div className="modal-content">
+                    <a className="modal-close right"><i className="material-icons" onClick={() => { setModalShow(false) }}>close</i></a>
+                    <div className="row" id="product-two">
+
+                        <div className="col m12 s12">
+                            <h4>Conformation</h4>
+                            <p className="text-center mb-3">Are you sure you want to delete? </p>
+                            <div className="content">
+
+                                <div className="w-50">
+
+                                    <a href="#" onClick={() => { setModalShow(false) }}>
+                                        <span className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" onClick={() => { handleConfirmDelete(deleteId) }}>  Delete</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

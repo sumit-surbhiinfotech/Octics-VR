@@ -40,11 +40,7 @@ import ListofCollection from './components/Products/ListofCollection';
 import CreateCollections from './components/Products/CreateCollections';
 import User from './components/User/User';
 import UserList from './components/User/UserList';
-<<<<<<< HEAD
-import NewDemo from './components/Profile/NewDemo';
-=======
 import { useEffect } from 'react';
->>>>>>> c2470c9a6a73ea70bb988262faec9d23251cbbcb
 
 function App() {
   useEffect(() => {
@@ -86,7 +82,6 @@ function App() {
           <Route path="/create-collection" element={<CreateCollections />} />
           <Route path="/user" element={<User />} />
           <Route path="/user-list" element={<UserList />} />
-          <Route path="/new-demo" element={<NewDemo />} />
         </Routes>
       </div>
     </BrowserRouter>

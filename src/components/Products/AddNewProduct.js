@@ -309,6 +309,7 @@ const AddNewProduct = () => {
         }
     }
 
+
     const getCollectionData = () => {
         getCollections().then((res) => {
             if (res.data) {
@@ -479,6 +480,11 @@ const AddNewProduct = () => {
         }
     };
 
+    // twoCalls = e => {
+    //     this.handleUploadImages(e);
+    //     this.uploadSingleFile(e);
+    // }
+
     return (
 
         <>
@@ -578,11 +584,19 @@ const AddNewProduct = () => {
                                         <div className="form-group">
                                             <input
                                                 type="file"
+                                                id="files"
+                                                name="files[]"
                                                 disabled={file.length === 10}
                                                 className="form-control"
-                                                onChange={uploadSingleFile}
-                                                multiple
+                                                // onChange={uploadSingleFile}
+                                                onChange={(e) => { handleUploadImages(e); }}
+                                            // multiple
                                             />
+                                            {
+                                                images && images.map((imageItem, imageIndex) => (
+                                                    <img style={{ "height": "100px", "width": "100px" }} src={imageItem?.original} />
+                                                ))
+                                            }
                                         </div>
                                         <button
                                             type="button"
@@ -762,31 +776,15 @@ const AddNewProduct = () => {
                                                         {
                                                             varientList && varientList.length > 0 && varientList.map((varientItem, varientIndex) => (
                                                                 <tr>
-                                                                    <td><div className="upaload-new-short-image">
-                                                                        <div
-                                                                            onDragEnter={(e) => handleEnterNew(e)}
-                                                                            onDragLeave={(e) => handleLeave(e)}
-                                                                            onDragOver={(e) => handleOver(e)}
-                                                                            onDrop={(e) => handleUploadNew(e)}
-                                                                            className={`upload${highlightNew ? " is-highlight" : dropNew ? " is-drop" : ""
-                                                                                }`}
-                                                                            style={{ backgroundImage: `url(${previewNew})` }}
-                                                                        >
-                                                                            <form className="my-form">
-                                                                                <p>
-                                                                                    <img src="images/plus-icon-plus-svg-png-icon-download-1.png" />
-                                                                                </p>
-                                                                                <div className="upload-button">
-                                                                                    <input
-                                                                                        type="file"
-                                                                                        className="upload-file"
-                                                                                        accept="image/*"
-                                                                                        onChange={(e) => handleUploadNew(e)}
-                                                                                    />
-                                                                                </div>
-                                                                            </form>
+                                                                    <td>
+                                                                        <div className="upaload-new-short-image">
+                                                                            {
+                                                                                images && images.map((imageItem, imageIndex) => (
+                                                                                    <img style={{ "height": "100px", "width": "100px" }} src={imageItem?.original} />
+                                                                                ))
+                                                                            }
                                                                         </div>
-                                                                    </div></td>
+                                                                    </td>
                                                                     <td>
                                                                         {varientItem.name}
                                                                     </td>

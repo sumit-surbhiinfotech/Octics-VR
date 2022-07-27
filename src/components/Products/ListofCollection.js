@@ -9,12 +9,16 @@ import 'antd/dist/antd.css';
 import { NavLink } from "react-router-dom";
 import { deleteCollection, getCollections } from "../../action";
 import parse from 'html-react-parser';
+import { deleteProduct, getAllProduct } from "../../action";
+import { toast } from "react-toastify";
 
 
 const ListofCollection = () => {
     const [data, setData] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
+    const [modalShow, setModalShow] = useState();
+    const [deleteId, setDeleteId] = useState(null);
     const searchInput = useRef(null);
     useEffect(() => {
         getData();
@@ -39,7 +43,7 @@ const ListofCollection = () => {
                             <NavLink to={`/create-collection?id=${item._id}`}>
                                 <Button className="edit-return">Edit</Button>
                             </NavLink>
-                            <Button className="edit-return" onClick={() => { handleConfirmDelete(item._id); }}><span className="material-icons">delete_forever </span></Button>
+                            <Button className="edit-return" onClick={() => { setModalShow(true); setDeleteId(item._id); }}><span className="material-icons">delete_forever </span></Button>
                         </>,
                 }
                 arr.push(temp);
@@ -52,7 +56,10 @@ const ListofCollection = () => {
 
     const handleConfirmDelete = (id) => {
         deleteCollection(id).then((res) => {
-            getData();
+            if (res.data) {
+                toast("Deleted Sucessfully");
+                getData();
+            }
         }).catch((err) => {
             console.log(err);
         })
@@ -257,6 +264,27 @@ const ListofCollection = () => {
                                     </div>
                                 </div>
                                 <div className="content-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modal2" className={`modal  ${modalShow == true ? "modal-show" : "modal-show-close"}`}>
+                <div className="modal-content">
+                    <a className="modal-close right"><i className="material-icons" onClick={() => { setModalShow(false) }}>close</i></a>
+                    <div className="row" id="product-two">
+
+                        <div className="col m12 s12">
+                            <h4>Conformation</h4>
+                            <p className="text-center mb-3">Are you sure you want to delete? </p>
+                            <div className="content">
+
+                                <div className="w-50">
+
+                                    <a href="#" onClick={() => { setModalShow(false) }}>
+                                        <span className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" onClick={() => { handleConfirmDelete(deleteId) }}>  Delete</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
