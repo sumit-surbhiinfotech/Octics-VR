@@ -3,11 +3,14 @@ import Header from "../dashboard/Header";
 import Footer from "../Footer";
 import Sidebar from "../dashboard/Sidebar";
 import { NavLink } from "react-router-dom";
-import { getSpecificOrderData } from "../../action";
+import { changeOrderStatus, getSpecificOrderData } from "../../action";
 
 const ViewOrder = () => {
     const [id, setId] = useState((window.location.href).split('=')[1]);
     const [data, setData] = useState({});
+    const [userData, setUserData] = useState([]);
+    const [productData, setProductData] = useState([]);
+    const [orderData, setOrderData] = useState({});
     useEffect(() => {
         getData();
     }, []);
@@ -16,12 +19,28 @@ const ViewOrder = () => {
         getSpecificOrderData(id).then((res) => {
             if (res.data) {
                 setData(res.data.data.data)
+                setUserData(res.data.data.data.user_data);
+                setProductData(res.data.data.data.product_data);
+                setOrderData(res.data.data.data.order_data);
             }
         }).catch((err) => {
             console.log(err);
         })
     }
-    console.log("scxza", data)
+
+    const changeFullOrderStatus = () => {
+        let body = {
+            order_id: orderData?._id,
+            status: orderData?.fullfillment_status === "pending" ? "completed" : 'pending'
+        }
+        changeOrderStatus(body).then((res) => {
+            if (res.data) {
+                getData();
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
 
     return (
         <>
@@ -57,14 +76,14 @@ const ViewOrder = () => {
                                                 <div className="media-body">
                                                     <h6 className="media-heading">
                                                         <span className="grey-text">Order Number : </span>
-                                                        <span className="grey-text">{data?._id}</span>
+                                                        <span className="grey-text">{orderData?._id}</span>
                                                     </h6>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col s12 m5 quick-action-btns display-flex justify-content-end align-items-center">
                                             <div>
-                                                <span className="btn-small btn-light-indigo">{data?.fullfillment_status}</span>
+                                                <span className="btn-small btn-light-indigo" onClick={changeFullOrderStatus}>{orderData?.fullfillment_status}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -79,17 +98,17 @@ const ViewOrder = () => {
                                                             <table className="responsive-table">
                                                                 <tbody>
                                                                     {
-                                                                        data && data.product_Data.map((item, index) => (
+                                                                        productData && productData.length > 0 && productData.map((item, index) => (
                                                                             <tr key={index}>
                                                                                 <td width="100px">
                                                                                     <img src={item.images[0].original} width="80px" height="80px" />
                                                                                 </td>
                                                                                 <td>
                                                                                     <p>{item.title}</p>
-                                                                                    <p>XXL / MULTICOLOR / Female</p>
+                                                                                    <p>{item.varient && item.varient[0] && item.varient[0].name}</p>
                                                                                 </td>
-                                                                                <td><span>₹1,299.00 × 1</span></td>
-                                                                                <td><span>₹1,299.00</span></td>
+                                                                                <td><span>₹{item.varient && item.varient[0] && item.varient[0].price}</span></td>
+                                                                                <td><span>₹{item.varient && item.varient[0] && item.varient[0].price}</span></td>
                                                                             </tr>
                                                                         ))
                                                                     }
@@ -104,28 +123,28 @@ const ViewOrder = () => {
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>Discount</td>
-                                                                        <td>OCTICS</td>
-                                                                        <td>-₹500.00</td>
+                                                                        <td></td>
+                                                                        <td>-₹{orderData.discount ? orderData.discount : 0}</td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    {/* <tr>
                                                                         <td>Subtotal</td>
                                                                         <td>3 items</td>
                                                                         <td>₹3,047.00</td>
-                                                                    </tr>
-                                                                    <tr>
+                                                                    </tr> */}
+                                                                    {/* <tr>
                                                                         <td>Shipping</td>
                                                                         <td>Standard Shipping (Cash on Delivery) (0.0 kg)</td>
                                                                         <td>₹99.00</td>
-                                                                    </tr>
+                                                                    </tr> */}
                                                                     <tr>
                                                                         <td>Tax</td>
                                                                         <td>IGST 12% (Included)</td>
-                                                                        <td>₹326.46</td>
+                                                                        <td>{orderData?.total_tax}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Total</td>
                                                                         <td></td>
-                                                                        <td>₹3,146.00</td>
+                                                                        <td>₹{orderData?.total_price}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -140,19 +159,19 @@ const ViewOrder = () => {
                                                             <tbody>
                                                                 <tr>
                                                                     <td className="indigo-text">Name:</td>
-                                                                    <td className="users-view-name">{data?.user_data && data?.user_data[0] && data?.user_data[0].first_name + ' ' + data?.user_data[0].last_name}</td>
+                                                                    <td className="users-view-name">{userData && userData[0] && userData[0].first_name + ' ' + userData[0].last_name}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">E-mail:</td>
-                                                                    <td className="users-view-email">{data?.user_data && data?.user_data[0] && data?.user_data[0].email}</td>
+                                                                    <td className="users-view-email">{userData && userData[0] && userData[0].email}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">Mobile:</td>
-                                                                    <td>{data?.user_data && data?.user_data[0] && data?.user_data[0].phone}</td>
+                                                                    <td>{userData && userData[0] && userData[0].phone}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td className="indigo-text">Address:</td>
-                                                                    <td>{data?.shipping_address}</td>
+                                                                    <td>{orderData?.shipping_address}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

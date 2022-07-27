@@ -8982,6 +8982,23 @@ input[type=range]::-ms-thumb {
     animation: container-rotate 1568ms linear infinite;
 }
 
+.custom-checkbox [type='checkbox']:not(:checked),
+.custom-checkbox [type='checkbox']:checked {
+    position: unset;
+    pointer-events: unset;
+    opacity: 1;
+}
+
+.percentage-value span {
+    position: absolute;
+    right: 0;
+    top: 17px;
+}
+
+.relative {
+    position: relative;
+}
+
 @-webkit-keyframes container-rotate {
     to {
         -webkit-transform: rotate(360deg);

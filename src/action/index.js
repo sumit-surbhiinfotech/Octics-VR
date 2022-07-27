@@ -71,3 +71,43 @@ export const getAllUserList = async () => {
 export const changeStatusOfUser = async (body) => {
     return axios.post(URL + `user/change-status`, body, config)
 }
+
+export const getLastOrderDetailsOfCustomer = async (id) => {
+    return axios.get(URL + `user/latest-order/${id}`, config)
+}
+
+export const changeUserStatus = async (body) => {
+    return axios.post(URL + `user/change-status`, body, config)
+}
+
+export const changeOrderStatus = async (body) => {
+    return axios.post(URL + `order/change-status`, body, config)
+}
+
+export const getNewDiscountCode = async () => {
+    return axios.get(URL + `discount/generate-code`, config)
+}
+
+export const createDiscount = async (body) => {
+    return axios.post(URL + `discount/create`, body, config)
+}
+
+export const getAllDiscounts = async () => {
+    return axios.get(URL + `discount/list`, config)
+}
+
+export const adminLogin = async (body) => {
+    return axios.post(URL + `admin/login`, body, config)
+}
+
+export const currentUserDetails = (id) => {
+    return axios.get(URL + `admin/${id}`, config);
+}
+
+export const uploadImageOfAdmin = (body) => {
+    return axios.post(URL + `admin/profile/file-upload`, body, config);
+}
+
+export const updateAdminProfile = (body) => {
+    return axios.post(URL + `admin/update-profile`, body, config);
+}
