@@ -433,7 +433,7 @@ const AddNewDiscount = () => {
 
                                     <div className="add-left-product mt-3">
                                         <h6>Customer Spends</h6>
-                                        <div className="costomer-spends mb-3" onChange={(e) => { setCspends(e.target.value); }}>
+                                        <div className="costomer-spends mb-3">
                                             <div className="mtb-10">
                                                 <label htmlFor="mi-quantity"><input id="mi-quantity" type="radio" name="mini-quntity" onClick={(e) => { setCustomerSpendMainType("quantity") }} checked={customerSpendMainType === "quantity" ? true : false} /> Minimum Quantity of Item</label>
                                                 <div className={`minimum-quantity ${customerSpendMainType === "quantity" ? "collections-add-open" : "collections-add-close"}`}>
@@ -573,7 +573,7 @@ const AddNewDiscount = () => {
                                         </div>
                                         <div className="at-a-discounted-value mb-3">
                                             <p className="valur-discount">AT A DISCOUNTED VALUE</p>
-                                            <div className="values-for-discount" onChange={(e) => { setFdiscount(e.target.value); }}>
+                                            <div className="values-for-discount">
                                                 <div className="mtb-10">
                                                     <label htmlFor="any-perecentage"><input id="any-perecentage" type="radio" name="pre-1" onClick={(e) => { setCustomerGetDiscountType("percentage") }} value="percentage" checked={customerGetDiscountType === "percentage" ? true : false} /> Perecentage</label>
                                                 </div>
@@ -682,13 +682,14 @@ const AddNewDiscount = () => {
                                     </div>
                                 }
 
+
                                 <div className="add-left-product mt-3">
                                     <h6>Active Date</h6>
                                     <div className="code-apply mt-3">
                                         <div className="date-set">
                                             <div className="row">
                                                 <div className="col s12 m6 l6 xl6">
-                                                    <div className="date-input" onChange={(e) => { setStart(e.target.value); }}>
+                                                    <div className="date-input">
                                                         <label>Start Date</label>
                                                         <input type="date" onChange={(e) => { setStart(e.target.value); console.log("e.target.value", e.target.value) }} />
                                                         <p className="error-p">{error?.start}</p>

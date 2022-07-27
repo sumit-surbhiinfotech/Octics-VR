@@ -82,7 +82,6 @@ function App() {
           <Route path="/create-collection" element={<CreateCollections />} />
           <Route path="/user" element={<User />} />
           <Route path="/user-list" element={<UserList />} />
-          <Route path="/new-demo" element={<NewDemo />} />
         </Routes>
       </div>
     </BrowserRouter>
