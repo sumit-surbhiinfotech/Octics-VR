@@ -191,15 +191,15 @@ const ListofCollection = () => {
                                 <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                                     <div className="container">
                                         <div className="row">
-                                            <div className="col s10 m6 l6">
+                                            <div className="col s5 m6 l6">
                                                 <h5 className="breadcrumbs-title mt-0 mb-0"><span>Collection List</span></h5>
                                                 <ol className="breadcrumbs mb-0">
                                                     <li className="breadcrumb-item"><a href="index.html">Home</a></li>
                                                     <li className="breadcrumb-item active">Collections </li>
                                                 </ol>
                                             </div>
-                                            <div className="col s10 m6 l2"></div>
-                                            <div className="col s2 m6 l4">
+                                            <div className="col  m6 l2"></div>
+                                            <div className="col s7 m6 l4">
                                                 <div className="add-discount">
                                                     <NavLink to="/create-collection">
                                                         <Button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">Create Collections</Button>

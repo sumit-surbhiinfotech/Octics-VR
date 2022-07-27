@@ -40,7 +40,6 @@ const AddNewProduct = () => {
     const [highlightNew, setHighlightNew] = useState(false);
     const [preview, setPreview] = useState("");
     const [previewNew, setPreviewNew] = useState("");
-    const [files, setFiles] = useState([]);
     const [filesNew, setFilesNew] = useState([]);
     const [drop, setDrop] = useState(false);
     const [dropNew, setDropNew] = useState(false);
@@ -70,6 +69,27 @@ const AddNewProduct = () => {
     const children = [<Option key={1}>test1</Option>, <Option key={2}>test2</Option>, <Option key={3}>test3</Option>, <Option key={4}>test4</Option>, <Option key={5}>test5</Option>];
     const [edit, setEdit] = useState(false);
     const [editData, setEditData] = useState({});
+    const [file, setFile] = useState([]);
+
+    function uploadSingleFile(e) {
+        let ImagesArray = Object.entries(e.target.files).map((e) =>
+            URL.createObjectURL(e[1])
+        );
+        console.log(ImagesArray);
+        setFile([...file, ...ImagesArray]);
+        console.log("file", file);
+    }
+
+    function upload(e) {
+        e.preventDefault();
+        console.log(file);
+    }
+
+    function deleteFile(e) {
+        const s = file.filter((item, index) => index !== e);
+        setFile(s);
+        console.log(s);
+    }
 
     useEffect(() => {
         getCollectionData();
@@ -512,7 +532,7 @@ const AddNewProduct = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="add-left-product-one mt-2">
+                                {/* <div className="add-left-product-one mt-2">
                                     <div className="image-upload">
                                         <h5>Images</h5>
                                         <div className="image-new-upload">
@@ -525,6 +545,48 @@ const AddNewProduct = () => {
                                             </form>
                                         </div>
                                     </div>
+                                </div> */}
+                                <div className="add-left-product-one mt-2">
+                                    <h5>Images</h5>
+                                    <form className="new-up-file">
+                                        <div className="form-group preview">
+                                            <div className="row">
+                                                {file.length > 0 &&
+                                                    file.map((item, index) => {
+                                                        return (
+
+                                                            <div key={item}>
+
+                                                                <div className="col s4 l6  xl3 mb-2">
+                                                                    <img src={item} alt="" className="img-fluid" />
+                                                                    <button type="button" onClick={() => deleteFile(index)}>
+                                                                        X
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                        );
+                                                    })}
+                                            </div>
+                                        </div>
+                                        <h5>Upload your Media Files</h5>
+                                        <div className="form-group">
+                                            <input
+                                                type="file"
+                                                disabled={file.length === 10}
+                                                className="form-control"
+                                                onChange={uploadSingleFile}
+                                                multiple
+                                            />
+                                        </div>
+                                        <button
+                                            type="button"
+                                            className="btn btn-primary btn-block d-none"
+                                            onClick={upload}
+                                        >
+                                            Upload
+                                        </button>
+                                    </form>
                                 </div>
                                 <div className="row">
                                     <div className="col s12   xl6">
@@ -543,7 +605,7 @@ const AddNewProduct = () => {
                                     </div>
                                     <div className="col s12   xl6">
                                         <div className="add-left-product-one mt-3">
-                                            <h5>Avtar 3d Image</h5>
+                                            <h5>Hanger 3d Image</h5>
                                             <div className="for-avter">
                                                 <form className="my-form add-new-product">
                                                     <div className="field" align="left">
@@ -581,7 +643,7 @@ const AddNewProduct = () => {
                                                     <div key={temp} className={`new-code-foe-size  `} >
                                                         <div className="row">
                                                             <div className="col s12  l6 xl2"></div>
-                                                            <div className="col s12 l6 xl8 mb-3">
+                                                            <div className="col s12 m12 l12 xl8 mb-3">
                                                                 <div className={``}>
                                                                     <div className={`mb-3 `}>
                                                                         <div className={`option-one  `} >
@@ -599,7 +661,7 @@ const AddNewProduct = () => {
                                                                                 <div className="plue-button">
                                                                                     {/* <input type="text"></input> */}
                                                                                     <div className="row">
-                                                                                        <div className="col s8  l6 xl12">
+                                                                                        <div className="col s8   l12 xl12">
                                                                                             <div className="add-remover-input">
                                                                                                 {/* {console.log("sdedefs", )} */}
                                                                                                 {
@@ -630,15 +692,15 @@ const AddNewProduct = () => {
                                                                 </div>
                                                             </div>
                                                             <div className="col s12  l6 xl2">
-                                                                {temp !== 0 && <button type="button" onClick={() => { handleRemoveOptionBlock(temp) }}>Remove</button>}
+                                                                {temp !== 0 && <button type="button" className="delet-btn" onClick={() => { handleRemoveOptionBlock(temp) }}><span class="material-icons">delete_forever</span></button>}
                                                             </div>
                                                         </div>
                                                         <div className="row ">
                                                             <div className="col s12  l6 xl2"></div>
-                                                            <div className="col s12 l6 xl8">
+                                                            <div className="col s12 l12 xl8">
 
                                                                 <div className="row">
-                                                                    <div className="col s12 l6 xl6">
+                                                                    <div className="col s12 l12 xl6">
 
                                                                         <div className={`all-size-color `}>
                                                                             <div className="size-list">
@@ -673,7 +735,9 @@ const AddNewProduct = () => {
                                     </div>
                                 </div>
                                 <div className="mb-5 pb-5">
-                                    <button type="button" onClick={makeVarient}>make variants</button>
+                                    <div className="make-variants">
+                                        <button className="mt-2 ripple3 btn gradient-45deg-green-teal" type="button" onClick={makeVarient}>make variants</button>
+                                    </div>
                                     <div className={`add-left-product-one mt-2 `}>
                                         <div>
                                             <h5>Variants</h5>
@@ -799,14 +863,20 @@ const AddNewProduct = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col s12 x12">
-                                    <div className="title-product">
-                                        <h5>Hanlde</h5>
-                                        <div className="add-tital">
-                                            <input type="text" placeholder="Add Handle Name" onChange={(e) => { setHandle(e.target.value); }} value={handle}></input>
+                                <div className="add-left-product-one mt-2 ">
+                                    <h5>Hanlde</h5>
+                                    <div className="row">
+                                        <div className="col s12  l6 xl12">
+                                            <div className="title-product">
+
+                                                <div className="add-tital">
+                                                    <input type="text" placeholder="Add Handle Name" onChange={(e) => { setHandle(e.target.value); }} value={handle}></input>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="add-left-product-one mt-2 ">
                                     <div>
                                         <h5>Collection</h5>

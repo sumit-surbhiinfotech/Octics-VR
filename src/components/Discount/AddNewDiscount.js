@@ -26,9 +26,13 @@ const AddNewDiscount = () => {
     const [discountcode, setDiscountCode] = useState("");
     const [cspends, setCspends] = useState("");
     const [fdiscount, setFdiscount] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [imgfile, setImgFile] = useState("");
+    const [fixed, setFixed] = useState("");
+    const [selectCountries, setSelectCountries] = useState("");
+    const [applies, setApplies] = useState("");
+    const [requirements, setRequirements] = useState("");
+    const [eligibility, setEligibility] = useState("");
+    const [maximum, setMaximum] = useState("");
+    const [start, setStart] = useState("");
     const [error, setError] = useState({});
 
     const handleSubmit = () => {
@@ -47,17 +51,48 @@ const AddNewDiscount = () => {
             validate = false;
         }
 
-        if (password === "") {
-            err.password = "Please Enter Password.";
+        if (fixed === "") {
+            err.fixed = "Please Enter fixed Amount or Percentage.";
             validate = false;
         }
-        if (imgfile === "") {
-            err.imgfile = 'Please select image.';
-            validate = false;
-        } else if (!(/\.(jpg|jpeg|png|gif)$/.test(imgfile))) {
-            err.imgfile = 'Please select valid image.';
+
+        if (selectCountries === "") {
+            err.selectCountries = "Please select Countries.";
             validate = false;
         }
+
+        if (applies === "") {
+            err.applies = "Please select  Specific Collections Or Products.";
+            validate = false;
+        }
+
+        if (requirements === "") {
+            err.requirements = "Please select  Minimum Purchase Requirements.";
+            validate = false;
+        }
+
+        if (eligibility === "") {
+            err.eligibility = "Please select Customer eligibility.";
+            validate = false;
+        }
+
+        if (maximum === "") {
+            err.maximum = "Please select Maximum Discount Uses.";
+            validate = false;
+        }
+
+        if (start === "") {
+            err.start = "Please select Active Date.";
+            validate = false;
+        }
+
+        // if (imgfile === "") {
+        //     err.imgfile = 'Please select image.';
+        //     validate = false;
+        // } else if (!(/\.(jpg|jpeg|png|gif)$/.test(imgfile))) {
+        //     err.imgfile = 'Please select valid image.';
+        //     validate = false;
+        // }
         setError(err);
         if (validate) {
 
@@ -180,19 +215,27 @@ const AddNewDiscount = () => {
                                                         <div className="type-discount"  >
                                                             <p className="product-percentage  active-new  " onClick={(e) => { setValueType('per') }}>Percentage</p>
                                                             <p className="product-amount" onClick={(e) => { setValueType('amt') }}>Fixed Amount</p>
+
                                                         </div>
+
                                                     </div>
                                                 </div>
                                                 <div className="col s12 l6 xl7">
-                                                    <div className="percentage-value">
+                                                    <div className="percentage-value" onChange={(e) => { setFixed(e.target.value); }}>
                                                         {
                                                             valueType === "amt" ?
-                                                                <input type="text" placeholder="$200" />
+                                                                <div className="">
+                                                                    <input type="text" placeholder="₹ 200" name="amt" />
+                                                                    <span>₹</span>
+                                                                </div>
                                                                 :
-                                                                <input type="text" placeholder="50%" />
+                                                                <div className="">
+                                                                    <input type="text" placeholder="50%" name="amt" />
+                                                                    <span>%</span>
+                                                                </div>
+
                                                         }
-                                                    </div>
-                                                    <div className="fixed-value">
+                                                        <p className="error-p">{error?.fixed}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -333,7 +376,7 @@ const AddNewDiscount = () => {
                                     <div className="add-left-product mt-3">
                                         <h6>Countries</h6>
                                         <div className="countries mb-3">
-                                            <div className="countries-input">
+                                            <div className="countries-input" onChange={(e) => { setSelectCountries(e.target.value); }}>
                                                 <div className="mtb-10">
                                                     <label htmlFor="any-all"><input id="any-all" type="radio" name="all-coun" onClick={(e) => { setAddAllCountries(addAllCountries === "any-all" ? "" : "any-all") }} /> All Countries</label>
                                                 </div>
@@ -360,6 +403,7 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <p className="error-p">{error?.selectCountries}</p>
                                             </div>
                                         </div>
                                         <hr />
@@ -386,10 +430,7 @@ const AddNewDiscount = () => {
                                     type !== "amount_of_orders" && type !== "by_x_get_y" && type !== "free_shipping" &&
                                     <div className="add-left-product mt-3">
                                         <h6>Applies to</h6>
-                                        <div className="code-apply mt-3">
-                                            {/* <div>
-                                            <p><input type="radio" /> Entire Order</p>
-                                        </div> */}
+                                        <div className="code-apply mt-3" onChange={(e) => { setApplies(e.target.value); }}>
                                             <div className="mtb-10">
                                                 <label htmlFor="collections"><input id="collections" type="radio" name="collections-customer" onClick={(e) => { setAddCollProduct(addCollProduct === "collections" ? "" : "collections") }} /> Specific Collections</label>
                                                 <div className={`input-code new-input pt-2 ${addCollProduct === "collections" ? "collections-add-open" : "collections-add-close"}`}>
@@ -414,6 +455,7 @@ const AddNewDiscount = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <p className="error-p">{error?.applies}</p>
                                         </div>
 
 
@@ -423,8 +465,8 @@ const AddNewDiscount = () => {
                                     type !== "by_x_get_y" &&
                                     <div className="add-left-product mt-3">
                                         <h6>Minimum Purchase Requirements</h6>
-                                        <div className="minimum-requirements">
-                                            <div className="minimum-input">
+                                        <div className="minimum-requirements" >
+                                            <div className="minimum-input" onChange={(e) => { setRequirements(e.target.value); }}>
                                                 <div className="mtb-10">
                                                     <label htmlFor="noone"><input id="noone" type="radio" name="minimum-customer" onClick={(e) => { setAddAmoutItem(addAmoutItem === "noone" ? "" : "noone") }} /> No Minimum Requirements</label>
                                                 </div>
@@ -452,6 +494,7 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <p className="error-p">{error?.requirements}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -462,7 +505,7 @@ const AddNewDiscount = () => {
                                     <div className="add-left-product mt-3">
                                         <h6>Customer eligibility</h6>
                                         <div className="customer-eligibility">
-                                            <div className="eligibility">
+                                            <div className="eligibility" onChange={(e) => { setEligibility(e.target.value); }}>
                                                 <div className="mtb-10">
                                                     <label htmlFor="allcust"><input id="allcust" type="radio" name="eligibility-customer" onClick={(e) => { setAddSpecific(addSpecific === "allcust" ? "" : "allcust") }} /> All Customers</label>
                                                 </div>
@@ -490,6 +533,7 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <p className="error-p">{error?.eligibility}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -499,7 +543,7 @@ const AddNewDiscount = () => {
                                     <div className="add-left-product mt-3">
                                         <h6>Maximum Discount Uses</h6>
                                         <div className="maximum-discount-uses">
-                                            <div className="discount-uses">
+                                            <div className="discount-uses" onChange={(e) => { setMaximum(e.target.value); }}>
                                                 <div className="mtb-10">
                                                     <label htmlFor="limitnumber"><input id="limitnumber" type="checkbox" name="discout-use-on" onClick={(e) => { setAddLimitUse(addLimitUse === "limitnumber" ? "" : "limitnumber") }} /> Limit Number Of Times this Discount can be used in total</label>
                                                     <div className={`dicount-add-uses mt-1 ${addLimitUse === "limitnumber" ? "amout-add-open" : "amout-add-close"}`}>
@@ -520,6 +564,7 @@ const AddNewDiscount = () => {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <p className="error-p">{error?.maximum}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -530,9 +575,10 @@ const AddNewDiscount = () => {
                                         <div className="date-set">
                                             <div className="row">
                                                 <div className="col s12 m6 l6 xl6">
-                                                    <div className="date-input">
+                                                    <div className="date-input" onChange={(e) => { setStart(e.target.value); }}>
                                                         <label>Start Date</label>
                                                         <input type="date" />
+                                                        <p className="error-p">{error?.start}</p>
                                                     </div>
                                                 </div>
                                             </div>

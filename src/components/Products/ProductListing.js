@@ -45,8 +45,8 @@ const ProductListing = () => {
                     <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
                     <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                         <div className="container">
-                            <div className="row">
-                                <div className="col s4 m6 l2">
+                            <div className="row d-align">
+                                <div className="col s6 m6 l3">
                                     <h5 className="breadcrumbs-title mt-0 mb-0"><span>Product List</span></h5>
                                     <ol className="breadcrumbs mb-0">
                                         <li className="breadcrumb-item"><a href="index.html">Home</a>
@@ -55,7 +55,7 @@ const ProductListing = () => {
                                         </li>
                                     </ol>
                                 </div>
-                                <div className="col s8 m6 l10">
+                                <div className="col s6 m6 l9">
                                     <div className="search-bar">
                                         <input className="form-control"></input>
                                         <span><i className="material-icons">search</i></span>

@@ -166,7 +166,7 @@ const Dashboard = () => {
                         </div>
                         <div id="sales-chart">
                            <div className="row">
-                              <div className="col s12 l12">
+                              <div className="col s12 l12 xl6">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -188,7 +188,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12  l12">
+                              <div className="col s12 l12  xl6">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -210,7 +210,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12  l12">
+                              <div className="col s12 l12  xl6">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -232,7 +232,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12  l12">
+                              <div className="col s12 l12 xl6">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">
@@ -254,7 +254,7 @@ const Dashboard = () => {
                                     </div>
                                  </div>
                               </div>
-                              <div className="col s12  l12">
+                              <div className="col s12  l12 xl12">
                                  <div id="revenue-chart" className="card animate fadeUp">
                                     <div className="card-content">
                                        <h4 className="header mt-0">

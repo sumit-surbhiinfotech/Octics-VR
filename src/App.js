@@ -39,6 +39,7 @@ import ListofCollection from './components/Products/ListofCollection';
 import CreateCollections from './components/Products/CreateCollections';
 import User from './components/User/User';
 import UserList from './components/User/UserList';
+import NewDemo from './components/Profile/NewDemo';
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
           <Route path="/create-collection" element={<CreateCollections />} />
           <Route path="/user" element={<User />} />
           <Route path="/user-list" element={<UserList />} />
+          <Route path="/new-demo" element={<NewDemo />} />
         </Routes>
       </div>
     </BrowserRouter>

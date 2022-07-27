@@ -153,7 +153,7 @@ const ProductView = () => {
                                 </div>
                                 <div className="col s12 l6 xl3"></div>
                             </div>
-                            <div className="col s12  l6 xl2"></div>
+                            <div className="col s12  l12 xl2"></div>
                             <div className="col s12 m6 l6 xl5">
                                 <div className="add-left-product">
                                     <div className="title-product">
