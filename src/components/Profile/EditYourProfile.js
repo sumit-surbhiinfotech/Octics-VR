@@ -31,10 +31,10 @@ const EditYourProfile = () => {
                 <div className="container">
                     <div className="view-your-profile mt-5 animate fadeUp">
                         <div className="row">
-                            <div className="col s12 m6 l6 xl3">
+                            <div className="col s12  xl3">
 
                             </div>
-                            <div className="col s12 m6 l6 xl6">
+                            <div className="col s12  xl6">
                                 <div className="add-left-product">
                                     <div className="img-profile">
                                         <div className="profile-img">
@@ -75,7 +75,7 @@ const EditYourProfile = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col s12 m6 l6 xl3">
+                            <div className="col s12 xl3">
 
                             </div>
                         </div>

@@ -12,7 +12,7 @@ const OrderFulfillAndTracking = () => {
                 <div className="product-fulfill-section animate fadeUp">
                     <div className="container">
                         <div className="row">
-                            <div className="col s12  l6 xl1"></div>
+                            <div className="col s12  xl1"></div>
                             <div className="col s12 m6 l6 xl6 mt-5">
                                 <div className="add-left-product">
                                     <h6>Fulfilled</h6>
