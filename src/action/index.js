@@ -96,6 +96,10 @@ export const getAllDiscounts = async () => {
     return axios.get(URL + `discount/list`, config)
 }
 
+export const deleteDiscount = async (id) => {
+    return await axios.delete(URL + `discount/${id}`, config)
+}
+
 export const adminLogin = async (body) => {
     return axios.post(URL + `admin/login`, body, config)
 }
