@@ -9,7 +9,10 @@ import { toast } from "react-toastify";
 
 const ProductListing = () => {
     const [data, setData] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
     const [viewData, setViewData] = useState({});
+    const [deleteId, setDeleteId] = useState(null);
+    const [openShow, setOpenShow] = useState();
     useEffect(() => {
         getData();
     }, []);
@@ -45,8 +48,8 @@ const ProductListing = () => {
                     <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
                     <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                         <div className="container">
-                            <div className="row">
-                                <div className="col s4 m6 l2">
+                            <div className="row d-align">
+                                <div className="col s6 m6 l3">
                                     <h5 className="breadcrumbs-title mt-0 mb-0"><span>Product List</span></h5>
                                     <ol className="breadcrumbs mb-0">
                                         <li className="breadcrumb-item"><a href="index.html">Home</a>
@@ -55,7 +58,7 @@ const ProductListing = () => {
                                         </li>
                                     </ol>
                                 </div>
-                                <div className="col s8 m6 l10">
+                                <div className="col s6 m6 l9">
                                     <div className="search-bar">
                                         <input className="form-control"></input>
                                         <span><i className="material-icons">search</i></span>
@@ -88,9 +91,11 @@ const ProductListing = () => {
                                                                 <NavLink to={`/add-new-product?id=${item._id}`} className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4">
                                                                     View
                                                                 </NavLink>
-                                                                <span className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" onClick={() => { handleConfirmDelete(item._id) }}>
+
+                                                                <span className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" onClick={() => { setModalShow(true); setDeleteId(item._id); }}>
                                                                     Delete
                                                                 </span>
+
 
                                                             </div>
                                                         </div>
@@ -132,36 +137,44 @@ const ProductListing = () => {
                         </div>
                     </div>
                 </div>
-                <div id="modal2" className={`modal ${modalShow == true ? "modal-show" : "modal-show-close"}`}>
+                <div id="modal2" className={`modal  ${modalShow == true ? "modal-show" : "modal-show-close"}`}>
                     <div className="modal-content">
                         <a className="modal-close right"><i className="material-icons" onClick={() => { setModalShow(false) }}>close</i></a>
                         <div className="row" id="product-two">
-                            <div className="col m6 s12">
-                                {
-                                    viewData.images && (viewData.images).length > 0 &&
-                                    <img src={viewData.images[0].original} className="obj-fit-img" alt="" />
-                                }
-                            </div>
-                            <div className="col m6 s12">
-                                <p>{viewData?.title}</p>
-                                <h5>{viewData?.description && parse(viewData?.description)}</h5>
-                                {/* <span className="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span> */}
-                                {/* <p>Availability: <span className="red-text">Out of stock</span></p> */}
-                                <hr className="mb-5" />
-                                {/* <span className="vertical-align-top mr-4"><i className="material-icons mr-3">favorite_border</i>Wishlist</span> */}
-                                {/* <ul className="list-bullet">
-                                    <li className="list-item-bullet">Fine-tuned acoustics for clarity</li>
-                                    <li className="list-item-bullet">Streamlined design for a custom-fit</li>
-                                    <li className="list-item-bullet">Durable and foldable so you can take them on-the-go</li>
-                                    <li className="list-item-bullet">ake calls and control music with RemoteTalk cable</li>
-                                </ul> */}
-                                <h5>₹{viewData?.price} <span className="prise-text-style ml-2">₹{viewData?.compare_price}</span></h5>
-                                {/* <a className="ripple2 btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a> */}
-                                {/* <a className="ripple2 btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a> */}
+
+                            <div className="col m12 s12">
+                                <h4>Conformation</h4>
+                                <p className="text-center mb-3">Are you sure you want to delete? </p>
+                                <div className="content">
+
+                                    <div className="w-50">
+                                        <a href="#" onClick={() => { setModalShow(false) }}>
+                                            <span className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" onClick={() => { handleConfirmDelete(deleteId) }}>  Delete</span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {
+                    showPopup &&
+                    <div id="popup1" className={`overlay ${openShow == true ? "modal-show" : "modal-show-close"}`}>
+                        <div className="popup">
+                            <h4>Conformation</h4>
+                            <p className="text-center mb-3">Are you sure you want to delete? </p>
+                            <a className="close" href="#" onClick={(e) => { setShowPopup(false); }}>&times;</a>
+                            <div className="content">
+
+                                <div className="w-50">
+                                    <a href="#">
+                                        <span className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" onClick={() => { handleConfirmDelete(deleteId) }}>  Delete</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
             <Footer />
         </>

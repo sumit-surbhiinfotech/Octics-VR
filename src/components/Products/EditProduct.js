@@ -48,6 +48,27 @@ const EditProduct = () => {
     const [preview, setPreview] = useState("");
     const [files, setFiles] = useState([]);
     const [drop, setDrop] = useState(false);
+    const [file, setFile] = useState([]);
+
+    function uploadSingleFile(e) {
+        let ImagesArray = Object.entries(e.target.files).map((e) =>
+            URL.createObjectURL(e[1])
+        );
+        console.log(ImagesArray);
+        setFile([...file, ...ImagesArray]);
+        console.log("file", file);
+    }
+
+    function upload(e) {
+        e.preventDefault();
+        console.log(file);
+    }
+
+    function deleteFile(e) {
+        const s = file.filter((item, index) => index !== e);
+        setFile(s);
+        console.log(s);
+    }
     const handleEnter = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -154,7 +175,7 @@ const EditProduct = () => {
                                 <div className="col s12 l6 xl3"></div>
                             </div>
 
-                            <div className="col s12  l6 xl2"></div>
+                            <div className="col s12   l12 xl2"></div>
                             <div className="col s12 m6 l6 xl5">
                                 <div className="add-left-product">
                                     <div className="title-product">
@@ -185,14 +206,45 @@ const EditProduct = () => {
                                 <div className="add-left-product-one mt-2">
                                     <div className="image-upload">
                                         <h5>Images</h5>
-                                        <div className="image-new-upload">
-                                            <form className="my-form add-new-product">
-                                                <div className="field" align="left">
-                                                    <h5>Upload your Media Files</h5>
-                                                    <input type="file" id="files" name="files[]" multiple />
+                                        <form className="new-up-file">
+                                            <div className="form-group preview">
+                                                <div className="row">
+                                                    {file.length > 0 &&
+                                                        file.map((item, index) => {
+                                                            return (
+
+                                                                <div key={item}>
+
+                                                                    <div className="col s4 l6  xl3 mb-2">
+                                                                        <img src={item} alt="" className="img-fluid" />
+                                                                        <button type="button" onClick={() => deleteFile(index)}>
+                                                                            X
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            );
+                                                        })}
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <h5>Upload your Media Files</h5>
+                                            <div className="form-group">
+                                                <input
+                                                    type="file"
+                                                    disabled={file.length === 10}
+                                                    className="form-control"
+                                                    onChange={uploadSingleFile}
+                                                    multiple
+                                                />
+                                            </div>
+                                            <button
+                                                type="button"
+                                                className="btn btn-primary btn-block d-none"
+                                                onClick={upload}
+                                            >
+                                                Upload
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
 

@@ -4379,6 +4379,16 @@ table span.badge {
     }
 }
 
+@media (min-width:1366px) {
+    .row .col.xl2-new {
+        right: auto;
+        left: auto;
+
+        width: 20%;
+        margin-left: auto;
+    }
+}
+
 @media only screen and (min-width: 1201px) {
     .row .col.xl1 {
         right: auto;
@@ -4396,13 +4406,7 @@ table span.badge {
         margin-left: auto;
     }
 
-    .row .col.xl2-new {
-        right: auto;
-        left: auto;
 
-        width: 20%;
-        margin-left: auto;
-    }
 
     .row .col.xl3 {
         right: auto;
@@ -6345,7 +6349,7 @@ body.keyboard-focused .dropdown-content li:focus {
     display: none;
     overflow-y: auto;
 
-    width: 55%;
+    width: 30%;
     max-height: 70%;
     margin: auto;
     padding: 0;
@@ -10667,6 +10671,7 @@ input[type=range]::-ms-thumb {
     display: flex;
     /* align-items: center; */
     overflow: hidden;
+    width: 100px;
 }
 
 .qty-input .product-qty,
@@ -10702,7 +10707,13 @@ input[type=range]::-ms-thumb {
     border: 1px solid #e2e2e2 !important;
 }
 
-.new-input-text input {}
+.new-input-text input {
+    width: 100px !important;
+}
+
+.upaload-new-short-image {
+    width: 100px;
+}
 
 .qty-input .product-qty::-webkit-outer-spin-button,
 .qty-input .product-qty::-webkit-inner-spin-button {
@@ -10979,6 +10990,17 @@ table td:nth-child(5) {
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
     padding-left: 5px;
     border-radius: 5px;
+    position: relative;
+}
+
+.percentage-value {
+    position: relative;
+}
+
+.percentage-value span {
+    position: absolute;
+    right: 0;
+    top: 17px;
 }
 
 .code-apply [type='radio']:not(:checked),
@@ -11583,9 +11605,7 @@ input[type="file"] {
     padding-bottom: 100%;
 }
 
-.add-tital .plue-button {
-    /* display: flex; */
-}
+
 
 .add-tital .plue-one {
     height: 2.15rem;
@@ -11943,6 +11963,11 @@ input[type="file"] {
     color: #8e8e8e;
 }
 
+.breadcrumbs-dark .d-align {
+    align-items: end;
+    display: flex;
+}
+
 .condition .product-match label [type='radio']:not(:checked),
 .condition .product-match label [type='radio']:checked {
     position: unset;
@@ -12019,6 +12044,141 @@ input[type="file"] {
     text-align: center;
     margin-top: 30px;
     font-weight: 600;
+}
+
+.uplaod-your-images p {
+    color: red;
+    margin-top: 0 !important;
+}
+
+.error-p {
+    color: red;
+    margin-top: 0 !important;
+}
+
+
+.delet-btn {
+    border-radius: 5px;
+    padding: 5px;
+    background: none;
+    border: 1px solid #ebebeb;
+}
+
+.make-variants {
+    text-align: center;
+    padding: 20px;
+}
+
+
+
+.d-none {
+    display: none !important;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.add-left-product-one .new-up-file {
+    position: relative;
+    padding: 30px;
+}
+
+.add-left-product-one .new-up-file h5 {
+    text-align: center;
+}
+
+.add-left-product-one .new-up-file .form-group input {
+    position: absolute;
+    top: -67px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 19vh;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.add-left-product-one .new-up-file .preview img {
+    position: relative;
+    border: 1px solid #d9d9d9;
+}
+
+.add-left-product-one .new-up-file .preview button {
+    position: absolute;
+    background: #fff;
+    z-index: 99;
+    color: red;
+    box-shadow: 0 0 10px gainsboro;
+    padding: 6px;
+    border: 1px solid #d9d9d9;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.popup .close:hover {
+    color: #06D85F;
+}
+
+.popup .content {
+    max-height: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+    .box {
+        width: 70%;
+    }
+
+    .popup {
+        width: 70%;
+    }
 }
 
 @media screen and (max-width:767px) {

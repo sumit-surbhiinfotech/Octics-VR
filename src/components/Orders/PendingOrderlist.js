@@ -220,52 +220,6 @@ const PendingOrderlist = () => {
 
                                                     <div className="row">
                                                         <div className="col s12">
-                                                            {/* <table id="page-length-option" className="display">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Customer Name</th>
-                                                                        <th>Location</th>
-                                                                        <th>Orders</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Sumit Kachariya</td>
-                                                                        <td>Surat</td>
-                                                                        <td>2</td>
-                                                                        <td className="">
-                                                                            <button className=" btn gradient-45deg-red-pink z-depth-4 pt-1 mr-1"><span class="material-icons">
-                                                                                delete_forever
-                                                                            </span></button>
-                                                                            <NavLink to="/customer-view">
-                                                                                <button className="waves-effect waves-light btn gradient-45deg-red-pink z-depth-4">View Customer</button>
-                                                                            </NavLink>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Sumit Kachariya</td>
-                                                                        <td>Surat</td>
-                                                                        <td>2</td>
-                                                                        <td className="">
-                                                                            <button className=" btn gradient-45deg-red-pink z-depth-4 pt-1 mr-1"><span class="material-icons">
-                                                                                delete_forever
-                                                                            </span></button>
-                                                                            <NavLink to="/customer-view">
-                                                                                <button className="waves-effect waves-light btn gradient-45deg-red-pink z-depth-4">View Customer</button>
-                                                                            </NavLink>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                                <tfoot>
-                                                                    <tr>
-                                                                        <th>Customer Name</th>
-                                                                        <th>Location</th>
-                                                                        <th>Orders</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                </tfoot>
-                                                            </table> */}
                                                             <div className="row">
                                                                 <div className="col s2 m6 l1">
                                                                     <div className="data-table-row-list mb-5">

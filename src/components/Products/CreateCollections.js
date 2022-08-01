@@ -149,6 +149,10 @@ const CreateCollections = () => {
 
     }
 
+    const [type, setType] = useState("");
+    const [files, setFiles] = useState("");
+
+
     return (
         <>
             <Header />

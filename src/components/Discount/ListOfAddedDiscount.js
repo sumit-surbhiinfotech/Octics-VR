@@ -6,13 +6,17 @@ import Footer from "../Footer";
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table } from 'antd';
 import { useRef, useState } from 'react';
+import { deleteDiscount, getAllDiscounts } from "../../action";
 import 'antd/dist/antd.css';
-import { getAllDiscounts } from "../../action";
+import { toast } from "react-toastify";
+
 
 const ListOfAddedDiscount = () => {
     const [data, setData] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
+    const [modalShow, setModalShow] = useState();
+    const [deleteId, setDeleteId] = useState(null);
     const searchInput = useRef(null);
 
     useEffect(() => {
@@ -42,6 +46,10 @@ const ListOfAddedDiscount = () => {
                         Used: item?.count ? item?.count : 0,
                         Start: item.start_date,
                         End: item.end_date ? item.end_date : '--',
+                        Action:
+                            <>
+                                <Button className="edit-return" onClick={() => { setModalShow(true); setDeleteId(item._id); }}><span className="material-icons">delete_forever </span></Button>
+                            </>,
                     }
                     arr.push(obj);
                 })
@@ -51,7 +59,16 @@ const ListOfAddedDiscount = () => {
             console.log(err);
         })
     }
-
+    const handleConfirmDelete = (id) => {
+        deleteDiscount(id).then((res) => {
+            if (res.data) {
+                toast("Deleted Sucessfully");
+                getData();
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
@@ -176,6 +193,13 @@ const ListOfAddedDiscount = () => {
             width: '10%',
             ...getColumnSearchProps('End'),
         },
+        {
+            title: 'Action',
+            dataIndex: 'Action',
+            key: 'Remove',
+            width: '10%',
+            ...getColumnSearchProps('Remove'),
+        },
     ];
     return (
         <>
@@ -187,7 +211,7 @@ const ListOfAddedDiscount = () => {
                     <div className="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
                         <div className="container">
                             <div className="row">
-                                <div className="col s4 m6 l6">
+                                <div className="col s5 m6 l6">
                                     <h5 className="breadcrumbs-title mt-0 mb-0"><span>Discount</span></h5>
                                     <ol className="breadcrumbs mb-0">
                                         <li className="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -195,7 +219,7 @@ const ListOfAddedDiscount = () => {
                                     </ol>
                                 </div>
                                 <div className="col  m6 l2"></div>
-                                <div className="col s8 m6 l4">
+                                <div className="col s7 m6 l4">
                                     <div className="add-discount">
                                         <NavLink to="/add-new-discount">
                                             <button className="btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2">Create Discount</button>
@@ -255,6 +279,27 @@ const ListOfAddedDiscount = () => {
                         </div>
                     </div>
                     <div className="content-overlay"></div>
+                </div>
+            </div>
+            <div id="modal2" className={`modal  ${modalShow == true ? "modal-show" : "modal-show-close"}`}>
+                <div className="modal-content">
+                    <a className="modal-close right"><i className="material-icons" onClick={() => { setModalShow(false) }}>close</i></a>
+                    <div className="row" id="product-two">
+
+                        <div className="col m12 s12">
+                            <h4>Conformation</h4>
+                            <p className="text-center mb-3">Are you sure you want to delete? </p>
+                            <div className="content">
+
+                                <div className="w-50">
+
+                                    <a href="#" onClick={() => { setModalShow(false) }}>
+                                        <span className="mt-2 ripple4 gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" onClick={() => { handleConfirmDelete(deleteId) }}>  Delete</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <Footer />
