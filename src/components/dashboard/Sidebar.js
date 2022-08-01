@@ -56,7 +56,7 @@ const Sidebar = () => {
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Product Listing</span>
                                     </NavLink>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <NavLink to="/product-view">
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Product View</span>
                                     </NavLink>
@@ -65,7 +65,7 @@ const Sidebar = () => {
                                     <NavLink to="/edit-product">
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Product Edit</span>
                                     </NavLink>
-                                </li>
+                                </li> */}
                                 <li>
                                     <NavLink to="/list-of-collection">
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Collections</span>
@@ -88,11 +88,11 @@ const Sidebar = () => {
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Manages Customer</span>
                                     </NavLink>
                                 </li> */}
-                                <li>
+                                {/* <li>
                                     <NavLink to="/customer-view">
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Customer View</span>
                                     </NavLink>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
 
@@ -103,11 +103,6 @@ const Sidebar = () => {
                                 <li>
                                     <NavLink to="/order-listing">
                                         <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice List">Order Listing</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/view-orders">
-                                        <i className="material-icons">radio_button_unchecked</i><span data-i18n="Invoice View">Order View</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -124,7 +119,7 @@ const Sidebar = () => {
                         </div>
 
                     </li>
-                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "discount" ? "" : "discount") }}><a className="collapsible-header ripple2" href="Javascript:void(0)"><i className="material-icons">add_shopping_cart</i><span className="menu-title" data-i18n="Invoice">Discount</span></a>
+                    <li className="bold" onClick={(e) => { setShowCollapsible(showCollapsible === "discount" ? "" : "discount") }}><a className="collapsible-header ripple2" href="Javascript:void(0)"><i className="material-icons">payments</i><span className="menu-title" data-i18n="Invoice">Discount</span></a>
                         <div className={`collapsible-body ${showCollapsible === "discount" ? "showcollapsible-open" : "showcollapsible-close"}`}>
                             <ul className="collapsible collapsible-sub" data-collapsible="accordion">
                                 <li>

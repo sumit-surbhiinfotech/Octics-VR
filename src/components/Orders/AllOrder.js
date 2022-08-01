@@ -82,7 +82,7 @@ const AllOrder = () => {
                         FulfillmentStatus: temp[i].fullfillment_status,
                         Action: <NavLink to={`/view-orders?id=${temp[i]._id}`}><button className=" btn gradient-45deg-red-pink z-depth-4 mr-1 mb-2 pt-3"><span className="material-icons">remove_red_eye </span></button></NavLink>,
                     };
-                    console.log("edcdscx", obj)
+                    // console.log("edcdscx", obj)
                     arr.push(obj);
                 }
                 // temp.map((item, index) => {
