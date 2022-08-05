@@ -124,11 +124,11 @@ const CustomerView = () => {
                                                                                 </td>
                                                                                 <td>
                                                                                     <p>{item.title}</p>
-                                                                                    <p>{item.varient && item.varient[0].name}</p>
+                                                                                    <p>{item.options && `size - ` + item.options[0]}</p>
                                                                                     {/* <a href="#"><p>#1002</p></a> */}
                                                                                 </td>
-                                                                                <td><span>₹{item.varient && item.varient[0].price}</span></td>
-                                                                                <td><span>₹{item.varient && item.varient[0].price}</span></td>
+                                                                                <td><span>₹{item.price}</span></td>
+                                                                                <td><span>₹{item.price}</span></td>
                                                                             </tr>
 
                                                                         ))

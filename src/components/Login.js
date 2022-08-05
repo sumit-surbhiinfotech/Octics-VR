@@ -85,9 +85,9 @@ const Login = () => {
                                         </div> */}
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <div className="btn ripple2 border-round gradient-45deg-purple-deep-orange col s12" onClick={(e) => { handleSubmit(); }} >
+                                                <button className="btn ripple2 border-round gradient-45deg-purple-deep-orange col s12" onClick={(e) => { handleSubmit(); }} type="button">
                                                     Login
-                                                </div>
+                                                </button>
                                             </div>
                                         </div>
                                         <div className="row">
