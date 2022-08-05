@@ -68,7 +68,7 @@ const EditYourProfile = () => {
                                             <label>Mobile</label>
                                             <h6>{data?.phone}</h6>
                                         </div>
-                                        <div className="">
+                                        <div className=" mb-10">
                                             <label>Address</label>
                                             <h6>{data?.address}</h6>
                                         </div>

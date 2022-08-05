@@ -15,7 +15,7 @@ const ChangedProfileInformation = () => {
     const [address, setAddress] = useState('');
     const [error, setError] = useState({});
     const navigate = useNavigate();
-
+    console.log("jdjisn", id)
     useEffect(() => {
         getData();
     }, []);
@@ -139,7 +139,7 @@ const ChangedProfileInformation = () => {
                                             <div className="mb-3">
                                                 <label>Email</label>
                                                 <div className="mt-1">
-                                                    <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} />
+                                                    <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); }} readOnly disabled />
                                                     {error && error?.email && <div>{error?.email}</div>}
                                                 </div>
                                             </div>

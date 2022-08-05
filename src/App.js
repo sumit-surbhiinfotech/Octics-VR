@@ -41,16 +41,17 @@ import CreateCollections from './components/Products/CreateCollections';
 import User from './components/User/User';
 import UserList from './components/User/UserList';
 import { useEffect } from 'react';
+import PrivateRoutes from './utils/PrivateRoutes'
 
 function App() {
-  useEffect(() => {
-    if (localStorage.getItem('admin')) {
-    } else {
-      if (window.location.href.split('/').pop() !== 'login') {
-        window.location.href = '/login'
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem('admin')) {
+  //   } else {
+  //     if (window.location.href.split('/').pop() !== 'login') {
+  //       window.location.href = '/login'
+  //     }
+  //   }
+  // }, []);
   return (
     <BrowserRouter>
       <div className="App"  >
@@ -58,30 +59,32 @@ function App() {
           <Route path='*' element={<NotFound />} />
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/order-listing" element={<AllOrder />} />
-          <Route path="/product-listing" element={<ProductListing />} />
-          <Route path="/view-orders" element={<ViewOrder />} />
-          <Route path="/customer-view" element={<CustomerView />} />
-          <Route path="/customer-listing" element={<CustomerListing />} />
-          <Route path="/add-new-product" element={<AddNewProduct />} />
-          <Route path="/edit-product" element={<EditProduct />} />
-          <Route path="/product-view" element={<ProductView />} />
-          <Route path="/manages-customer" element={<ManagesCustomer />} />
-          <Route path="/pending-order-list" element={<PendingOrderlist />} />
-          <Route path="/order-fulfill-and-tracking" element={<OrderFulfillAndTracking />} />
-          <Route path="/list-of-addes-discount" element={<ListOfAddedDiscount />} />
-          <Route path="/add-new-discount" element={<AddNewDiscount />} />
-          <Route path="/list-of-return-order" element={<ListOfReturnOrder />} />
-          <Route path="/return-order-view" element={<ReturnOrderView />} />
-          <Route path="/edit-your-profile" element={<EditYourProfile />} />
-          <Route path="/changed-profile-information" element={<ChangedProfileInformation />} />
-          <Route path="/list-upload-3d-modal" element={<ListOfUpload3DModal />} />
-          <Route path="/refund" element={<Refund />} />
-          <Route path="/list-of-collection" element={<ListofCollection />} />
-          <Route path="/create-collection" element={<CreateCollections />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/user-list" element={<UserList />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/order-listing" element={<AllOrder />} />
+            <Route path="/product-listing" element={<ProductListing />} />
+            <Route path="/view-orders" element={<ViewOrder />} />
+            <Route path="/customer-view" element={<CustomerView />} />
+            <Route path="/customer-listing" element={<CustomerListing />} />
+            <Route path="/add-new-product" element={<AddNewProduct />} />
+            <Route path="/edit-product" element={<EditProduct />} />
+            <Route path="/product-view" element={<ProductView />} />
+            <Route path="/manages-customer" element={<ManagesCustomer />} />
+            <Route path="/pending-order-list" element={<PendingOrderlist />} />
+            <Route path="/order-fulfill-and-tracking" element={<OrderFulfillAndTracking />} />
+            <Route path="/list-of-addes-discount" element={<ListOfAddedDiscount />} />
+            <Route path="/add-new-discount" element={<AddNewDiscount />} />
+            <Route path="/list-of-return-order" element={<ListOfReturnOrder />} />
+            <Route path="/return-order-view" element={<ReturnOrderView />} />
+            <Route path="/edit-your-profile" element={<EditYourProfile />} />
+            <Route path="/changed-profile-information" element={<ChangedProfileInformation />} />
+            <Route path="/list-upload-3d-modal" element={<ListOfUpload3DModal />} />
+            <Route path="/refund" element={<Refund />} />
+            <Route path="/list-of-collection" element={<ListofCollection />} />
+            <Route path="/create-collection" element={<CreateCollections />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/user-list" element={<UserList />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
