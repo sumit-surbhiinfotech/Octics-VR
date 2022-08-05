@@ -15,7 +15,7 @@ const ChangedProfileInformation = () => {
     const [address, setAddress] = useState('');
     const [error, setError] = useState({});
     const navigate = useNavigate();
-
+    console.log("jdjisn", id)
     useEffect(() => {
         getData();
     }, []);
