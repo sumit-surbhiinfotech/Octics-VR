@@ -44,7 +44,7 @@ const AddNewProduct = () => {
     const [drop, setDrop] = useState(false);
     const [dropNew, setDropNew] = useState(false);
     const [addButton, setAddButton] = useState([""]);
-    const [addVariants, setAddVariants] = useState();
+    // const [addVariants, setAddVariants] = useState();
     const [addNewOption, setAddNewOption] = useState([{
         name: "",
         value: ['']
@@ -70,6 +70,12 @@ const AddNewProduct = () => {
     const [edit, setEdit] = useState(false);
     const [editData, setEditData] = useState({});
     const [file, setFile] = useState([]);
+    const [sleeveLength, setSleeveLength] = useState("");
+    const [fit, setFit] = useState("");
+    const [closer, setCloser] = useState("");
+    const [patternType, setPatternType] = useState("");
+    const [neck, setNeck] = useState("");
+    const [sleevePattern, setSleevePattern] = useState("");
 
     function uploadSingleFile(e) {
         let ImagesArray = Object.entries(e.target.files).map((e) =>
@@ -118,18 +124,24 @@ const AddNewProduct = () => {
         setImages(data?.images)
         setHangerImage(data?.hanger_image)
         setAvtarImage(data?.avtar_image)
-        setCategory(data?.category);
-        setComparePrice(data?.compare_price);
+        setCategory(data?.collections);
         setPrice(data?.price);
         setAddNewOption(data?.options);
         setQuantity(data?.quantity);
-        setType(data?.type);
-        setSku(data?.sku);
-        setTags(data?.tags);
-        setVarientList(data?.varient);
-        setHandle(data?.handle)
-        setOpenOption(true);
-        document.getElementById('vehicle1').checked = true;
+        setSleeveLength(data?.sleeve_length);
+        setSleevePattern(data?.sleeve_pattern);
+        setFit(data?.fit);
+        setCloser(data?.closer);
+        setNeck(data?.neck);
+        setPatternType(data?.pattern_type)
+        // setComparePrice(data?.compare_price);
+        // setType(data?.type);
+        // setSku(data?.sku);
+        // setTags(data?.tags);
+        // setVarientList(data?.varient);
+        // setHandle(data?.handle)
+        // setOpenOption(true);
+        // document.getElementById('vehicle1').checked = true;
     }
 
     const setHtml = (html) => {
@@ -257,7 +269,6 @@ const AddNewProduct = () => {
             let file = e.target.files[i];
             uploadFileNew(file);
         }
-
     };
 
     function uploadFileNew(file) {
@@ -360,27 +371,36 @@ const AddNewProduct = () => {
                 images: images,
                 avtar_image: avtarImage,
                 hanger_image: hangerImage,
-                sku: sku,
                 quantity: parseInt(quantity),
                 price: parseInt(price),
-                compare_price: parseInt(comparePrice),
-                type: type,
-                category: category,
                 options: addNewOption,
-                tags: tags,
-                handle: handle,
-                varient: varientList
+                sleeve_length: sleeveLength,
+                pattern_type: patternType,
+                fit: fit,
+                neck: neck,
+                closer: closer,
+                sleeve_pattern: sleevePattern,
+                collections: category,
+                // sleeve_length:sleevelength
+                // compare_price: parseInt(comparePrice),
+                // sku: sku,
+                // type: type,
+                // tags: tags,
+                // handle: handle,
+                // varient: varientList
             }
-            if (!(varientList.length > 0)) {
-                let tempVarient = {};
-                tempVarient.varient_id = makeid(25);
-                tempVarient.name = title;
-                tempVarient.image_url = [];
-                tempVarient.price = 0;
-                tempVarient.sku = '';
-                tempVarient.quantity = 0;
-                body.varient = tempVarient
-            }
+            // if (!(varientList.length > 0)) {
+            //     let tempVarient = {};
+            //     tempVarient.varient_id = makeid(25);
+            //     tempVarient.name = title;
+            //     tempVarient.image_url = [];
+            //     tempVarient.price = 0;
+            //     tempVarient.sku = '';
+            //     tempVarient.quantity = 0;
+            //     body.varient = tempVarient
+            // }
+            console.log("dsxzxz", body)
+            // return;
             if (edit) {
                 body._id = editData._id;
                 updateProduct(body).then((res) => {
@@ -419,39 +439,39 @@ const AddNewProduct = () => {
         temp.splice(index, 1);
         setAddNewOption(temp)
     }
-    const makeVarient = () => {
-        let arr = [];
-        let attributes = {};
-        addNewOption.map((item) => {
-            attributes[item.name] = item.value;
-        })
+    // const makeVarient = () => {
+    //     let arr = [];
+    //     let attributes = {};
+    //     addNewOption.map((item) => {
+    //         attributes[item.name] = item.value;
+    //     })
 
-        for (const [attr, values] of Object.entries(attributes))
-            arr.push(values.map(v => ({ [attr]: v })));
+    //     for (const [attr, values] of Object.entries(attributes))
+    //         arr.push(values.map(v => ({ [attr]: v })));
 
-        arr = arr.reduce((a, b) => a.flatMap(d => b.map(e => ({ ...d, ...e }))));
+    //     arr = arr.reduce((a, b) => a.flatMap(d => b.map(e => ({ ...d, ...e }))));
 
-        console.log("arr", arr);
-        let varient = [];
-        arr.map((item) => {
-            let temp = {};
-            let str = '';
-            Object.values(item).map((specificVal, index) => {
-                str += specificVal;
-                if (index !== (Object.values(item).length - 1)) {
-                    str += ' / ';
-                }
-            });
-            temp.varient_id = makeid(25);
-            temp.name = str;
-            temp.image_url = [];
-            temp.price = 0;
-            temp.sku = '';
-            temp.quantity = 0;
-            varient.push(temp);
-        })
-        setVarientList(varient);
-    }
+    //     console.log("arr", arr);
+    //     let varient = [];
+    //     arr.map((item) => {
+    //         let temp = {};
+    //         let str = '';
+    //         Object.values(item).map((specificVal, index) => {
+    //             str += specificVal;
+    //             if (index !== (Object.values(item).length - 1)) {
+    //                 str += ' / ';
+    //             }
+    //         });
+    //         temp.varient_id = makeid(25);
+    //         temp.name = str;
+    //         temp.image_url = [];
+    //         temp.price = 0;
+    //         temp.sku = '';
+    //         temp.quantity = 0;
+    //         varient.push(temp);
+    //     })
+    //     setVarientList(varient);
+    // }
 
     function makeid(length) {
         var result = '';
@@ -479,11 +499,6 @@ const AddNewProduct = () => {
             }
         }
     };
-
-    // twoCalls = e => {
-    //     this.handleUploadImages(e);
-    //     this.uploadSingleFile(e);
-    // }
 
     return (
 
@@ -644,7 +659,7 @@ const AddNewProduct = () => {
                                         </div>
                                     </div>
                                 </div>
-
+                                {console.log("addNewOption", addNewOption)}
 
                                 <div className="add-left-product-one mt-2">
                                     <div>
@@ -652,11 +667,11 @@ const AddNewProduct = () => {
                                     </div>
                                     <div>
                                         <div className="row">
-                                            <div className="options-select-section" >
+                                            {/* <div className="options-select-section" >
                                                 <input id="vehicle1" type="checkbox" onClick={() => { setOpenOption(!openOption) }} />
                                                 <label htmlFor="vehicle1"> This Product Has  Options, Like Size Or Color</label>
-                                            </div>
-                                            <div className={`option-name  ${openOption == true ? "open-option-open" : "open-option-close"}`}>
+                                            </div> */}
+                                            <div className={`option-name  ${true == true ? "open-option-open" : "open-option-close"}`}>
                                                 <hr />
                                                 {addNewOption && addNewOption.map((item, temp) => (
 
@@ -671,7 +686,7 @@ const AddNewProduct = () => {
                                                                             {/* <select className="option-select" onChange={(e) => { console.log("sdaxczdzscx ", e.target.value, temp) }} value={item.name}> */}
                                                                             <select className="option-select" onChange={(e) => { handleOptionSelect(e.target.value, temp) }}>
                                                                                 <option value="">Select</option>
-                                                                                <option value="color">Color</option>
+                                                                                {/* <option value="color">Color</option> */}
                                                                                 <option value="size">Size</option>
                                                                             </select>
                                                                         </div>
@@ -741,20 +756,56 @@ const AddNewProduct = () => {
                                                             <div className="col s12  l6 xl2"></div>
                                                         </div>
                                                         <hr />
-                                                        <div className="add-new-option mt-3">
+                                                        <div className="title-product">
+                                                            <h5>Sleeve Length</h5>
+                                                            <div className="add-tital">
+                                                                <input type="text" placeholder="Add Sleeve lenth" onChange={(e) => { setSleeveLength(e.target.value); }} value={sleeveLength}></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="title-product">
+                                                            <h5>Sleeve Pattern</h5>
+                                                            <div className="add-tital">
+                                                                <input type="text" placeholder="Add Sleeve Pattern" onChange={(e) => { setSleevePattern(e.target.value); }} value={sleevePattern}></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="title-product">
+                                                            <h5>Fit</h5>
+                                                            <div className="add-tital">
+                                                                <input type="text" placeholder="Add Fit" onChange={(e) => { setFit(e.target.value); }} value={fit}></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="title-product">
+                                                            <h5>Neck</h5>
+                                                            <div className="add-tital">
+                                                                <input type="text" placeholder="Add Neck" onChange={(e) => { setNeck(e.target.value); }} value={neck}></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="title-product">
+                                                            <h5>Closer</h5>
+                                                            <div className="add-tital">
+                                                                <input type="text" placeholder="Add Closer" onChange={(e) => { setCloser(e.target.value); }} value={closer}></input>
+                                                            </div>
+                                                        </div>
+                                                        <div className="title-product">
+                                                            <h5>Pattern Type</h5>
+                                                            <div className="add-tital">
+                                                                <input type="text" placeholder="Add Pattern " onChange={(e) => { setPatternType(e.target.value); }} value={patternType}></input>
+                                                            </div>
+                                                        </div>
+                                                        {/* <div className="add-new-option mt-3">
                                                             <div className="">
                                                                 {temp == (addNewOption.length - 1) &&
                                                                     <>
                                                                         <h6 className="new-filed" onClick={handleAdd2} >Add New Option +</h6></>}
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 ))}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mb-5 pb-5">
+                                {/* <div className="mb-5 pb-5">
                                     <div className="make-variants">
                                         <button className="mt-2 ripple3 btn gradient-45deg-green-teal" type="button" onClick={makeVarient}>make variants</button>
                                     </div>
@@ -820,7 +871,7 @@ const AddNewProduct = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
                             </div>
 
@@ -831,12 +882,12 @@ const AddNewProduct = () => {
                                     </div>
                                     <div>
                                         <div className="row">
-                                            <div className="col s12  l6 xl6">
+                                            {/* <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label> SKU</label>
                                                     <input type="text" placeholder="" onChange={(e) => { setSku(e.target.value); }} value={sku}></input>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Quantity</label>
@@ -858,16 +909,16 @@ const AddNewProduct = () => {
                                                     <input type="text" placeholder="$ 0.00" onChange={(e) => { setPrice(e.target.value); }} value={price}></input>
                                                 </div>
                                             </div>
-                                            <div className="col s12  l6 xl6">
+                                            {/* <div className="col s12  l6 xl6">
                                                 <div className="add-tital">
                                                     <label>Compare at Price</label>
                                                     <input type="text" placeholder="$ 0.00" onChange={(e) => { setComparePrice(e.target.value); }} value={comparePrice}></input>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
-                                <div className="add-left-product-one mt-2 ">
+                                {/* <div className="add-left-product-one mt-2 ">
                                     <h5>Hanlde</h5>
                                     <div className="row">
                                         <div className="col s12  l6 xl12">
@@ -879,7 +930,7 @@ const AddNewProduct = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className="add-left-product-one mt-2 ">
                                     <div>
@@ -912,7 +963,7 @@ const AddNewProduct = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="add-left-product-one mt-2">
+                                {/* <div className="add-left-product-one mt-2">
                                     <div>
                                         <h5>Tags</h5>
                                     </div>
@@ -937,7 +988,7 @@ const AddNewProduct = () => {
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="pablish-btn mt-5 mb-5 ">
                                     <button className="mt-2 ripple3 btn gradient-45deg-green-teal" type="button" onClick={handleSubmit}>Submit</button>
                                 </div>
